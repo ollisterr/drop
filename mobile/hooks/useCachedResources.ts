@@ -17,10 +17,10 @@ export default function useCachedResources() {
           ...FontAwesome.font,
           'space-mono': require('../assets/fonts/SpaceMono-Regular.ttf'),
           'NATS': require('../assets/fonts/NATS-Regular.ttf'),
-          "Open Sans Bold": require("../assets/fonts/OpenSans-Bold.ttf"),
+          "Open Sans Light": require("../assets/fonts/OpenSans-Light.ttf"),
           "Open Sans Regular": require("../assets/fonts/OpenSans-Regular.ttf"),
           "Open Sans Medium": require("../assets/fonts/OpenSans-Medium.ttf"),
-          "Open Sans Light": require("../assets/fonts/OpenSans-Light.ttf"),
+          "Open Sans Bold": require("../assets/fonts/OpenSans-Bold.ttf"),
         });
       } catch (e) {
         // We might want to provide this error information to an error reporting service

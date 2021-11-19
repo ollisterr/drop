@@ -35,29 +35,29 @@ const theme = {
   typography: {
       h1: css`
         font-family: NATS;
-        font-size: ${px(32)};
+        font-size: ${px(48)};
         font-weight: 600;
       `,
       h2: css`
         font-family: NATS;
-        font-size: ${px(24)};
+        font-size: ${px(32)};
         font-weight: 600;
       `,
       h3: css`
         font-family: NATS;
-        font-size: ${px(16)};
+        font-size: ${px(24)};
         text-transform: uppercase;
       `,
       subheading: css`
-        font-family: Open Sans Medium, sans-serif;
+        font-family: "Open Sans Medium, sans-serif";
         font-size: ${px(16)};
       `,
       body: css`
-        font-family: Open Sans Regular, sans-serif;
+        font-family: "Open Sans Regular, sans-serif";
         font-size: ${px(16)};
       `,
       detail: css`
-        font-family: Open Sans Regular, sans-serif;
+        font-family: "Open Sans Regular, sans-serif";
         font-size: ${px(12)};
       `
   }

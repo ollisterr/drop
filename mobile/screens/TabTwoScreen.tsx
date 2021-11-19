@@ -1,14 +1,15 @@
 import * as React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
 import EditScreenInfo from '../components/EditScreenInfo';
+import { H1, Text } from '../styles/typography';
 
 export default function TabTwoScreen() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Tab Two</Text>
+      <H1>Tab Two</H1>
       <View style={styles.separator} />
-      <EditScreenInfo path="/screens/TabTwoScreen.tsx" />
+      <Text>Tässä on tekstiä niin maan perkelesti</Text>
     </View>
   );
 }
