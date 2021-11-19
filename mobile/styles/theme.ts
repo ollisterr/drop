@@ -1,3 +1,4 @@
+import { css } from ".";
 import { px } from "./style.utils";
 
 const theme = {
@@ -31,6 +32,31 @@ const theme = {
     xxlarge: px(64),
     xxxlarge: px(128),
   },
+  typography: {
+      h1: css`
+        font-family: NATS;
+        font-size: ${px(32)};
+        font-weight: 600;
+      `,
+      h2: css`
+        font-family: NATS;
+        font-size: ${px(24)};
+        font-weight: 600;
+      `,
+      h3: css`
+        font-family: NATS;
+        font-size: ${px(16)};
+        text-transform: uppercase;
+      `,
+      body: css`
+        font-family: Open Sans, sans-serif;
+        font-size: ${px(16)};
+      `,
+      detail: css`
+        font-family: Open Sans, sans-serif;
+        font-size: ${px(12)};
+      `
+  }
 };
 
 export type Theme = typeof theme;

@@ -16,6 +16,8 @@ export default function useCachedResources() {
         await Font.loadAsync({
           ...FontAwesome.font,
           'space-mono': require('../assets/fonts/SpaceMono-Regular.ttf'),
+          'NATS': require('../assets/fonts/NATS-Regular.ttf'),
+          // "Open Sans": require("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap")
         });
       } catch (e) {
         // We might want to provide this error information to an error reporting service
