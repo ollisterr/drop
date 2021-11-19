@@ -48,12 +48,16 @@ const theme = {
         font-size: ${px(16)};
         text-transform: uppercase;
       `,
+      subheading: css`
+        font-family: Open Sans Medium, sans-serif;
+        font-size: ${px(16)};
+      `,
       body: css`
-        font-family: Open Sans, sans-serif;
+        font-family: Open Sans Regular, sans-serif;
         font-size: ${px(16)};
       `,
       detail: css`
-        font-family: Open Sans, sans-serif;
+        font-family: Open Sans Regular, sans-serif;
         font-size: ${px(12)};
       `
   }
