@@ -1,6 +1,6 @@
-import * as styledComponents from "styled-components/native";
+import * as styledComponents from 'styled-components/native';
 
-import { Theme } from "./theme";
+import { Theme } from './theme';
 
 const {
   default: styled,

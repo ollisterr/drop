@@ -1,18 +1,21 @@
-import { css } from ".";
-import { px } from "./style.utils";
+import { css } from '.';
+import { px } from './style.utils';
 
 const theme = {
   colors: {
     // accents
-    primary: "#0079BD",
-    primaryLight: "#55ADFF",
-    primaryDark: "#003A5B",
+    primary: '#0079BD',
+    primaryLight: '#55ADFF',
+    primaryDark: '#003A5B',
+
+    success: '#42B1A4',
+    alert: '#C93000',
 
     // greys
-    black: "#373737",
-    grey: "#7C7C7C",
-    lightgrey: "#E5E5E5",
-    whitesmoke: "#F0F0F0",
+    black: '#373737',
+    grey: '#7C7C7C',
+    lightgrey: '#E5E5E5',
+    whitesmoke: '#F0F0F0',
   },
   borderRadius: {
     small: px(3),
@@ -33,43 +36,46 @@ const theme = {
     xxxlarge: px(128),
   },
   typography: {
-      h1: css`
-        font-family: NATS;
-        font-size: ${px(48)};
-        font-weight: 600;
-        line-height: 40;
-      `,
-      h2: css`
-        font-family: NATS;
-        font-size: ${px(32)};
-        font-weight: 600;
-        line-height: 40;
-      `,
-      h3: css`
-        font-family: NATS;
-        font-size: ${px(24)};
-        text-transform: uppercase;
-        line-height: 40;
-      `,
-      subheading: css`
-        font-family: "Open Sans Medium, sans-serif";
-        font-size: ${px(16)};
-      `,
-      body: css`
-        font-family: "Open Sans Regular, sans-serif";
-        font-size: ${px(16)};
-      `,
-      detail: css`
-        font-family: "Open Sans Regular, sans-serif";
-        font-size: ${px(12)};
-      `
-  }
+    h1: css`
+      font-family: NATS;
+      font-size: ${px(100)};
+      font-weight: 600;
+      margin-top: -${px(50)};
+      margin-bottom: -${px(50)};
+    `,
+    h2: css`
+      font-family: NATS;
+      font-size: ${px(64)};
+      font-weight: 600;
+      margin-top: -${px(32)};
+      margin-bottom: -${px(32)};
+    `,
+    h3: css`
+      font-family: NATS;
+      font-size: ${px(36)};
+      text-transform: uppercase;
+      margin-top: -${px(18)};
+      margin-bottom: -${px(18)};
+    `,
+    subheading: css`
+      font-family: 'Open Sans Medium';
+      font-size: ${px(16)};
+    `,
+    body: css`
+      font-family: 'Open Sans Regular';
+      font-size: ${px(16)};
+    `,
+    detail: css`
+      font-family: 'Open Sans Regular';
+      font-size: ${px(12)};
+    `,
+  },
 };
 
 export type Theme = typeof theme;
 
-export type Color = keyof Theme["colors"];
+export type Color = keyof Theme['colors'];
 
-export type Spacing = keyof Theme["spacing"];
+export type Spacing = keyof Theme['spacing'];
 
 export default theme;

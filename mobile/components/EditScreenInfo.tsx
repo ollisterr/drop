@@ -2,8 +2,6 @@ import * as WebBrowser from 'expo-web-browser';
 import React from 'react';
 import { StyleSheet, TouchableOpacity, View, Text } from 'react-native';
 
-import theme from '../styles/theme';
-
 export default function EditScreenInfo({ path }: { path: string }) {
   return (
     <View>
