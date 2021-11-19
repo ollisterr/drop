@@ -1,0 +1,23 @@
+{
+  "folders": [
+    {
+      "name": "root",
+      "path": "../"
+    },
+    {
+      "name": "mobile",
+      "path": "../mobile"
+    },
+    {
+      "name": "admin",
+      "path": "../admin"
+    }
+  ],
+  "settings": {
+    "files.exclude": {
+      "mobile/": true,
+      "admin/": true
+    },
+    "git.ignoreLimitWarning": true
+  }
+}
