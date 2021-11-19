@@ -1,0 +1,610 @@
+{
+    "components": {
+        "schemas": {
+            "CountModel": {
+                "properties": {
+                    "count": {
+                        "title": "Count",
+                        "type": "integer"
+                    },
+                    "page_size": {
+                        "title": "Page Size",
+                        "type": "integer"
+                    }
+                },
+                "required": [
+                    "count",
+                    "page_size"
+                ],
+                "title": "CountModel",
+                "type": "object"
+            },
+            "HTTPValidationError": {
+                "properties": {
+                    "detail": {
+                        "items": {
+                            "$ref": "#/components/schemas/ValidationError"
+                        },
+                        "title": "Detail",
+                        "type": "array"
+                    }
+                },
+                "title": "HTTPValidationError",
+                "type": "object"
+            },
+            "ReferenceModel": {
+                "properties": {
+                    "columnName": {
+                        "title": "Columnname",
+                        "type": "string"
+                    },
+                    "tableName": {
+                        "title": "Tablename",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "tableName",
+                    "columnName"
+                ],
+                "title": "ReferenceModel",
+                "type": "object"
+            },
+            "ReferencesModel": {
+                "properties": {
+                    "references": {
+                        "items": {
+                            "$ref": "#/components/schemas/ReferenceModel"
+                        },
+                        "title": "References",
+                        "type": "array"
+                    }
+                },
+                "required": [
+                    "references"
+                ],
+                "title": "ReferencesModel",
+                "type": "object"
+            },
+            "TestItem": {
+                "properties": {
+                    "content": {
+                        "extra": {},
+                        "format": "text-area",
+                        "nullable": false,
+                        "title": "Content",
+                        "type": "string"
+                    },
+                    "created_on": {
+                        "extra": {},
+                        "format": "date-time",
+                        "nullable": false,
+                        "title": "Created On",
+                        "type": "string"
+                    },
+                    "id": {
+                        "extra": {},
+                        "nullable": false,
+                        "title": "Id",
+                        "type": "integer"
+                    },
+                    "published": {
+                        "extra": {},
+                        "nullable": false,
+                        "title": "Published",
+                        "type": "boolean"
+                    },
+                    "title": {
+                        "extra": {},
+                        "maxLength": 255,
+                        "nullable": false,
+                        "title": "Title",
+                        "type": "string"
+                    }
+                },
+                "title": "TestItem",
+                "type": "object"
+            },
+            "TestOutput": {
+                "properties": {
+                    "content": {
+                        "extra": {},
+                        "format": "text-area",
+                        "nullable": false,
+                        "title": "Content",
+                        "type": "string"
+                    },
+                    "created_on": {
+                        "extra": {},
+                        "format": "date-time",
+                        "nullable": false,
+                        "title": "Created On",
+                        "type": "string"
+                    },
+                    "id": {
+                        "extra": {},
+                        "nullable": false,
+                        "title": "Id",
+                        "type": "integer"
+                    },
+                    "published": {
+                        "extra": {},
+                        "nullable": false,
+                        "title": "Published",
+                        "type": "boolean"
+                    },
+                    "title": {
+                        "extra": {},
+                        "maxLength": 255,
+                        "nullable": false,
+                        "title": "Title",
+                        "type": "string"
+                    }
+                },
+                "title": "TestOutput",
+                "type": "object"
+            },
+            "TestPlural": {
+                "properties": {
+                    "rows": {
+                        "items": {
+                            "$ref": "#/components/schemas/TestItem"
+                        },
+                        "title": "Rows",
+                        "type": "array"
+                    }
+                },
+                "title": "TestPlural",
+                "type": "object"
+            },
+            "ValidationError": {
+                "properties": {
+                    "loc": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "title": "Location",
+                        "type": "array"
+                    },
+                    "msg": {
+                        "title": "Message",
+                        "type": "string"
+                    },
+                    "type": {
+                        "title": "Error Type",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "loc",
+                    "msg",
+                    "type"
+                ],
+                "title": "ValidationError",
+                "type": "object"
+            }
+        }
+    },
+    "info": {
+        "title": "FastAPI",
+        "version": "0.1.0"
+    },
+    "openapi": "3.0.2",
+    "paths": {
+        "/test/": {
+            "get": {
+                "description": "Returns all rows matching the given query.",
+                "operationId": "get_test__get",
+                "parameters": [
+                    {
+                        "description": "Filter by the `id` column.",
+                        "in": "query",
+                        "name": "id",
+                        "required": false,
+                        "schema": {
+                            "description": "Filter by the `id` column.",
+                            "title": "Id",
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "description": "Which operator to use for `id`. The options are `e` (equals - default) `lt`, `lte`, `gt`, and `gte`.",
+                        "in": "query",
+                        "name": "id__operator",
+                        "required": false,
+                        "schema": {
+                            "description": "Which operator to use for `id`. The options are `e` (equals - default) `lt`, `lte`, `gt`, and `gte`.",
+                            "title": "Id  Operator"
+                        }
+                    },
+                    {
+                        "description": "Filter by the `title` column.",
+                        "in": "query",
+                        "name": "title",
+                        "required": false,
+                        "schema": {
+                            "description": "Filter by the `title` column.",
+                            "maxLength": 255,
+                            "title": "Title",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Filter by the `content` column.",
+                        "in": "query",
+                        "name": "content",
+                        "required": false,
+                        "schema": {
+                            "description": "Filter by the `content` column.",
+                            "title": "Content",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Specifies how `content` should be matched - `contains` (default), `exact`, `starts`, `ends`.",
+                        "in": "query",
+                        "name": "content__match",
+                        "required": false,
+                        "schema": {
+                            "description": "Specifies how `content` should be matched - `contains` (default), `exact`, `starts`, `ends`.",
+                            "title": "Content  Match"
+                        }
+                    },
+                    {
+                        "description": "Filter by the `published` column.",
+                        "in": "query",
+                        "name": "published",
+                        "required": false,
+                        "schema": {
+                            "description": "Filter by the `published` column.",
+                            "title": "Published",
+                            "type": "boolean"
+                        }
+                    },
+                    {
+                        "description": "Filter by the `created_on` column.",
+                        "in": "query",
+                        "name": "created_on",
+                        "required": false,
+                        "schema": {
+                            "description": "Filter by the `created_on` column.",
+                            "format": "date-time",
+                            "title": "Created On",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Specifies which field to sort the results by. For example `id` to sort by id, and `-id` for descending.",
+                        "in": "query",
+                        "name": "__order",
+                        "required": false,
+                        "schema": {
+                            "description": "Specifies which field to sort the results by. For example `id` to sort by id, and `-id` for descending.",
+                            "title": "  Order",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "The number of results to return.",
+                        "in": "query",
+                        "name": "__page_size",
+                        "required": false,
+                        "schema": {
+                            "description": "The number of results to return.",
+                            "title": "  Page Size",
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "description": "Which page of results to return (default 1).",
+                        "in": "query",
+                        "name": "__page",
+                        "required": false,
+                        "schema": {
+                            "description": "Which page of results to return (default 1).",
+                            "title": "  Page",
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "description": "The fields to return. It's a comma separated list - for example 'name,address'. By default all fields are returned.",
+                        "in": "query",
+                        "name": "__visible_fields",
+                        "required": false,
+                        "schema": {
+                            "description": "The fields to return. It's a comma separated list - for example 'name,address'. By default all fields are returned.",
+                            "title": "  Visible Fields",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TestPlural"
+                                }
+                            }
+                        },
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                },
+                "summary": "Get"
+            }
+        },
+        "/test/count/": {
+            "get": {
+                "description": "Returns the number of rows matching the given query.",
+                "operationId": "count_test_count__get",
+                "parameters": [
+                    {
+                        "description": "Filter by the `id` column.",
+                        "in": "query",
+                        "name": "id",
+                        "required": false,
+                        "schema": {
+                            "description": "Filter by the `id` column.",
+                            "title": "Id",
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "description": "Which operator to use for `id`. The options are `e` (equals - default) `lt`, `lte`, `gt`, and `gte`.",
+                        "in": "query",
+                        "name": "id__operator",
+                        "required": false,
+                        "schema": {
+                            "description": "Which operator to use for `id`. The options are `e` (equals - default) `lt`, `lte`, `gt`, and `gte`.",
+                            "title": "Id  Operator"
+                        }
+                    },
+                    {
+                        "description": "Filter by the `title` column.",
+                        "in": "query",
+                        "name": "title",
+                        "required": false,
+                        "schema": {
+                            "description": "Filter by the `title` column.",
+                            "maxLength": 255,
+                            "title": "Title",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Filter by the `content` column.",
+                        "in": "query",
+                        "name": "content",
+                        "required": false,
+                        "schema": {
+                            "description": "Filter by the `content` column.",
+                            "title": "Content",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Specifies how `content` should be matched - `contains` (default), `exact`, `starts`, `ends`.",
+                        "in": "query",
+                        "name": "content__match",
+                        "required": false,
+                        "schema": {
+                            "description": "Specifies how `content` should be matched - `contains` (default), `exact`, `starts`, `ends`.",
+                            "title": "Content  Match"
+                        }
+                    },
+                    {
+                        "description": "Filter by the `published` column.",
+                        "in": "query",
+                        "name": "published",
+                        "required": false,
+                        "schema": {
+                            "description": "Filter by the `published` column.",
+                            "title": "Published",
+                            "type": "boolean"
+                        }
+                    },
+                    {
+                        "description": "Filter by the `created_on` column.",
+                        "in": "query",
+                        "name": "created_on",
+                        "required": false,
+                        "schema": {
+                            "description": "Filter by the `created_on` column.",
+                            "format": "date-time",
+                            "title": "Created On",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CountModel"
+                                }
+                            }
+                        },
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                },
+                "summary": "Count"
+            }
+        },
+        "/test/ids/": {
+            "get": {
+                "description": "Returns a mapping of row IDs to a readable representation.",
+                "operationId": "ids_test_ids__get",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "search",
+                        "required": false,
+                        "schema": {
+                            "title": "Search",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "limit",
+                        "required": false,
+                        "schema": {
+                            "title": "Limit",
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "additionalProperties": {
+                                        "type": "string"
+                                    },
+                                    "title": "Response Ids Test Ids  Get",
+                                    "type": "object"
+                                }
+                            }
+                        },
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                },
+                "summary": "Ids"
+            }
+        },
+        "/test/new/": {
+            "get": {
+                "description": "Returns all of the default values for a new row,\nbut doesn't save it.",
+                "operationId": "new_test_new__get",
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "additionalProperties": {
+                                        "type": "string"
+                                    },
+                                    "title": "Response New Test New  Get",
+                                    "type": "object"
+                                }
+                            }
+                        },
+                        "description": "Successful Response"
+                    }
+                },
+                "summary": "New"
+            }
+        },
+        "/test/references/": {
+            "get": {
+                "description": "Returns a list of objects showing relationships with other tables.",
+                "operationId": "references_test_references__get",
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ReferencesModel"
+                                }
+                            }
+                        },
+                        "description": "Successful Response"
+                    }
+                },
+                "summary": "References"
+            }
+        },
+        "/test/schema/": {
+            "get": {
+                "description": "Returns the JSON schema for the given table.",
+                "operationId": "schema_test_schema__get",
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "title": "Response Schema Test Schema  Get",
+                                    "type": "object"
+                                }
+                            }
+                        },
+                        "description": "Successful Response"
+                    }
+                },
+                "summary": "Schema"
+            }
+        },
+        "/test/{row_id}/": {
+            "get": {
+                "description": "Retrieve a single row from the table.",
+                "operationId": "get_single_test__row_id___get",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "row_id",
+                        "required": true,
+                        "schema": {
+                            "title": "Row Id",
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TestOutput"
+                                }
+                            }
+                        },
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                },
+                "summary": "Get Single"
+            }
+        }
+    }
+}

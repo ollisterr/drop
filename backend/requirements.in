@@ -1,0 +1,7 @@
+fastapi
+uvicorn[standard]
+piccolo[sqlite]
+piccolo_api
+piccolo_admin
+fastapi-code-generator
+python-dotenv
