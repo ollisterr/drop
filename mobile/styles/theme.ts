@@ -13,6 +13,7 @@ const theme = {
 
     // greys
     black: '#373737',
+    white: '#fff',
     grey: '#7C7C7C',
     lightgrey: '#E5E5E5',
     whitesmoke: '#F0F0F0',
@@ -67,7 +68,7 @@ const theme = {
     `,
     detail: css`
       font-family: 'Open Sans Regular';
-      font-size: ${px(12)};
+      font-size: ${px(14)};
     `,
   },
 };

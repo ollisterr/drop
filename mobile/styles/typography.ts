@@ -25,6 +25,10 @@ export const Subheading = styled(Text)`
   ${p => p.theme.typography.subheading}
 `;
 
+export const Detail = styled(Text)`
+  ${p => p.theme.typography.detail}
+`;
+
 export const H1 = styled(BaseText)`
   ${p => p.theme.typography.h1}
 `;

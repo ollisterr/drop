@@ -4,6 +4,7 @@ import { Spacing } from './theme';
 export const ScreenWrapper = styled.View`
   width: 100%;
   flex: 1;
+  background-color: ${p => p.theme.colors.white};
 `;
 
 export const Spacer = styled.View<{ axis?: 'x' | 'y'; spacing?: Spacing }>`
