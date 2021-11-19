@@ -1,5 +1,6 @@
 import { createGlobalStyle, ThemeProvider } from "styled-components";
 import { AppProps } from "next/app";
+import theme from "../components/theme";
 
 const GlobalStyle = createGlobalStyle`
 /*** The new CSS Reset - version 1.2.0 (last updated 23.7.2021) ***/
@@ -40,12 +41,6 @@ textarea {
   white-space: revert;
 }
 `;
-
-const theme = {
-  colors: {
-    primary: "#0079BD",
-  },
-};
 
 export default function App({ Component, pageProps }: AppProps) {
   return (

@@ -1,4 +1,6 @@
 import type { NextPage } from "next";
+import Image from "next/image";
+import Link from "next/link";
 import Head from "next/head";
 import styled from "styled-components";
 import { Layout } from "../components/Layout";
@@ -15,7 +17,19 @@ const Home: NextPage = () => {
       </Head>
 
       <Sidebar>
-        <p>nice man</p>
+        <Image src="/logo.svg" height={100} width={200} alt="" />
+
+        <LinkList>
+          <LinkWrapper>
+            <Link href="/apartments">Apartments</Link>
+          </LinkWrapper>
+          <LinkWrapper>
+            <Link href="/users">Users</Link>
+          </LinkWrapper>
+          <LinkWrapper>
+            <Link href="/settings">Settings</Link>
+          </LinkWrapper>
+        </LinkList>
       </Sidebar>
 
       <Main>
@@ -27,6 +41,20 @@ const Home: NextPage = () => {
 
 const Title = styled.h1`
   font-size: 3rem;
+`;
+
+const LinkWrapper = styled.li`
+  cursor: pointer;
+  color: ${(p) => p.theme.colors.primaryDark};
+
+  font-size: ${(p) => p.theme.spacing.medium};
+`;
+
+const LinkList = styled.ul`
+  display: flex;
+  flex-direction: column;
+  gap: ${(p) => p.theme.spacing.medium};
+  padding-top: ${(p) => p.theme.spacing.xxlarge};
 `;
 
 export default Home;
