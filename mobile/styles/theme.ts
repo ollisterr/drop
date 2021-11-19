@@ -37,16 +37,19 @@ const theme = {
         font-family: NATS;
         font-size: ${px(48)};
         font-weight: 600;
+        line-height: 40;
       `,
       h2: css`
         font-family: NATS;
         font-size: ${px(32)};
         font-weight: 600;
+        line-height: 40;
       `,
       h3: css`
         font-family: NATS;
         font-size: ${px(24)};
         text-transform: uppercase;
+        line-height: 40;
       `,
       subheading: css`
         font-family: "Open Sans Medium, sans-serif";
