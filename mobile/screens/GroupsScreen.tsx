@@ -2,10 +2,9 @@ import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import * as React from 'react';
-import { ScrollView, TouchableOpacity } from 'react-native';
+import { ScrollView } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { GroupType, GroupCard, KPICard } from '../components';
-import styled from '../styles';
+import { GroupType, GroupCard, KPICard, OverlayButton } from '../components';
 import { Row, ScreenWrapper, shadowStyle, Spacer } from '../styles/components';
 import theme from '../styles/theme';
 
@@ -65,31 +64,10 @@ export default function GroupsScreen() {
         ))}
       </ScrollView>
 
-      <AddGroupButton
-        bottom={insets.bottom}
-        style={shadowStyle}
+      <OverlayButton
+        icon="add"
         onPress={() => navigation.navigate('AddGroup')}
-        activeOpacity={0.6}
-      >
-        <Ionicons
-          name="add"
-          size={32}
-          color={theme.colors.white}
-          style={{ alignSelf: 'center' }}
-        />
-      </AddGroupButton>
+      />
     </ScreenWrapper>
   );
 }
-
-const AddGroupButton = styled.TouchableOpacity<{ bottom: number }>`
-  position: absolute;
-  align-items: center;
-  justify-content: center;
-  right: ${p => p.theme.spacing.small};
-  bottom: 20px;
-  width: 50px;
-  height: 50px;
-  border-radius: 999px;
-  background-color: ${p => p.theme.colors.primaryDark};
-`;

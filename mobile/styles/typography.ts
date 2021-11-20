@@ -1,16 +1,18 @@
 import styled, { css } from '.';
 import { Color } from './theme';
 
-const BaseText = styled.Text<{
+type TextProps = {
   color?: Color;
   align?: 'left' | 'right' | 'center';
-}>`
+  weight?: 'medium' | 'bold';
+};
+
+const BaseText = styled.Text<TextProps>`
   color: ${p => p.theme.colors[p.color ?? 'black']};
   text-align: ${p => p.align ?? 'left'};
 `;
 
-export const Text = styled(BaseText)<{ weight?: 'medium' | 'bold' }>`
-  ${p => p.theme.typography.body}
+const weightedStyle = css<TextProps>`
   ${p =>
     p.weight &&
     css`
@@ -21,27 +23,35 @@ export const Text = styled(BaseText)<{ weight?: 'medium' | 'bold' }>`
     `}
 `;
 
-export const Subheading = styled(Text)`
+export const Text = styled(BaseText)<TextProps>`
+  ${p => p.theme.typography.body}
+  ${weightedStyle}
+`;
+
+export const Subheading = styled(Text)<TextProps>`
   ${p => p.theme.typography.subheading}
+  ${weightedStyle}
 `;
 
-export const Detail = styled(Text)`
+export const Detail = styled(Text)<TextProps>`
   ${p => p.theme.typography.detail}
+  ${weightedStyle}
 `;
 
-export const Description = styled(Text)`
+export const Description = styled(Text)<TextProps>`
   ${p => p.theme.typography.detail}
   font-size: ${p => p.theme.px(10)};
+  ${weightedStyle}
 `;
 
-export const H1 = styled(BaseText)`
+export const H1 = styled(BaseText)<TextProps>`
   ${p => p.theme.typography.h1}
 `;
 
-export const H2 = styled(BaseText)`
+export const H2 = styled(BaseText)<TextProps>`
   ${p => p.theme.typography.h2}
 `;
 
-export const H3 = styled(BaseText)`
+export const H3 = styled(BaseText)<TextProps>`
   ${p => p.theme.typography.h3}
 `;

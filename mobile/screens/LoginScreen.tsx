@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { BackHandler } from 'react-native';
 import styled from '../styles';
-import { ScreenWrapper, Spacer } from '../styles/components';
+import { Input, ScreenWrapper, Spacer } from '../styles/components';
 import { Text } from '../styles/typography';
 import LogoIcon from '../assets/images/drop-logo.svg';
 import background from '../assets/images/rain-drops.jpg';
@@ -95,7 +95,12 @@ const LoginView = () => {
 
       <Spacer axis="y" spacing="large" />
 
-      <Input value={input} onChangeText={setInput} placeholder="Username" />
+      <Input
+        value={input}
+        onChangeText={setInput}
+        placeholder="Username"
+        align="center"
+      />
 
       <Spacer axis="y" spacing="medium" />
 
@@ -122,15 +127,4 @@ const ContentWrapper = styled.View`
   align-items: center;
   padding: ${p => p.theme.spacing.default};
   padding-top: 25%;
-`;
-
-const Input = styled.TextInput`
-  ${p => p.theme.typography.body}
-  width: 100%;
-  border-radius: ${p => p.theme.borderRadius.large};
-  padding-vertical: ${p => p.theme.spacing.small};
-  padding-horizontal: ${p => p.theme.spacing.large};
-  border: solid 3px ${p => p.theme.colors.primaryLight};
-  background-color: ${p => p.theme.colors.white};
-  text-align: center;
 `;

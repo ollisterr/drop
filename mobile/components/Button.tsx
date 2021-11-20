@@ -2,6 +2,7 @@ import React, { ReactNode } from 'react';
 import { TouchableOpacityProps } from 'react-native';
 
 import styled from '../styles';
+import theme from '../styles/theme';
 import { Text } from '../styles/typography';
 
 interface ButtonProps extends TouchableOpacityProps {
@@ -20,7 +21,7 @@ export default function Button({
         {children}
       </Text>
 
-      {loading && <LoadingAnimation />}
+      {loading && <LoadingAnimation color={theme.colors.white} />}
     </ButtonWrapper>
   );
 }
@@ -35,5 +36,8 @@ const ButtonWrapper = styled.TouchableOpacity`
 
 const LoadingAnimation = styled.ActivityIndicator`
   position: absolute;
+  align-self: center;
+  top: 0;
+  bottom: 0;
   right: ${p => p.theme.spacing.medium};
 `;
