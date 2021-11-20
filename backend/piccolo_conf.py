@@ -6,6 +6,8 @@ from piccolo.engine.postgres import PostgresEngine
 
 load_dotenv()
 
+ENV = os.getenv("ENV")
+
 DB = os.getenv("POSTGRES_DB")
 USER = os.getenv("POSTGRES_USER")
 PASSWORD = os.getenv("POSTGRES_PASSWORD")
@@ -20,7 +22,8 @@ DB = PostgresEngine(
         "password": PASSWORD,
         "host": DB_HOST,
         "port": DB_PORT,
-    }
+    },
+    log_queries=True if ENV == "development" else False,
 )
 
 APP_REGISTRY = AppRegistry(

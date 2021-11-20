@@ -3,20 +3,31 @@ from fastapi.openapi.utils import get_openapi
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from piccolo.engine import engine_finder
+from piccolo_admin.endpoints import create_admin
 from piccolo_api.crud.endpoints import PiccoloCRUD
 from piccolo_api.fastapi.endpoints import FastAPIWrapper
+from piccolo_api.session_auth.endpoints import session_login, session_logout
 
+from orm.piccolo_app import APP_CONFIG
 from orm.tables import Apartment, ApartmentGroups, Group, Measurement
-from routes import admin, auth, index, static
+from routes import index, kpis, register, users
 
 app = FastAPI(site_name="Drop API")
 
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
 app.include_router(index.router)
-app.include_router(admin.router)
-app.include_router(auth.router)
-app.include_router(static.router)
+app.include_router(register.router)
+app.include_router(users.router)
+app.include_router(kpis.router)
+
+admin = create_admin(tables=APP_CONFIG.table_classes, site_name="Drop Admin")
+
+app.mount("/admin/", admin)
+app.mount("/login/", session_login())
+app.mount("/logout/", session_logout())
+
+app.mount("/static", StaticFiles(directory="static"), name="static")
 
 
 def custom_openapi():
