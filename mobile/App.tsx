@@ -3,7 +3,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import Constants from "expo-constants";
 import * as Notifications from "expo-notifications";
-import { Text, View, Button, Platform } from "react-native";
+import { Platform } from "react-native";
 
 import useCachedResources from "./hooks/useCachedResources";
 import Navigation from "./navigation";
@@ -27,32 +27,11 @@ export default function App() {
   }
 
   const [expoPushToken, setExpoPushToken] = useState("");
-  const [notification, setNotification] = useState(false);
-  const notificationListener =
-    useRef<ReturnType<typeof Notifications.addNotificationsEventListener>>();
-  const responseListener = useRef();
 
   useEffect(() => {
     registerForPushNotificationsAsync().then((token) =>
       setExpoPushToken(token as string)
     );
-
-    notificationListener.current =
-      Notifications.addNotificationReceivedListener((notification) => {
-        setNotification(notification);
-      });
-
-    responseListener.current =
-      Notifications.addNotificationResponseReceivedListener((response) => {
-        console.log(response);
-      });
-
-    return () => {
-      Notifications.removeNotificationSubscription(
-        notificationListener.current
-      );
-      Notifications.removeNotificationSubscription(responseListener.current);
-    };
   }, []);
 
   return (
