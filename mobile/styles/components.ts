@@ -5,15 +5,24 @@ import theme, { Spacing } from './theme';
 export const ScreenWrapper = styled.View<{
   withPadding?: boolean;
   insets?: { top?: number; left?: number; bottom?: number; right?: number };
+  align?: 'center' | 'flex-end';
+  noBackground?: boolean;
 }>`
   width: 100%;
   flex: 1;
-  background-color: ${p => p.theme.colors.white};
+  background-color: ${p =>
+    p.noBackground ? 'transparent' : p.theme.colors.white};
   ${p => !!p.withPadding && `padding: ${p.theme.spacing.default};`}
   ${p => !!p.insets?.left && `padding-left: ${p.insets?.left}px;`}
   ${p => !!p.insets?.right && `padding-right: ${p.insets?.right}px;`}
   ${p => !!p.insets?.bottom && `padding-bottom: ${p.insets?.bottom}px;`}
   ${p => !!p.insets?.top && `padding-top: ${p.insets?.top}px;`}
+  ${p =>
+    p.align &&
+    css`
+      align-items: ${p.align};
+      justify-content: ${p.align};
+    `}
 `;
 
 export const Spacer = styled.View<{ axis?: 'x' | 'y'; spacing?: Spacing }>`

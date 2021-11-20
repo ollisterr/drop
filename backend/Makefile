@@ -35,7 +35,10 @@ create-migrations:
 	$(PICCOLO) migrations new drop_api --auto
 
 run-migrations:
-	$(PICCOLO) migrations forward all
+	$(PICCOLO) migrations forward user
+	$(PICCOLO) migrations forward session_auth
+	$(PICCOLO) migrations forward piccolo_admin
+	$(PICCOLO) migrations forward drop_api
 
 create-admin-user:
 	piccolo user create \
