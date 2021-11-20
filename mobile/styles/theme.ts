@@ -2,6 +2,7 @@ import { css } from '.';
 import { px } from './style.utils';
 
 const theme = {
+  px,
   colors: {
     // accents
     primary: '#0079BD',
@@ -10,6 +11,7 @@ const theme = {
 
     success: '#42B1A4',
     alert: '#C93000',
+    victory: '#FFD700',
 
     // greys
     black: '#373737',
@@ -53,7 +55,7 @@ const theme = {
     `,
     h3: css`
       font-family: NATS;
-      font-size: ${px(36)};
+      font-size: ${px(28)};
       text-transform: uppercase;
       margin-top: -${px(18)};
       margin-bottom: -${px(18)};

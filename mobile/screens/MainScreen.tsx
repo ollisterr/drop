@@ -10,6 +10,7 @@ import DropSVG from '../assets/images/drop-icon.svg';
 import LogoSVG from '../assets/images/drop-logo.svg';
 import Card from '../components/Card';
 import KPICard from '../components/KPICard';
+import Rank from '../components/Rank';
 
 export default function MainScreen() {
   const insets = useSafeAreaInsets();
@@ -46,7 +47,13 @@ export default function MainScreen() {
           <Spacer axis="y" spacing="xlarge" />
 
           <Card shadowed>
-            <Text>BOI</Text>
+            <Row align="center" justify="space-between">
+              <Rank rank={1} groupName="Taloyhtio Oy AB" />
+
+              <Spacer spacing="small" />
+
+              <Rank rank={1} groupName="Taloyhtio Oy AB" />
+            </Row>
           </Card>
 
           <Spacer axis="y" />

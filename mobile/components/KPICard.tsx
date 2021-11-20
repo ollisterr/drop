@@ -17,7 +17,9 @@ export default function KPICard({
     <Card color={color} flex source={background}>
       <H2 color="white">{kpi}</H2>
 
-      <Text color="white">{description}</Text>
+      <Text color="white" style={{ paddingBottom: 10 }}>
+        {description}
+      </Text>
     </Card>
   );
 }

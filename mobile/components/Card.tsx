@@ -22,11 +22,11 @@ export default function Card({
   return (
     <Wrapper style={[shadowed && shadowStyle]} shouldFlex={flex}>
       {source && (
-        <>
+        <BackgroundWrapper>
           <Background source={source} />
 
           <BackgroundColor color={color} />
-        </>
+        </BackgroundWrapper>
       )}
 
       <Content color={!source ? color : undefined}>{children}</Content>
@@ -40,19 +40,25 @@ const shadowStyle: StyleProp<ViewStyle> = {
   shadowOpacity: 0.15,
   shadowRadius: 5,
   elevation: 10,
+  backgroundColor: theme.colors.white,
 };
 
 const Wrapper = styled.View<{
   shouldFlex: boolean;
 }>`
   border-radius: ${p => p.theme.borderRadius.large};
-  background-color: ${p => p.theme.colors.white};
   ${p => p.shouldFlex && 'flex: 1;'}
+`;
+
+const BackgroundWrapper = styled.View`
+  border-radius: ${p => p.theme.borderRadius.large};
+  position: absolute;
+  height: 100%;
+  width: 100%;
   overflow: hidden;
 `;
 
 const Background = styled.ImageBackground`
-  position: absolute;
   height: 100%;
   width: 100%;
 `;
@@ -61,12 +67,13 @@ const BackgroundColor = styled.View<{ color: Color }>`
   position: absolute;
   height: 100%;
   width: 100%;
+  border-radius: ${p => p.theme.borderRadius.large};
   background-color: ${p => p.theme.colors[p.color]};
   opacity: 0.5;
 `;
 
 const Content = styled.View<{ color?: Color }>`
   padding: ${p => p.theme.spacing.default};
-  padding-bottom: ${p => p.theme.spacing.medium};
+  border-radius: ${p => p.theme.borderRadius.large};
   ${p => p.color && `background-color: ${p.theme.colors[p.color]}`};
 `;

@@ -29,6 +29,11 @@ export const Detail = styled(Text)`
   ${p => p.theme.typography.detail}
 `;
 
+export const Description = styled(Text)`
+  ${p => p.theme.typography.detail}
+  font-size: ${p => p.theme.px(10)};
+`;
+
 export const H1 = styled(BaseText)`
   ${p => p.theme.typography.h1}
 `;
