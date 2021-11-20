@@ -1,8 +1,10 @@
 VENV = venv
 PYTHON = $(VENV)/bin/python3
-PIP_COMPILE = $(VENV)/bin/pip
+COMPOSE = docker-compose
+PIP_COMPILE = pip-compile
 PICCOLO = piccolo
 BLACK = black
+ISORT = isort
 
 all: install run
 
@@ -24,10 +26,10 @@ run: run-db run-migrations
 	$(PYTHON) main.py
 
 run-db:
-	docker-compose up -d
+	$(COMPOSE) up -d
 
 stop-db:
-	docker-compose down
+	$(COMPOSE) down
 
 sql:
 	$(PICCOLO) sql_shell run
@@ -47,6 +49,7 @@ compile-deps:
 
 lint:
 	$(BLACK) .
+	$(ISORT) .
 
 clean: stop-db
 	find . -type f -name *.pyc -delete

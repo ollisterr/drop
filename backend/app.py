@@ -1,16 +1,18 @@
 from typing import List
+
+from fastapi import FastAPI
+from piccolo.engine import engine_finder
 from piccolo_admin.endpoints import create_admin
 from piccolo_api.crud.endpoints import PiccoloCRUD
 from piccolo_api.fastapi.endpoints import FastAPIWrapper
-from piccolo.engine import engine_finder
 from starlette.routing import BaseRoute, Mount
-from fastapi import FastAPI
 
 from orm.piccolo_app import APP_CONFIG
-from orm.tables import Group, Apartment, Appliance, Measurement, Resident
+from orm.tables import Apartment, Appliance, Group, Measurement, Resident
 
 admin = create_admin(tables=APP_CONFIG.table_classes, site_name="Drop Admin")
 routes: List[BaseRoute] = [Mount("/admin/", admin)]
+
 app = FastAPI(
     routes=routes,
     site_name="Drop API",
@@ -21,7 +23,7 @@ FastAPIWrapper(
     fastapi_app=app,
     piccolo_crud=PiccoloCRUD(
         table=Apartment,
-        read_only=True,
+        read_only=False,
     ),
 )
 
@@ -30,7 +32,7 @@ FastAPIWrapper(
     fastapi_app=app,
     piccolo_crud=PiccoloCRUD(
         table=Resident,
-        read_only=True,
+        read_only=False,
     ),
 )
 
@@ -39,7 +41,7 @@ FastAPIWrapper(
     fastapi_app=app,
     piccolo_crud=PiccoloCRUD(
         table=Group,
-        read_only=True,
+        read_only=False,
     ),
 )
 
@@ -48,7 +50,7 @@ FastAPIWrapper(
     fastapi_app=app,
     piccolo_crud=PiccoloCRUD(
         table=Appliance,
-        read_only=True,
+        read_only=False,
     ),
 )
 
@@ -57,7 +59,7 @@ FastAPIWrapper(
     fastapi_app=app,
     piccolo_crud=PiccoloCRUD(
         table=Measurement,
-        read_only=True,
+        read_only=False,
     ),
 )
 

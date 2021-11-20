@@ -1,12 +1,12 @@
-from piccolo.table import Table
 from piccolo.columns.column_types import (
-    ForeignKey,
-    Varchar,
-    Timestamp,
-    Text,
-    Integer,
     Decimal,
+    ForeignKey,
+    Integer,
+    Text,
+    Timestamp,
+    Varchar,
 )
+from piccolo.table import Table
 
 
 class Group(Table, tablename="drop_group"):
@@ -15,8 +15,8 @@ class Group(Table, tablename="drop_group"):
     """
 
     name = Varchar()
-    resident = ForeignKey(references="Resident")
-    apartment = ForeignKey(references="Apartment")
+    resident = ForeignKey("Resident")
+    apartment = ForeignKey("Apartment")
 
 
 class Apartment(Table):
@@ -28,7 +28,7 @@ class Apartment(Table):
     owner = Text()
     people = Integer()
     created_on = Timestamp()
-    appliance = ForeignKey(references="Appliance")
+    appliance = ForeignKey("Appliance")
 
 
 class Appliance(Table):
@@ -37,7 +37,7 @@ class Appliance(Table):
     """
 
     name = Varchar()
-    measurement = ForeignKey(references="Measurement")
+    measurement = ForeignKey("Measurement")
 
 
 class Measurement(Table):
@@ -51,5 +51,8 @@ class Measurement(Table):
 
 
 class Resident(Table):
+    """
+    Resident table
+    """
 
-    apartment = ForeignKey(references="Apartment")
+    apartment = ForeignKey("Apartment")

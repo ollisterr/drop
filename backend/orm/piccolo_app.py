@@ -1,6 +1,6 @@
 import os
-from piccolo.conf.apps import AppConfig, table_finder
 
+from piccolo.conf.apps import AppConfig, table_finder
 
 CURRENT_DIRECTORY = os.path.dirname(os.path.abspath(__file__))
 
