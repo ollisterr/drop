@@ -55,3 +55,14 @@ export const Separator = styled.View`
   height: 1px;
   background-color: ${p => p.theme.colors.greyLight};
 `;
+
+export const Input = styled.TextInput<{ align?: 'left' | 'center' | 'right' }>`
+  ${p => p.theme.typography.body}
+  width: 100%;
+  border-radius: ${p => p.theme.borderRadius.large};
+  padding-vertical: ${p => p.theme.spacing.small};
+  padding-horizontal: ${p => p.theme.spacing.large};
+  border: solid 3px ${p => p.theme.colors.primaryLight};
+  background-color: ${p => p.theme.colors.white};
+  text-align: ${p => p.align ?? 'left'};
+`;

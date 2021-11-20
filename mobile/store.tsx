@@ -6,7 +6,7 @@ import React, {
   useMemo,
   useState,
 } from 'react';
-import { navigate } from './navigation/utils';
+import { navigate, reset } from './navigation/utils';
 import { getPersistedData, persistData, resetPersistedData } from './utils';
 
 export enum AuthStatus {
@@ -60,7 +60,7 @@ export function GlobalStateProvider({ children }: { children: ReactNode }) {
     setAuthStatus(AuthStatus.UNAUTHENTICATED);
     setUsername(null);
     resetPersistedData('username');
-    navigate('Login');
+    reset('Login');
   };
 
   const login = (user?: string) => {
