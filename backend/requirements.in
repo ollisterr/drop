@@ -5,3 +5,7 @@ piccolo_api
 piccolo_admin
 fastapi-code-generator
 python-dotenv
+python-dateutil
+pandas
+numpy
+sklearn
