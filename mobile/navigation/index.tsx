@@ -21,6 +21,7 @@ import theme from '../styles/theme';
 import styled from '../styles';
 import GroupScreen from '../screens/GroupScreen';
 import AddGroupScreen from '../screens/AddGroupScreen';
+import ShowerScreen from '../screens/ShowerScreen';
 
 const RootStack = createNativeStackNavigator<RootStackParamList>();
 
@@ -71,7 +72,7 @@ const BottomTabNavigator = () => {
       />
       <BottomTab.Screen
         name="Shower"
-        component={GroupsScreen}
+        component={ShowerScreen}
         options={{
           tabBarLabel: (props: any) => (
             <BottomTabLabel icon="water" title="Let's bath" {...props} />
