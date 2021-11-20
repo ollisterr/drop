@@ -12,9 +12,7 @@ interface Props {
 export default function Rank({ rank, groupName }: Props) {
   return (
     <Row align="center" style={{ flex: 1 }}>
-      <RankWrapper>
-        <H3 color="primaryDark">#{rank}</H3>
-      </RankWrapper>
+      <RankNumber rank={rank} />
 
       <Spacer spacing="xsmall" />
 
@@ -26,6 +24,12 @@ export default function Rank({ rank, groupName }: Props) {
     </Row>
   );
 }
+
+export const RankNumber = ({ rank }: { rank: number }) => (
+  <RankWrapper>
+    <H3 color="primaryDark">#{rank}</H3>
+  </RankWrapper>
+);
 
 const RankWrapper = styled.View`
   align-items: center;

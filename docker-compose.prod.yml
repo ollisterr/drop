@@ -1,0 +1,32 @@
+services:
+  admin:
+    restart: unless-stopped
+
+  api:
+    restart: unless-stopped
+
+  db:
+    restart: unless-stopped
+    volumes:
+      - db_volume:/var/lib/postgresql
+
+  caddy:
+    image: caddy:2.4.6
+    container_name: caddy
+    restart: unless-stopped
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./caddy/Caddyfile:/etc/caddy/Caddyfile
+      - /etc/caddy/data:/data
+      - /etc/caddy/config:/config
+      - /var/log/caddy/:/var/log/caddy/
+      - /srv/www:/srv/www
+    environment:
+      - ADMIN_USER=${ADMIN_USER:-admin}
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin}
+
+volumes:
+  db_volume:
+   external: true

@@ -1,0 +1,8 @@
+services:
+  admin:
+    volumes:
+      - ./admin:/app
+
+  api:
+    volumes:
+      - ./backend:/app

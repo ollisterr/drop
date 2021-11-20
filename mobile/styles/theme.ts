@@ -17,7 +17,7 @@ const theme = {
     black: '#373737',
     white: '#fff',
     grey: '#7C7C7C',
-    lightgrey: '#E5E5E5',
+    greyLight: '#E5E5E5',
     whitesmoke: '#F0F0F0',
   },
   borderRadius: {
@@ -48,20 +48,20 @@ const theme = {
     `,
     h2: css`
       font-family: NATS;
-      font-size: ${px(64)};
+      font-size: ${px(40)};
       font-weight: 600;
-      margin-top: -${px(32)};
-      margin-bottom: -${px(32)};
+      margin-top: -${px(20)};
+      margin-bottom: -${px(20)};
     `,
     h3: css`
       font-family: NATS;
       font-size: ${px(28)};
       text-transform: uppercase;
-      margin-top: -${px(18)};
-      margin-bottom: -${px(18)};
+      margin-top: -${px(14)};
+      margin-bottom: -${px(14)};
     `,
     subheading: css`
-      font-family: 'Open Sans Medium';
+      font-family: 'Open Sans Bold';
       font-size: ${px(16)};
     `,
     body: css`
