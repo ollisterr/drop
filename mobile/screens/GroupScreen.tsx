@@ -2,22 +2,36 @@ import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import * as React from 'react';
-import { ScrollView, TouchableOpacity } from 'react-native';
+import { ScrollView } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { GroupType, GroupCard, KPICard, Header } from '../components';
+import { KPICard, Header } from '../components';
 import { Row, ScreenWrapper, Spacer } from '../styles/components';
 import theme from '../styles/theme';
+import styled from '../styles';
+import { Text, H3 } from '../styles/typography';
 
-import { H2 } from '../styles/typography';
 import { GroupStackParamList } from '../types';
 
-const testData: GroupType[] = [
+const testData = [
   {
     id: 'poikamiehet',
-    name: 'Poikamiehet',
+    username: 'Poikamiehet',
     score: 67,
-    rank: 3,
-    participants: ['Timo', 'Taku', 'Jonesus', 'Kaabriel', 'Hesekiel'],
+  },
+  {
+    id: 'poikamiehet',
+    username: 'Kannis',
+    score: 67,
+  },
+  {
+    id: 'poikamiehet',
+    username: 'Tuhuri',
+    score: 67,
+  },
+  {
+    id: 'poikamiehet',
+    username: 'Lebens67',
+    score: 67,
   },
 ];
 
@@ -42,7 +56,7 @@ export default function GroupScreen() {
       >
         <Spacer axis="y" />
 
-        <Row bordered>
+        <Row>
           <KPICard
             kpi="Top 3"
             description="Three weeks in a row"
@@ -60,10 +74,56 @@ export default function GroupScreen() {
 
         <Spacer axis="y" spacing="large" />
 
-        {testData.map(group => (
-          <GroupCard {...group} />
+        {testData.map((user, i) => (
+          <UserCard key={user.id}>
+            <H3 color={i < 3 ? 'victory' : undefined}>#{i + 1}</H3>
+
+            <Spacer />
+
+            <Text>{user.username}</Text>
+
+            <Spacer fill />
+
+            <Ionicons
+              name="water"
+              size={20}
+              color={theme.colors.primaryLight}
+            />
+
+            <Spacer spacing="xxsmall" />
+
+            <Text weight="bold">{user.score}</Text>
+
+            <Spacer />
+
+            <Ionicons
+              name="fitness-outline"
+              size={20}
+              color={theme.colors.alert}
+            />
+
+            <Spacer spacing="xxsmall" />
+
+            <Text weight="bold">{user.score}</Text>
+
+            <Spacer />
+
+            <Ionicons name="leaf" size={20} color={theme.colors.success} />
+
+            <Spacer spacing="xxsmall" />
+
+            <Text weight="bold">{user.score}</Text>
+          </UserCard>
         ))}
       </ScrollView>
     </ScreenWrapper>
   );
 }
+
+const UserCard = styled(Row)`
+  align-items: center;
+  border-color: ${p => p.theme.colors.greyLight};
+  padding-vertical: ${p => p.theme.spacing.default};
+  border-width: 0px;
+  border-bottom-width: 1px;
+`;

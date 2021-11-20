@@ -25,12 +25,17 @@ export const ScreenWrapper = styled.View<{
     `}
 `;
 
-export const Spacer = styled.View<{ axis?: 'x' | 'y'; spacing?: Spacing }>`
+export const Spacer = styled.View<{
+  axis?: 'x' | 'y';
+  spacing?: Spacing;
+  fill?: boolean;
+}>`
   flex-direction: ${p => (p.axis === 'y' ? 'column' : 'row')};
   width: ${p =>
     p.axis === 'y' ? '1px' : p.theme.spacing[p.spacing ?? 'default']};
   height: ${p =>
     p.axis === 'y' ? p.theme.spacing[p.spacing ?? 'default'] : '1px'};
+  ${p => p.fill && 'flex: 1;'}
 `;
 export const Row = styled.View<{
   justify?: 'center' | 'space-between' | 'flex-end' | 'space-between';
@@ -67,7 +72,7 @@ export const Separator = styled.View`
 
 export const Input = styled.TextInput<{ align?: 'left' | 'center' | 'right' }>`
   ${p => p.theme.typography.body}
-  width: 100%;
+  min-width: 100%;
   border-radius: ${p => p.theme.borderRadius.large};
   padding-vertical: ${p => p.theme.spacing.small};
   padding-horizontal: ${p => p.theme.spacing.large};

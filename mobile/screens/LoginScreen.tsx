@@ -1,5 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Animated, BackHandler, Easing } from 'react-native';
+import faker from 'faker';
+
 import styled from '../styles';
 import { Input, ScreenWrapper, Spacer } from '../styles/components';
 import { Text } from '../styles/typography';
@@ -9,6 +11,7 @@ import background from '../assets/images/rain-drops.jpg';
 import { Button, TextButton } from '../components';
 import useGlobalState from '../store';
 import theme from '../styles/theme';
+import { AXIOS_INSTANCE } from '../api/axios';
 
 export default function LoginScreen() {
   const [showWelcomeScreen, toggleShowWelcomeScreen] = useState(true);
@@ -164,7 +167,7 @@ const WelcomeText = ({ next }: { next: () => void }) => (
 
     <Spacer axis="y" spacing="xxlarge" />
 
-    <Button onPress={next}>Let's bath</Button>
+    <Button onPress={next}>Let&apos;s bath</Button>
   </Content>
 );
 
@@ -176,19 +179,27 @@ const LoginView = () => {
 
   const submit = (username: string) => {
     toggleLoading(true);
-    new Promise(resolve => {
-      setTimeout(resolve, 1000);
+    AXIOS_INSTANCE.post('https://api.drop.energy/register', {
+      user: {
+        username,
+        password: 'kakka',
+      },
+      apartment: {
+        address: faker.address.streetAddress(),
+        people: 100,
+      },
     })
       .then(() => {
         login(username);
       })
+      .catch(err => console.log(err))
       .finally(() => toggleLoading(false));
   };
 
   return (
     <Content>
       <Text color="grey" align="center">
-        Add a username so that you're shower buddies can find you.
+        Add a username so that you&apos;re shower buddies can find you.
       </Text>
 
       <Spacer axis="y" spacing="large" />
@@ -205,12 +216,6 @@ const LoginView = () => {
       <Button onPress={() => submit(input)} loading={loading}>
         Log in
       </Button>
-
-      <Spacer axis="y" spacing="xxlarge" />
-
-      <TextButton onPress={() => submit('suihku-ukko')} disabled={loading}>
-        Skip log in for now
-      </TextButton>
     </Content>
   );
 };
