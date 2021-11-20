@@ -1,6 +1,6 @@
 VENV = venv
 PYTHON = $(VENV)/bin/python3
-COMPOSE = docker-compose
+COMPOSE = docker-compose -f docker-compose.yml -f docker-compose.dev.yml
 PIP_COMPILE = pip-compile
 PICCOLO = piccolo
 BLACK = black
@@ -26,10 +26,10 @@ run-db:
 	$(COMPOSE) up -d
 
 stop-db:
-	$(COMPOSE) down
+	$(COMPOSE) down db
 
 sql:
-	$(PICCOLO) sql_shell run
+	psql postgres://drop_db:test@0.0.0.0:6432/drop_db
 
 create-migrations:
 	$(PICCOLO) migrations new drop_api --auto
@@ -45,6 +45,9 @@ create-admin-user:
 	 --is_admin true \
 	 --is_superuser true \
 	 --is_active true
+
+exec-docker:
+	cd .. && $(COMPOSE) exec api /bin/bash
 
 generate-openapi:
 	$(PYTHON) scripts/export_openapi_spec.py

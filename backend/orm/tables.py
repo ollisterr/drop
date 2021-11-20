@@ -1,3 +1,4 @@
+from piccolo.apps.user.tables import BaseUser
 from piccolo.columns.column_types import (
     Decimal,
     ForeignKey,
@@ -23,6 +24,15 @@ class Apartment(Table):
 
     address = Varchar()
     people = Integer()
+
+
+class User(Table, tablename="drop_user"):
+    """
+    User table
+    """
+
+    user = ForeignKey(BaseUser)
+    apartment = ForeignKey(Apartment)
 
 
 class ApartmentGroups(Table):
