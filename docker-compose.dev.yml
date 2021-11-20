@@ -1,8 +1,9 @@
 services:
-  admin:
-    volumes:
-      - ./admin:/app
+    admin:
+        volumes:
+            - ./admin:/app
 
-  api:
-    volumes:
-      - ./backend:/app
+    api:
+        volumes:
+            - ./backend:/app
+            - ./data:/data
