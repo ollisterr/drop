@@ -7,11 +7,11 @@
  */
 
 export interface MeasurementIn {
-  apartment?: number | null;
-  appliance?: string;
-  flow_time?: number;
-  power_consumption?: number;
-  temp?: number;
   timestamp?: string;
+  appliance?: string;
+  apartment?: number | null;
+  power_consumption?: number;
   water_consumption?: number;
+  temp?: number;
+  flow_time?: number;
 }

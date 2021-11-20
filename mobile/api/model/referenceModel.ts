@@ -7,6 +7,6 @@
  */
 
 export interface ReferenceModel {
-  columnName: string;
   tableName: string;
+  columnName: string;
 }

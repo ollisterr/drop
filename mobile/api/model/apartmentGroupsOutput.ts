@@ -7,7 +7,7 @@
  */
 
 export interface ApartmentGroupsOutput {
+  id?: number;
   apartment?: number | null;
   group_id?: number | null;
-  id?: number;
 }
