@@ -94,7 +94,7 @@ export default function AddGroupScreen() {
           </SelectedUserList>
 
           {data.map(user => (
-            <UserCard style={shadowStyle}>
+            <UserCard key={user.id} style={shadowStyle}>
               <Subheading>
                 {user.firstName} {user.lastName}
               </Subheading>
