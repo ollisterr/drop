@@ -2,6 +2,7 @@ import React, { ReactNode } from 'react';
 import { TouchableOpacityProps } from 'react-native';
 
 import styled from '../styles';
+import theme from '../styles/theme';
 import { Text } from '../styles/typography';
 
 interface ButtonProps extends TouchableOpacityProps {
@@ -33,7 +34,12 @@ const ButtonWrapper = styled.TouchableOpacity`
   align-items: center;
 `;
 
-const LoadingAnimation = styled.ActivityIndicator`
+const LoadingAnimation = styled.ActivityIndicator.attrs({
+  color: theme.colors.white,
+})`
   position: absolute;
+  top: 0;
+  bottom: 0;
   right: ${p => p.theme.spacing.medium};
+  align-self: center;
 `;
