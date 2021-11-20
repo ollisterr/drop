@@ -1,6 +1,48 @@
 {
     "components": {
         "schemas": {
+            "ApartmentIn": {
+                "properties": {
+                    "address": {
+                        "extra": {},
+                        "maxLength": 255,
+                        "nullable": false,
+                        "title": "Address",
+                        "type": "string"
+                    },
+                    "appliance": {
+                        "extra": {
+                            "foreign_key": true,
+                            "to": "appliance"
+                        },
+                        "nullable": true,
+                        "title": "Appliance",
+                        "type": "integer"
+                    },
+                    "created_on": {
+                        "extra": {},
+                        "format": "date-time",
+                        "nullable": false,
+                        "title": "Created On",
+                        "type": "string"
+                    },
+                    "owner": {
+                        "extra": {},
+                        "format": "text-area",
+                        "nullable": false,
+                        "title": "Owner",
+                        "type": "string"
+                    },
+                    "people": {
+                        "extra": {},
+                        "nullable": false,
+                        "title": "People",
+                        "type": "integer"
+                    }
+                },
+                "title": "ApartmentIn",
+                "type": "object"
+            },
             "ApartmentItem": {
                 "properties": {
                     "address": {
@@ -47,6 +89,54 @@
                     }
                 },
                 "title": "ApartmentItem",
+                "type": "object"
+            },
+            "ApartmentOptional": {
+                "properties": {
+                    "address": {
+                        "extra": {},
+                        "maxLength": 255,
+                        "nullable": false,
+                        "title": "Address",
+                        "type": "string"
+                    },
+                    "appliance": {
+                        "extra": {
+                            "foreign_key": true,
+                            "to": "appliance"
+                        },
+                        "nullable": true,
+                        "title": "Appliance",
+                        "type": "integer"
+                    },
+                    "created_on": {
+                        "extra": {},
+                        "format": "date-time",
+                        "nullable": false,
+                        "title": "Created On",
+                        "type": "string"
+                    },
+                    "id": {
+                        "extra": {},
+                        "nullable": false,
+                        "title": "Id",
+                        "type": "integer"
+                    },
+                    "owner": {
+                        "extra": {},
+                        "format": "text-area",
+                        "nullable": false,
+                        "title": "Owner",
+                        "type": "string"
+                    },
+                    "people": {
+                        "extra": {},
+                        "nullable": false,
+                        "title": "People",
+                        "type": "integer"
+                    }
+                },
+                "title": "ApartmentOptional",
                 "type": "object"
             },
             "ApartmentOutput": {
@@ -110,6 +200,28 @@
                 "title": "ApartmentPlural",
                 "type": "object"
             },
+            "ApplianceIn": {
+                "properties": {
+                    "measurement": {
+                        "extra": {
+                            "foreign_key": true,
+                            "to": "measurement"
+                        },
+                        "nullable": true,
+                        "title": "Measurement",
+                        "type": "integer"
+                    },
+                    "name": {
+                        "extra": {},
+                        "maxLength": 255,
+                        "nullable": false,
+                        "title": "Name",
+                        "type": "string"
+                    }
+                },
+                "title": "ApplianceIn",
+                "type": "object"
+            },
             "ApplianceItem": {
                 "properties": {
                     "id": {
@@ -136,6 +248,34 @@
                     }
                 },
                 "title": "ApplianceItem",
+                "type": "object"
+            },
+            "ApplianceOptional": {
+                "properties": {
+                    "id": {
+                        "extra": {},
+                        "nullable": false,
+                        "title": "Id",
+                        "type": "integer"
+                    },
+                    "measurement": {
+                        "extra": {
+                            "foreign_key": true,
+                            "to": "measurement"
+                        },
+                        "nullable": true,
+                        "title": "Measurement",
+                        "type": "integer"
+                    },
+                    "name": {
+                        "extra": {},
+                        "maxLength": 255,
+                        "nullable": false,
+                        "title": "Name",
+                        "type": "string"
+                    }
+                },
+                "title": "ApplianceOptional",
                 "type": "object"
             },
             "ApplianceOutput": {
@@ -197,6 +337,37 @@
                 "title": "CountModel",
                 "type": "object"
             },
+            "GroupIn": {
+                "properties": {
+                    "apartment": {
+                        "extra": {
+                            "foreign_key": true,
+                            "to": "apartment"
+                        },
+                        "nullable": true,
+                        "title": "Apartment",
+                        "type": "integer"
+                    },
+                    "name": {
+                        "extra": {},
+                        "maxLength": 255,
+                        "nullable": false,
+                        "title": "Name",
+                        "type": "string"
+                    },
+                    "resident": {
+                        "extra": {
+                            "foreign_key": true,
+                            "to": "resident"
+                        },
+                        "nullable": true,
+                        "title": "Resident",
+                        "type": "integer"
+                    }
+                },
+                "title": "GroupIn",
+                "type": "object"
+            },
             "GroupItem": {
                 "properties": {
                     "apartment": {
@@ -232,6 +403,43 @@
                     }
                 },
                 "title": "GroupItem",
+                "type": "object"
+            },
+            "GroupOptional": {
+                "properties": {
+                    "apartment": {
+                        "extra": {
+                            "foreign_key": true,
+                            "to": "apartment"
+                        },
+                        "nullable": true,
+                        "title": "Apartment",
+                        "type": "integer"
+                    },
+                    "id": {
+                        "extra": {},
+                        "nullable": false,
+                        "title": "Id",
+                        "type": "integer"
+                    },
+                    "name": {
+                        "extra": {},
+                        "maxLength": 255,
+                        "nullable": false,
+                        "title": "Name",
+                        "type": "string"
+                    },
+                    "resident": {
+                        "extra": {
+                            "foreign_key": true,
+                            "to": "resident"
+                        },
+                        "nullable": true,
+                        "title": "Resident",
+                        "type": "integer"
+                    }
+                },
+                "title": "GroupOptional",
                 "type": "object"
             },
             "GroupOutput": {
@@ -297,6 +505,31 @@
                 "title": "HTTPValidationError",
                 "type": "object"
             },
+            "MeasurementIn": {
+                "properties": {
+                    "power_consumption": {
+                        "extra": {},
+                        "nullable": false,
+                        "title": "Power Consumption",
+                        "type": "number"
+                    },
+                    "timestamp": {
+                        "extra": {},
+                        "format": "date-time",
+                        "nullable": false,
+                        "title": "Timestamp",
+                        "type": "string"
+                    },
+                    "water_consumption": {
+                        "extra": {},
+                        "nullable": false,
+                        "title": "Water Consumption",
+                        "type": "number"
+                    }
+                },
+                "title": "MeasurementIn",
+                "type": "object"
+            },
             "MeasurementItem": {
                 "properties": {
                     "id": {
@@ -326,6 +559,37 @@
                     }
                 },
                 "title": "MeasurementItem",
+                "type": "object"
+            },
+            "MeasurementOptional": {
+                "properties": {
+                    "id": {
+                        "extra": {},
+                        "nullable": false,
+                        "title": "Id",
+                        "type": "integer"
+                    },
+                    "power_consumption": {
+                        "extra": {},
+                        "nullable": false,
+                        "title": "Power Consumption",
+                        "type": "number"
+                    },
+                    "timestamp": {
+                        "extra": {},
+                        "format": "date-time",
+                        "nullable": false,
+                        "title": "Timestamp",
+                        "type": "string"
+                    },
+                    "water_consumption": {
+                        "extra": {},
+                        "nullable": false,
+                        "title": "Water Consumption",
+                        "type": "number"
+                    }
+                },
+                "title": "MeasurementOptional",
                 "type": "object"
             },
             "MeasurementOutput": {
@@ -406,6 +670,21 @@
                 "title": "ReferencesModel",
                 "type": "object"
             },
+            "ResidentIn": {
+                "properties": {
+                    "apartment": {
+                        "extra": {
+                            "foreign_key": true,
+                            "to": "apartment"
+                        },
+                        "nullable": true,
+                        "title": "Apartment",
+                        "type": "integer"
+                    }
+                },
+                "title": "ResidentIn",
+                "type": "object"
+            },
             "ResidentItem": {
                 "properties": {
                     "apartment": {
@@ -425,6 +704,27 @@
                     }
                 },
                 "title": "ResidentItem",
+                "type": "object"
+            },
+            "ResidentOptional": {
+                "properties": {
+                    "apartment": {
+                        "extra": {
+                            "foreign_key": true,
+                            "to": "apartment"
+                        },
+                        "nullable": true,
+                        "title": "Apartment",
+                        "type": "integer"
+                    },
+                    "id": {
+                        "extra": {},
+                        "nullable": false,
+                        "title": "Id",
+                        "type": "integer"
+                    }
+                },
+                "title": "ResidentOptional",
                 "type": "object"
             },
             "ResidentOutput": {
@@ -490,8 +790,12 @@
         }
     },
     "info": {
-        "title": "FastAPI",
-        "version": "0.1.0"
+        "description": "The OpenAPI schema for drop.energy",
+        "title": "Drop API",
+        "version": "0.1.0",
+        "x-logo": {
+            "url": "https://api.drop.energy/static/drop-logo.png"
+        }
     },
     "openapi": "3.0.2",
     "paths": {
@@ -676,6 +980,43 @@
                     }
                 },
                 "summary": "Get"
+            },
+            "post": {
+                "description": "Create a new row in the table.",
+                "operationId": "post_apartment__post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ApartmentIn"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApartmentOutput"
+                                }
+                            }
+                        },
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                },
+                "summary": "Post"
             }
         },
         "/apartment/count/": {
@@ -933,6 +1274,42 @@
             }
         },
         "/apartment/{row_id}/": {
+            "delete": {
+                "description": "Delete a single row from the table.",
+                "operationId": "delete_single_apartment__row_id___delete",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "row_id",
+                        "required": true,
+                        "schema": {
+                            "title": "Row Id",
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        },
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                },
+                "summary": "Delete Single"
+            },
             "get": {
                 "description": "Retrieve a single row from the table.",
                 "operationId": "get_single_apartment__row_id___get",
@@ -970,6 +1347,102 @@
                     }
                 },
                 "summary": "Get Single"
+            },
+            "patch": {
+                "description": "Update a single row.",
+                "operationId": "patch_apartment__row_id___patch",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "row_id",
+                        "required": true,
+                        "schema": {
+                            "title": "Row Id",
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ApartmentOptional"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApartmentOutput"
+                                }
+                            }
+                        },
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                },
+                "summary": "Patch"
+            },
+            "put": {
+                "description": "Insert or update a single row.",
+                "operationId": "put_apartment__row_id___put",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "row_id",
+                        "required": true,
+                        "schema": {
+                            "title": "Row Id",
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ApartmentIn"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApartmentOutput"
+                                }
+                            }
+                        },
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                },
+                "summary": "Put"
             }
         },
         "/appliance/": {
@@ -1099,6 +1572,43 @@
                     }
                 },
                 "summary": "Get"
+            },
+            "post": {
+                "description": "Create a new row in the table.",
+                "operationId": "post_appliance__post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ApplianceIn"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApplianceOutput"
+                                }
+                            }
+                        },
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                },
+                "summary": "Post"
             }
         },
         "/appliance/count/": {
@@ -1302,6 +1812,42 @@
             }
         },
         "/appliance/{row_id}/": {
+            "delete": {
+                "description": "Delete a single row from the table.",
+                "operationId": "delete_single_appliance__row_id___delete",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "row_id",
+                        "required": true,
+                        "schema": {
+                            "title": "Row Id",
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        },
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                },
+                "summary": "Delete Single"
+            },
             "get": {
                 "description": "Retrieve a single row from the table.",
                 "operationId": "get_single_appliance__row_id___get",
@@ -1339,6 +1885,102 @@
                     }
                 },
                 "summary": "Get Single"
+            },
+            "patch": {
+                "description": "Update a single row.",
+                "operationId": "patch_appliance__row_id___patch",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "row_id",
+                        "required": true,
+                        "schema": {
+                            "title": "Row Id",
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ApplianceOptional"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApplianceOutput"
+                                }
+                            }
+                        },
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                },
+                "summary": "Patch"
+            },
+            "put": {
+                "description": "Insert or update a single row.",
+                "operationId": "put_appliance__row_id___put",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "row_id",
+                        "required": true,
+                        "schema": {
+                            "title": "Row Id",
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ApplianceIn"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApplianceOutput"
+                                }
+                            }
+                        },
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                },
+                "summary": "Put"
             }
         },
         "/group/": {
@@ -1489,6 +2131,43 @@
                     }
                 },
                 "summary": "Get"
+            },
+            "post": {
+                "description": "Create a new row in the table.",
+                "operationId": "post_group__post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/GroupIn"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GroupOutput"
+                                }
+                            }
+                        },
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                },
+                "summary": "Post"
             }
         },
         "/group/count/": {
@@ -1713,6 +2392,42 @@
             }
         },
         "/group/{row_id}/": {
+            "delete": {
+                "description": "Delete a single row from the table.",
+                "operationId": "delete_single_group__row_id___delete",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "row_id",
+                        "required": true,
+                        "schema": {
+                            "title": "Row Id",
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        },
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                },
+                "summary": "Delete Single"
+            },
             "get": {
                 "description": "Retrieve a single row from the table.",
                 "operationId": "get_single_group__row_id___get",
@@ -1750,6 +2465,102 @@
                     }
                 },
                 "summary": "Get Single"
+            },
+            "patch": {
+                "description": "Update a single row.",
+                "operationId": "patch_group__row_id___patch",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "row_id",
+                        "required": true,
+                        "schema": {
+                            "title": "Row Id",
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/GroupOptional"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GroupOutput"
+                                }
+                            }
+                        },
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                },
+                "summary": "Patch"
+            },
+            "put": {
+                "description": "Insert or update a single row.",
+                "operationId": "put_group__row_id___put",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "row_id",
+                        "required": true,
+                        "schema": {
+                            "title": "Row Id",
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/GroupIn"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GroupOutput"
+                                }
+                            }
+                        },
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                },
+                "summary": "Put"
             }
         },
         "/measurement/": {
@@ -1880,6 +2691,43 @@
                     }
                 },
                 "summary": "Get"
+            },
+            "post": {
+                "description": "Create a new row in the table.",
+                "operationId": "post_measurement__post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/MeasurementIn"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/MeasurementOutput"
+                                }
+                            }
+                        },
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                },
+                "summary": "Post"
             }
         },
         "/measurement/count/": {
@@ -2084,6 +2932,42 @@
             }
         },
         "/measurement/{row_id}/": {
+            "delete": {
+                "description": "Delete a single row from the table.",
+                "operationId": "delete_single_measurement__row_id___delete",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "row_id",
+                        "required": true,
+                        "schema": {
+                            "title": "Row Id",
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        },
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                },
+                "summary": "Delete Single"
+            },
             "get": {
                 "description": "Retrieve a single row from the table.",
                 "operationId": "get_single_measurement__row_id___get",
@@ -2121,6 +3005,102 @@
                     }
                 },
                 "summary": "Get Single"
+            },
+            "patch": {
+                "description": "Update a single row.",
+                "operationId": "patch_measurement__row_id___patch",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "row_id",
+                        "required": true,
+                        "schema": {
+                            "title": "Row Id",
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/MeasurementOptional"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/MeasurementOutput"
+                                }
+                            }
+                        },
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                },
+                "summary": "Patch"
+            },
+            "put": {
+                "description": "Insert or update a single row.",
+                "operationId": "put_measurement__row_id___put",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "row_id",
+                        "required": true,
+                        "schema": {
+                            "title": "Row Id",
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/MeasurementIn"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/MeasurementOutput"
+                                }
+                            }
+                        },
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                },
+                "summary": "Put"
             }
         },
         "/resident/": {
@@ -2238,6 +3218,43 @@
                     }
                 },
                 "summary": "Get"
+            },
+            "post": {
+                "description": "Create a new row in the table.",
+                "operationId": "post_resident__post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ResidentIn"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResidentOutput"
+                                }
+                            }
+                        },
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                },
+                "summary": "Post"
             }
         },
         "/resident/count/": {
@@ -2429,6 +3446,42 @@
             }
         },
         "/resident/{row_id}/": {
+            "delete": {
+                "description": "Delete a single row from the table.",
+                "operationId": "delete_single_resident__row_id___delete",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "row_id",
+                        "required": true,
+                        "schema": {
+                            "title": "Row Id",
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        },
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                },
+                "summary": "Delete Single"
+            },
             "get": {
                 "description": "Retrieve a single row from the table.",
                 "operationId": "get_single_resident__row_id___get",
@@ -2466,6 +3519,102 @@
                     }
                 },
                 "summary": "Get Single"
+            },
+            "patch": {
+                "description": "Update a single row.",
+                "operationId": "patch_resident__row_id___patch",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "row_id",
+                        "required": true,
+                        "schema": {
+                            "title": "Row Id",
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ResidentOptional"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResidentOutput"
+                                }
+                            }
+                        },
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                },
+                "summary": "Patch"
+            },
+            "put": {
+                "description": "Insert or update a single row.",
+                "operationId": "put_resident__row_id___put",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "row_id",
+                        "required": true,
+                        "schema": {
+                            "title": "Row Id",
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ResidentIn"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResidentOutput"
+                                }
+                            }
+                        },
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                },
+                "summary": "Put"
             }
         }
     }

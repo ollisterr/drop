@@ -31,7 +31,7 @@
 	}
 }
 
-www.drop.energy drop.energy {
+api.drop.energy {
 	tls admin@drop.energy
 
 	import security-headers
@@ -40,6 +40,19 @@ www.drop.energy drop.energy {
 	root * /srv/www/drop
 
 	reverse_proxy drop_api:8000
+
+	encode zstd gzip
+}
+
+admin.drop.energy {
+	tls admin@drop.energy
+
+	import security-headers
+	import logging
+
+	root * /srv/www/drop
+
+	reverse_proxy drop_admin:3000
 
 	encode zstd gzip
 }
