@@ -1,0 +1,36 @@
+services:
+  drop_api:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    container_name: drop_api
+    restart: unless-stopped
+    ports:
+      - 8000:8000
+    env_file: .env
+
+  db:
+    volumes:
+      - db_volume:/var/lib/postgresql
+    restart: unless-stopped
+
+  caddy:
+    image: caddy:2.4.6
+    container_name: caddy
+    restart: unless-stopped
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./caddy/Caddyfile:/etc/caddy/Caddyfile
+      - /etc/caddy/data:/data
+      - /etc/caddy/config:/config
+      - /var/log/caddy/:/var/log/caddy/
+      - /srv/www:/srv/www
+    environment:
+      - ADMIN_USER=${ADMIN_USER:-admin}
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin}
+
+volumes:
+  db_volume:
+   external: true
