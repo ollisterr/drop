@@ -6,6 +6,10 @@ BLACK = black
 
 all: install run
 
+install: venv env
+	. venv/bin/activate && pip install -r requirements.txt
+	python3 -m pip install pip-tools
+
 venv:
 	test -d $(VENV) || python3 -m $(VENV) $(VENV)
 

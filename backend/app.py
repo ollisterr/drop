@@ -7,7 +7,7 @@ from starlette.routing import BaseRoute, Mount
 from fastapi import FastAPI
 
 from orm.piccolo_app import APP_CONFIG
-from orm.tables import Test
+from orm.tables import Apartment
 
 admin = create_admin(tables=APP_CONFIG.table_classes, site_name="Drop Admin")
 routes: List[BaseRoute] = [Mount("/admin/", admin)]
@@ -20,7 +20,7 @@ FastAPIWrapper(
     root_url="/test/",
     fastapi_app=app,
     piccolo_crud=PiccoloCRUD(
-        table=Test,
+        table=Apartment,
         read_only=True,
     ),
 )
