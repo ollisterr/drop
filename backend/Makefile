@@ -1,46 +1,52 @@
+VENV = venv
+PYTHON = $(VENV)/bin/python3
+PIP_COMPILE = $(VENV)/bin/pip
+PICCOLO = piccolo
+BLACK = black
+
 all: install run
 
-install: venv env
-	. venv/bin/activate && pip install -r requirements.txt
-	python -m pip install pip-tools
-
 venv:
-	test -d venv || python3 -m venv venv
+	test -d $(VENV) || python3 -m $(VENV) $(VENV)
 
 env:
 	cp .env.example .env
 
-compile-deps:
-	pip-compile requirements.in
-	pip-compile requirements-dev.in
+install: venv env
+	. venv/bin/activate && pip install -r requirements.txt
+	python3 -m pip install pip-tools
 
-codegen:
-	fastapi-codegen --input ../data/api-schema.yaml --output app
+run: run-db run-migrations
+	$(PYTHON) main.py
 
-lint:
-	black .
-
-clean:
-	rm -rf venv
-	find -iname "*.pyc" -delete
-
-run:
+run-db:
 	docker-compose up -d
-	python3 main.py
 
-stop:
+stop-db:
 	docker-compose down
 
 sql:
-	piccolo sql_shell run
+	$(PICCOLO) sql_shell run
 
 create-migrations:
-	piccolo migrations new drop_api --auto
+	$(PICCOLO) migrations new drop_api --auto
 
 run-migrations:
-	piccolo migrations forward all
+	$(PICCOLO) migrations forward all
 
 generate-openapi:
-	python3 scripts/export_openapi_spec.py
+	$(PYTHON) scripts/export_openapi_spec.py
 
-.PHONY: all compile-deps install init codegen run run-migrations sql venv
+compile-deps:
+	$(PIP_COMPILE) requirements.in
+	$(PIP_COMPILE) requirements-dev.in
+
+lint:
+	$(BLACK) .
+
+clean: stop-db
+	find . -type f -name *.pyc -delete
+	find . -type d -name __pycache__ -delete
+	rm -rf $(VENV)
+
+.PHONY: all compile-deps clean generate-openapi install init codegen run run-migrations sql venv
