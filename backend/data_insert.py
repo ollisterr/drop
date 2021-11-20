@@ -1,7 +1,7 @@
 import json
 from datetime import datetime
 
-from orm.tables import Apartment, Group, ApartmentGroups, Measurement
+from orm.tables import Apartment, ApartmentGroups, Group, Measurement
 
 with open("../data/apartments.json") as af, open("../data/groups.json") as gf:
     apt_data = json.load(af)

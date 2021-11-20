@@ -8,10 +8,6 @@ ISORT = isort
 
 all: install run
 
-install: venv env
-	. venv/bin/activate && pip install -r requirements.txt
-	python3 -m pip install pip-tools
-
 venv:
 	test -d $(VENV) || python3 -m $(VENV) $(VENV)
 
@@ -40,6 +36,15 @@ create-migrations:
 
 run-migrations:
 	$(PICCOLO) migrations forward all
+
+create-admin-user:
+	piccolo user create \
+	 --username admin \
+	 --email admin@drop.energy \
+	 --password admin \
+	 --is_admin true \
+	 --is_superuser true \
+	 --is_active true
 
 generate-openapi:
 	$(PYTHON) scripts/export_openapi_spec.py

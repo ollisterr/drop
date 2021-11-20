@@ -1,16 +1,18 @@
+import decimal
+
 from piccolo.apps.migrations.auto import MigrationManager
-from piccolo.columns.base import OnDelete
-from piccolo.columns.base import OnUpdate
-from piccolo.columns.column_types import Decimal
-from piccolo.columns.column_types import ForeignKey
-from piccolo.columns.column_types import Integer
-from piccolo.columns.column_types import Serial
-from piccolo.columns.column_types import Timestamp
-from piccolo.columns.column_types import Varchar
+from piccolo.columns.base import OnDelete, OnUpdate
+from piccolo.columns.column_types import (
+    Decimal,
+    ForeignKey,
+    Integer,
+    Serial,
+    Timestamp,
+    Varchar,
+)
 from piccolo.columns.defaults.timestamp import TimestampNow
 from piccolo.columns.indexes import IndexMethod
 from piccolo.table import Table
-import decimal
 
 
 class Apartment(Table, tablename="apartment"):

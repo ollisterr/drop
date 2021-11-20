@@ -1,5 +1,8 @@
 services:
   admin:
+    build:
+      context: admin
+      target: runner
     restart: unless-stopped
 
   api:
