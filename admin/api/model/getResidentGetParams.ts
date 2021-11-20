@@ -6,12 +6,12 @@
  */
 
 export type GetResidentGetParams = {
-    id?: number;
-    id__operator?: unknown;
-    apartment?: number;
-    apartment__operator?: unknown;
-    __order?: string;
-    __page_size?: number;
-    __page?: number;
-    __visible_fields?: string;
+  id?: number;
+  id__operator?: unknown;
+  apartment?: number;
+  apartment__operator?: unknown;
+  __order?: string;
+  __page_size?: number;
+  __page?: number;
+  __visible_fields?: string;
 };

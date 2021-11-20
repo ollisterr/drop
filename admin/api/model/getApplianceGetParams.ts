@@ -6,13 +6,13 @@
  */
 
 export type GetApplianceGetParams = {
-    id?: number;
-    id__operator?: unknown;
-    name?: string;
-    measurement?: number;
-    measurement__operator?: unknown;
-    __order?: string;
-    __page_size?: number;
-    __page?: number;
-    __visible_fields?: string;
+  id?: number;
+  id__operator?: unknown;
+  name?: string;
+  measurement?: number;
+  measurement__operator?: unknown;
+  __order?: string;
+  __page_size?: number;
+  __page?: number;
+  __visible_fields?: string;
 };

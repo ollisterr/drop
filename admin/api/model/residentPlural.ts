@@ -7,5 +7,5 @@
 import type { ResidentItem } from "./residentItem";
 
 export interface ResidentPlural {
-    rows?: ResidentItem[];
+  rows?: ResidentItem[];
 }

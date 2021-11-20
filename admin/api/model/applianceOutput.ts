@@ -6,7 +6,7 @@
  */
 
 export interface ApplianceOutput {
-    id?: number;
-    measurement?: number | null;
-    name?: string;
+  id?: number;
+  measurement?: number | null;
+  name?: string;
 }

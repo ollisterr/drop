@@ -6,8 +6,8 @@
  */
 
 export type CountResidentCountGetParams = {
-    id?: number;
-    id__operator?: unknown;
-    apartment?: number;
-    apartment__operator?: unknown;
+  id?: number;
+  id__operator?: unknown;
+  apartment?: number;
+  apartment__operator?: unknown;
 };

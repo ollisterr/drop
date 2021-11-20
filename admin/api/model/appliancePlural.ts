@@ -7,5 +7,5 @@
 import type { ApplianceItem } from "./applianceItem";
 
 export interface AppliancePlural {
-    rows?: ApplianceItem[];
+  rows?: ApplianceItem[];
 }

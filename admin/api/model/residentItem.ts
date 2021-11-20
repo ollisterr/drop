@@ -6,6 +6,6 @@
  */
 
 export interface ResidentItem {
-    apartment?: number | null;
-    id?: number;
+  apartment?: number | null;
+  id?: number;
 }

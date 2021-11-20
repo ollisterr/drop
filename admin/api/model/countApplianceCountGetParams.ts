@@ -6,9 +6,9 @@
  */
 
 export type CountApplianceCountGetParams = {
-    id?: number;
-    id__operator?: unknown;
-    name?: string;
-    measurement?: number;
-    measurement__operator?: unknown;
+  id?: number;
+  id__operator?: unknown;
+  name?: string;
+  measurement?: number;
+  measurement__operator?: unknown;
 };
