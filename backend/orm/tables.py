@@ -2,7 +2,6 @@ from piccolo.columns.column_types import (
     Decimal,
     ForeignKey,
     Integer,
-    Text,
     Timestamp,
     Varchar,
 )
@@ -15,8 +14,6 @@ class Group(Table, tablename="drop_group"):
     """
 
     name = Varchar()
-    resident = ForeignKey("Resident")
-    apartment = ForeignKey("Apartment")
 
 
 class Apartment(Table):
@@ -25,19 +22,16 @@ class Apartment(Table):
     """
 
     address = Varchar()
-    owner = Text()
     people = Integer()
-    created_on = Timestamp()
-    appliance = ForeignKey("Appliance")
 
 
-class Appliance(Table):
+class ApartmentGroups(Table):
     """
-    Group table
+    Junction table for many-to-many with Apartments and Groups
     """
 
-    name = Varchar()
-    measurement = ForeignKey("Measurement")
+    apartment = ForeignKey(Apartment)
+    group_id = ForeignKey(Group)
 
 
 class Measurement(Table):
@@ -46,13 +40,10 @@ class Measurement(Table):
     """
 
     timestamp = Timestamp()
-    water_consumption = Decimal()
-    power_consumption = Decimal()
-
-
-class Resident(Table):
-    """
-    Resident table
-    """
-
+    appliance = Varchar()
     apartment = ForeignKey("Apartment")
+
+    power_consumption = Decimal()
+    water_consumption = Decimal()
+    temp = Decimal()
+    flow_time = Decimal()
