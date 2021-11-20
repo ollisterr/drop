@@ -1,6 +1,184 @@
 {
     "components": {
         "schemas": {
+            "ApartmentItem": {
+                "properties": {
+                    "address": {
+                        "extra": {},
+                        "maxLength": 255,
+                        "nullable": false,
+                        "title": "Address",
+                        "type": "string"
+                    },
+                    "appliance": {
+                        "extra": {
+                            "foreign_key": true,
+                            "to": "appliance"
+                        },
+                        "nullable": true,
+                        "title": "Appliance",
+                        "type": "integer"
+                    },
+                    "created_on": {
+                        "extra": {},
+                        "format": "date-time",
+                        "nullable": false,
+                        "title": "Created On",
+                        "type": "string"
+                    },
+                    "id": {
+                        "extra": {},
+                        "nullable": false,
+                        "title": "Id",
+                        "type": "integer"
+                    },
+                    "owner": {
+                        "extra": {},
+                        "format": "text-area",
+                        "nullable": false,
+                        "title": "Owner",
+                        "type": "string"
+                    },
+                    "people": {
+                        "extra": {},
+                        "nullable": false,
+                        "title": "People",
+                        "type": "integer"
+                    }
+                },
+                "title": "ApartmentItem",
+                "type": "object"
+            },
+            "ApartmentOutput": {
+                "properties": {
+                    "address": {
+                        "extra": {},
+                        "maxLength": 255,
+                        "nullable": false,
+                        "title": "Address",
+                        "type": "string"
+                    },
+                    "appliance": {
+                        "extra": {
+                            "foreign_key": true,
+                            "to": "appliance"
+                        },
+                        "nullable": true,
+                        "title": "Appliance",
+                        "type": "integer"
+                    },
+                    "created_on": {
+                        "extra": {},
+                        "format": "date-time",
+                        "nullable": false,
+                        "title": "Created On",
+                        "type": "string"
+                    },
+                    "id": {
+                        "extra": {},
+                        "nullable": false,
+                        "title": "Id",
+                        "type": "integer"
+                    },
+                    "owner": {
+                        "extra": {},
+                        "format": "text-area",
+                        "nullable": false,
+                        "title": "Owner",
+                        "type": "string"
+                    },
+                    "people": {
+                        "extra": {},
+                        "nullable": false,
+                        "title": "People",
+                        "type": "integer"
+                    }
+                },
+                "title": "ApartmentOutput",
+                "type": "object"
+            },
+            "ApartmentPlural": {
+                "properties": {
+                    "rows": {
+                        "items": {
+                            "$ref": "#/components/schemas/ApartmentItem"
+                        },
+                        "title": "Rows",
+                        "type": "array"
+                    }
+                },
+                "title": "ApartmentPlural",
+                "type": "object"
+            },
+            "ApplianceItem": {
+                "properties": {
+                    "id": {
+                        "extra": {},
+                        "nullable": false,
+                        "title": "Id",
+                        "type": "integer"
+                    },
+                    "measurement": {
+                        "extra": {
+                            "foreign_key": true,
+                            "to": "measurement"
+                        },
+                        "nullable": true,
+                        "title": "Measurement",
+                        "type": "integer"
+                    },
+                    "name": {
+                        "extra": {},
+                        "maxLength": 255,
+                        "nullable": false,
+                        "title": "Name",
+                        "type": "string"
+                    }
+                },
+                "title": "ApplianceItem",
+                "type": "object"
+            },
+            "ApplianceOutput": {
+                "properties": {
+                    "id": {
+                        "extra": {},
+                        "nullable": false,
+                        "title": "Id",
+                        "type": "integer"
+                    },
+                    "measurement": {
+                        "extra": {
+                            "foreign_key": true,
+                            "to": "measurement"
+                        },
+                        "nullable": true,
+                        "title": "Measurement",
+                        "type": "integer"
+                    },
+                    "name": {
+                        "extra": {},
+                        "maxLength": 255,
+                        "nullable": false,
+                        "title": "Name",
+                        "type": "string"
+                    }
+                },
+                "title": "ApplianceOutput",
+                "type": "object"
+            },
+            "AppliancePlural": {
+                "properties": {
+                    "rows": {
+                        "items": {
+                            "$ref": "#/components/schemas/ApplianceItem"
+                        },
+                        "title": "Rows",
+                        "type": "array"
+                    }
+                },
+                "title": "AppliancePlural",
+                "type": "object"
+            },
             "CountModel": {
                 "properties": {
                     "count": {
@@ -19,6 +197,93 @@
                 "title": "CountModel",
                 "type": "object"
             },
+            "GroupItem": {
+                "properties": {
+                    "apartment": {
+                        "extra": {
+                            "foreign_key": true,
+                            "to": "apartment"
+                        },
+                        "nullable": true,
+                        "title": "Apartment",
+                        "type": "integer"
+                    },
+                    "id": {
+                        "extra": {},
+                        "nullable": false,
+                        "title": "Id",
+                        "type": "integer"
+                    },
+                    "name": {
+                        "extra": {},
+                        "maxLength": 255,
+                        "nullable": false,
+                        "title": "Name",
+                        "type": "string"
+                    },
+                    "resident": {
+                        "extra": {
+                            "foreign_key": true,
+                            "to": "resident"
+                        },
+                        "nullable": true,
+                        "title": "Resident",
+                        "type": "integer"
+                    }
+                },
+                "title": "GroupItem",
+                "type": "object"
+            },
+            "GroupOutput": {
+                "properties": {
+                    "apartment": {
+                        "extra": {
+                            "foreign_key": true,
+                            "to": "apartment"
+                        },
+                        "nullable": true,
+                        "title": "Apartment",
+                        "type": "integer"
+                    },
+                    "id": {
+                        "extra": {},
+                        "nullable": false,
+                        "title": "Id",
+                        "type": "integer"
+                    },
+                    "name": {
+                        "extra": {},
+                        "maxLength": 255,
+                        "nullable": false,
+                        "title": "Name",
+                        "type": "string"
+                    },
+                    "resident": {
+                        "extra": {
+                            "foreign_key": true,
+                            "to": "resident"
+                        },
+                        "nullable": true,
+                        "title": "Resident",
+                        "type": "integer"
+                    }
+                },
+                "title": "GroupOutput",
+                "type": "object"
+            },
+            "GroupPlural": {
+                "properties": {
+                    "rows": {
+                        "items": {
+                            "$ref": "#/components/schemas/GroupItem"
+                        },
+                        "title": "Rows",
+                        "type": "array"
+                    }
+                },
+                "title": "GroupPlural",
+                "type": "object"
+            },
             "HTTPValidationError": {
                 "properties": {
                     "detail": {
@@ -30,6 +295,81 @@
                     }
                 },
                 "title": "HTTPValidationError",
+                "type": "object"
+            },
+            "MeasurementItem": {
+                "properties": {
+                    "id": {
+                        "extra": {},
+                        "nullable": false,
+                        "title": "Id",
+                        "type": "integer"
+                    },
+                    "power_consumption": {
+                        "extra": {},
+                        "nullable": false,
+                        "title": "Power Consumption",
+                        "type": "number"
+                    },
+                    "timestamp": {
+                        "extra": {},
+                        "format": "date-time",
+                        "nullable": false,
+                        "title": "Timestamp",
+                        "type": "string"
+                    },
+                    "water_consumption": {
+                        "extra": {},
+                        "nullable": false,
+                        "title": "Water Consumption",
+                        "type": "number"
+                    }
+                },
+                "title": "MeasurementItem",
+                "type": "object"
+            },
+            "MeasurementOutput": {
+                "properties": {
+                    "id": {
+                        "extra": {},
+                        "nullable": false,
+                        "title": "Id",
+                        "type": "integer"
+                    },
+                    "power_consumption": {
+                        "extra": {},
+                        "nullable": false,
+                        "title": "Power Consumption",
+                        "type": "number"
+                    },
+                    "timestamp": {
+                        "extra": {},
+                        "format": "date-time",
+                        "nullable": false,
+                        "title": "Timestamp",
+                        "type": "string"
+                    },
+                    "water_consumption": {
+                        "extra": {},
+                        "nullable": false,
+                        "title": "Water Consumption",
+                        "type": "number"
+                    }
+                },
+                "title": "MeasurementOutput",
+                "type": "object"
+            },
+            "MeasurementPlural": {
+                "properties": {
+                    "rows": {
+                        "items": {
+                            "$ref": "#/components/schemas/MeasurementItem"
+                        },
+                        "title": "Rows",
+                        "type": "array"
+                    }
+                },
+                "title": "MeasurementPlural",
                 "type": "object"
             },
             "ReferenceModel": {
@@ -66,95 +406,59 @@
                 "title": "ReferencesModel",
                 "type": "object"
             },
-            "TestItem": {
+            "ResidentItem": {
                 "properties": {
-                    "content": {
-                        "extra": {},
-                        "format": "text-area",
-                        "nullable": false,
-                        "title": "Content",
-                        "type": "string"
-                    },
-                    "created_on": {
-                        "extra": {},
-                        "format": "date-time",
-                        "nullable": false,
-                        "title": "Created On",
-                        "type": "string"
+                    "apartment": {
+                        "extra": {
+                            "foreign_key": true,
+                            "to": "apartment"
+                        },
+                        "nullable": true,
+                        "title": "Apartment",
+                        "type": "integer"
                     },
                     "id": {
                         "extra": {},
                         "nullable": false,
                         "title": "Id",
                         "type": "integer"
-                    },
-                    "published": {
-                        "extra": {},
-                        "nullable": false,
-                        "title": "Published",
-                        "type": "boolean"
-                    },
-                    "title": {
-                        "extra": {},
-                        "maxLength": 255,
-                        "nullable": false,
-                        "title": "Title",
-                        "type": "string"
                     }
                 },
-                "title": "TestItem",
+                "title": "ResidentItem",
                 "type": "object"
             },
-            "TestOutput": {
+            "ResidentOutput": {
                 "properties": {
-                    "content": {
-                        "extra": {},
-                        "format": "text-area",
-                        "nullable": false,
-                        "title": "Content",
-                        "type": "string"
-                    },
-                    "created_on": {
-                        "extra": {},
-                        "format": "date-time",
-                        "nullable": false,
-                        "title": "Created On",
-                        "type": "string"
+                    "apartment": {
+                        "extra": {
+                            "foreign_key": true,
+                            "to": "apartment"
+                        },
+                        "nullable": true,
+                        "title": "Apartment",
+                        "type": "integer"
                     },
                     "id": {
                         "extra": {},
                         "nullable": false,
                         "title": "Id",
                         "type": "integer"
-                    },
-                    "published": {
-                        "extra": {},
-                        "nullable": false,
-                        "title": "Published",
-                        "type": "boolean"
-                    },
-                    "title": {
-                        "extra": {},
-                        "maxLength": 255,
-                        "nullable": false,
-                        "title": "Title",
-                        "type": "string"
                     }
                 },
-                "title": "TestOutput",
+                "title": "ResidentOutput",
                 "type": "object"
             },
-            "TestPlural": {
+            "ResidentPlural": {
                 "properties": {
                     "rows": {
                         "items": {
-                            "$ref": "#/components/schemas/TestItem"
+                            "$ref": "#/components/schemas/ResidentItem"
                         },
                         "title": "Rows",
                         "type": "array"
                     }
                 },
-                "title": "TestPlural",
+                "title": "ResidentPlural",
                 "type": "object"
             },
             "ValidationError": {
@@ -191,10 +495,10 @@
     },
     "openapi": "3.0.2",
     "paths": {
-        "/test/": {
+        "/apartment/": {
             "get": {
                 "description": "Returns all rows matching the given query.",
-                "operationId": "get_test__get",
+                "operationId": "get_apartment__get",
                 "parameters": [
                     {
                         "description": "Filter by the `id` column.",
@@ -218,47 +522,57 @@
                         }
                     },
                     {
-                        "description": "Filter by the `title` column.",
+                        "description": "Filter by the `address` column.",
                         "in": "query",
-                        "name": "title",
+                        "name": "address",
                         "required": false,
                         "schema": {
-                            "description": "Filter by the `title` column.",
+                            "description": "Filter by the `address` column.",
                             "maxLength": 255,
-                            "title": "Title",
+                            "title": "Address",
                             "type": "string"
                         }
                     },
                     {
-                        "description": "Filter by the `content` column.",
+                        "description": "Filter by the `owner` column.",
                         "in": "query",
-                        "name": "content",
+                        "name": "owner",
                         "required": false,
                         "schema": {
-                            "description": "Filter by the `content` column.",
-                            "title": "Content",
+                            "description": "Filter by the `owner` column.",
+                            "title": "Owner",
                             "type": "string"
                         }
                     },
                     {
-                        "description": "Specifies how `content` should be matched - `contains` (default), `exact`, `starts`, `ends`.",
+                        "description": "Specifies how `owner` should be matched - `contains` (default), `exact`, `starts`, `ends`.",
                         "in": "query",
-                        "name": "content__match",
+                        "name": "owner__match",
                         "required": false,
                         "schema": {
-                            "description": "Specifies how `content` should be matched - `contains` (default), `exact`, `starts`, `ends`.",
-                            "title": "Content  Match"
+                            "description": "Specifies how `owner` should be matched - `contains` (default), `exact`, `starts`, `ends`.",
+                            "title": "Owner  Match"
                         }
                     },
                     {
-                        "description": "Filter by the `published` column.",
+                        "description": "Filter by the `people` column.",
                         "in": "query",
-                        "name": "published",
+                        "name": "people",
                         "required": false,
                         "schema": {
-                            "description": "Filter by the `published` column.",
-                            "title": "Published",
-                            "type": "boolean"
+                            "description": "Filter by the `people` column.",
+                            "title": "People",
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "description": "Which operator to use for `people`. The options are `e` (equals - default) `lt`, `lte`, `gt`, and `gte`.",
+                        "in": "query",
+                        "name": "people__operator",
+                        "required": false,
+                        "schema": {
+                            "description": "Which operator to use for `people`. The options are `e` (equals - default) `lt`, `lte`, `gt`, and `gte`.",
+                            "title": "People  Operator"
                         }
                     },
                     {
@@ -271,6 +585,27 @@
                             "format": "date-time",
                             "title": "Created On",
                             "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Filter by the `appliance` column.",
+                        "in": "query",
+                        "name": "appliance",
+                        "required": false,
+                        "schema": {
+                            "description": "Filter by the `appliance` column.",
+                            "title": "Appliance",
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "description": "Which operator to use for `appliance`. The options are `e` (equals - default) `lt`, `lte`, `gt`, and `gte`.",
+                        "in": "query",
+                        "name": "appliance__operator",
+                        "required": false,
+                        "schema": {
+                            "description": "Which operator to use for `appliance`. The options are `e` (equals - default) `lt`, `lte`, `gt`, and `gte`.",
+                            "title": "Appliance  Operator"
                         }
                     },
                     {
@@ -323,7 +658,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/TestPlural"
+                                    "$ref": "#/components/schemas/ApartmentPlural"
                                 }
                             }
                         },
@@ -343,10 +678,10 @@
                 "summary": "Get"
             }
         },
-        "/test/count/": {
+        "/apartment/count/": {
             "get": {
                 "description": "Returns the number of rows matching the given query.",
-                "operationId": "count_test_count__get",
+                "operationId": "count_apartment_count__get",
                 "parameters": [
                     {
                         "description": "Filter by the `id` column.",
@@ -370,47 +705,57 @@
                         }
                     },
                     {
-                        "description": "Filter by the `title` column.",
+                        "description": "Filter by the `address` column.",
                         "in": "query",
-                        "name": "title",
+                        "name": "address",
                         "required": false,
                         "schema": {
-                            "description": "Filter by the `title` column.",
+                            "description": "Filter by the `address` column.",
                             "maxLength": 255,
-                            "title": "Title",
+                            "title": "Address",
                             "type": "string"
                         }
                     },
                     {
-                        "description": "Filter by the `content` column.",
+                        "description": "Filter by the `owner` column.",
                         "in": "query",
-                        "name": "content",
+                        "name": "owner",
                         "required": false,
                         "schema": {
-                            "description": "Filter by the `content` column.",
-                            "title": "Content",
+                            "description": "Filter by the `owner` column.",
+                            "title": "Owner",
                             "type": "string"
                         }
                     },
                     {
-                        "description": "Specifies how `content` should be matched - `contains` (default), `exact`, `starts`, `ends`.",
+                        "description": "Specifies how `owner` should be matched - `contains` (default), `exact`, `starts`, `ends`.",
                         "in": "query",
-                        "name": "content__match",
+                        "name": "owner__match",
                         "required": false,
                         "schema": {
-                            "description": "Specifies how `content` should be matched - `contains` (default), `exact`, `starts`, `ends`.",
-                            "title": "Content  Match"
+                            "description": "Specifies how `owner` should be matched - `contains` (default), `exact`, `starts`, `ends`.",
+                            "title": "Owner  Match"
                         }
                     },
                     {
-                        "description": "Filter by the `published` column.",
+                        "description": "Filter by the `people` column.",
                         "in": "query",
-                        "name": "published",
+                        "name": "people",
                         "required": false,
                         "schema": {
-                            "description": "Filter by the `published` column.",
-                            "title": "Published",
-                            "type": "boolean"
+                            "description": "Filter by the `people` column.",
+                            "title": "People",
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "description": "Which operator to use for `people`. The options are `e` (equals - default) `lt`, `lte`, `gt`, and `gte`.",
+                        "in": "query",
+                        "name": "people__operator",
+                        "required": false,
+                        "schema": {
+                            "description": "Which operator to use for `people`. The options are `e` (equals - default) `lt`, `lte`, `gt`, and `gte`.",
+                            "title": "People  Operator"
                         }
                     },
                     {
@@ -423,6 +768,27 @@
                             "format": "date-time",
                             "title": "Created On",
                             "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Filter by the `appliance` column.",
+                        "in": "query",
+                        "name": "appliance",
+                        "required": false,
+                        "schema": {
+                            "description": "Filter by the `appliance` column.",
+                            "title": "Appliance",
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "description": "Which operator to use for `appliance`. The options are `e` (equals - default) `lt`, `lte`, `gt`, and `gte`.",
+                        "in": "query",
+                        "name": "appliance__operator",
+                        "required": false,
+                        "schema": {
+                            "description": "Which operator to use for `appliance`. The options are `e` (equals - default) `lt`, `lte`, `gt`, and `gte`.",
+                            "title": "Appliance  Operator"
                         }
                     }
                 ],
@@ -451,10 +817,10 @@
                 "summary": "Count"
             }
         },
-        "/test/ids/": {
+        "/apartment/ids/": {
             "get": {
                 "description": "Returns a mapping of row IDs to a readable representation.",
-                "operationId": "ids_test_ids__get",
+                "operationId": "ids_apartment_ids__get",
                 "parameters": [
                     {
                         "in": "query",
@@ -483,7 +849,7 @@
                                     "additionalProperties": {
                                         "type": "string"
                                     },
-                                    "title": "Response Ids Test Ids  Get",
+                                    "title": "Response Ids Apartment Ids  Get",
                                     "type": "object"
                                 }
                             }
@@ -504,10 +870,10 @@
                 "summary": "Ids"
             }
         },
-        "/test/new/": {
+        "/apartment/new/": {
             "get": {
                 "description": "Returns all of the default values for a new row,\nbut doesn't save it.",
-                "operationId": "new_test_new__get",
+                "operationId": "new_apartment_new__get",
                 "responses": {
                     "200": {
                         "content": {
@@ -516,7 +882,7 @@
                                     "additionalProperties": {
                                         "type": "string"
                                     },
-                                    "title": "Response New Test New  Get",
+                                    "title": "Response New Apartment New  Get",
                                     "type": "object"
                                 }
                             }
@@ -527,10 +893,10 @@
                 "summary": "New"
             }
         },
-        "/test/references/": {
+        "/apartment/references/": {
             "get": {
                 "description": "Returns a list of objects showing relationships with other tables.",
-                "operationId": "references_test_references__get",
+                "operationId": "references_apartment_references__get",
                 "responses": {
                     "200": {
                         "content": {
@@ -546,16 +912,16 @@
                 "summary": "References"
             }
         },
-        "/test/schema/": {
+        "/apartment/schema/": {
             "get": {
                 "description": "Returns the JSON schema for the given table.",
-                "operationId": "schema_test_schema__get",
+                "operationId": "schema_apartment_schema__get",
                 "responses": {
                     "200": {
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "title": "Response Schema Test Schema  Get",
+                                    "title": "Response Schema Apartment Schema  Get",
                                     "type": "object"
                                 }
                             }
@@ -566,10 +932,10 @@
                 "summary": "Schema"
             }
         },
-        "/test/{row_id}/": {
+        "/apartment/{row_id}/": {
             "get": {
                 "description": "Retrieve a single row from the table.",
-                "operationId": "get_single_test__row_id___get",
+                "operationId": "get_single_apartment__row_id___get",
                 "parameters": [
                     {
                         "in": "path",
@@ -586,7 +952,1503 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/TestOutput"
+                                    "$ref": "#/components/schemas/ApartmentOutput"
+                                }
+                            }
+                        },
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                },
+                "summary": "Get Single"
+            }
+        },
+        "/appliance/": {
+            "get": {
+                "description": "Returns all rows matching the given query.",
+                "operationId": "get_appliance__get",
+                "parameters": [
+                    {
+                        "description": "Filter by the `id` column.",
+                        "in": "query",
+                        "name": "id",
+                        "required": false,
+                        "schema": {
+                            "description": "Filter by the `id` column.",
+                            "title": "Id",
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "description": "Which operator to use for `id`. The options are `e` (equals - default) `lt`, `lte`, `gt`, and `gte`.",
+                        "in": "query",
+                        "name": "id__operator",
+                        "required": false,
+                        "schema": {
+                            "description": "Which operator to use for `id`. The options are `e` (equals - default) `lt`, `lte`, `gt`, and `gte`.",
+                            "title": "Id  Operator"
+                        }
+                    },
+                    {
+                        "description": "Filter by the `name` column.",
+                        "in": "query",
+                        "name": "name",
+                        "required": false,
+                        "schema": {
+                            "description": "Filter by the `name` column.",
+                            "maxLength": 255,
+                            "title": "Name",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Filter by the `measurement` column.",
+                        "in": "query",
+                        "name": "measurement",
+                        "required": false,
+                        "schema": {
+                            "description": "Filter by the `measurement` column.",
+                            "title": "Measurement",
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "description": "Which operator to use for `measurement`. The options are `e` (equals - default) `lt`, `lte`, `gt`, and `gte`.",
+                        "in": "query",
+                        "name": "measurement__operator",
+                        "required": false,
+                        "schema": {
+                            "description": "Which operator to use for `measurement`. The options are `e` (equals - default) `lt`, `lte`, `gt`, and `gte`.",
+                            "title": "Measurement  Operator"
+                        }
+                    },
+                    {
+                        "description": "Specifies which field to sort the results by. For example `id` to sort by id, and `-id` for descending.",
+                        "in": "query",
+                        "name": "__order",
+                        "required": false,
+                        "schema": {
+                            "description": "Specifies which field to sort the results by. For example `id` to sort by id, and `-id` for descending.",
+                            "title": "  Order",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "The number of results to return.",
+                        "in": "query",
+                        "name": "__page_size",
+                        "required": false,
+                        "schema": {
+                            "description": "The number of results to return.",
+                            "title": "  Page Size",
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "description": "Which page of results to return (default 1).",
+                        "in": "query",
+                        "name": "__page",
+                        "required": false,
+                        "schema": {
+                            "description": "Which page of results to return (default 1).",
+                            "title": "  Page",
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "description": "The fields to return. It's a comma separated list - for example 'name,address'. By default all fields are returned.",
+                        "in": "query",
+                        "name": "__visible_fields",
+                        "required": false,
+                        "schema": {
+                            "description": "The fields to return. It's a comma separated list - for example 'name,address'. By default all fields are returned.",
+                            "title": "  Visible Fields",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AppliancePlural"
+                                }
+                            }
+                        },
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                },
+                "summary": "Get"
+            }
+        },
+        "/appliance/count/": {
+            "get": {
+                "description": "Returns the number of rows matching the given query.",
+                "operationId": "count_appliance_count__get",
+                "parameters": [
+                    {
+                        "description": "Filter by the `id` column.",
+                        "in": "query",
+                        "name": "id",
+                        "required": false,
+                        "schema": {
+                            "description": "Filter by the `id` column.",
+                            "title": "Id",
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "description": "Which operator to use for `id`. The options are `e` (equals - default) `lt`, `lte`, `gt`, and `gte`.",
+                        "in": "query",
+                        "name": "id__operator",
+                        "required": false,
+                        "schema": {
+                            "description": "Which operator to use for `id`. The options are `e` (equals - default) `lt`, `lte`, `gt`, and `gte`.",
+                            "title": "Id  Operator"
+                        }
+                    },
+                    {
+                        "description": "Filter by the `name` column.",
+                        "in": "query",
+                        "name": "name",
+                        "required": false,
+                        "schema": {
+                            "description": "Filter by the `name` column.",
+                            "maxLength": 255,
+                            "title": "Name",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Filter by the `measurement` column.",
+                        "in": "query",
+                        "name": "measurement",
+                        "required": false,
+                        "schema": {
+                            "description": "Filter by the `measurement` column.",
+                            "title": "Measurement",
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "description": "Which operator to use for `measurement`. The options are `e` (equals - default) `lt`, `lte`, `gt`, and `gte`.",
+                        "in": "query",
+                        "name": "measurement__operator",
+                        "required": false,
+                        "schema": {
+                            "description": "Which operator to use for `measurement`. The options are `e` (equals - default) `lt`, `lte`, `gt`, and `gte`.",
+                            "title": "Measurement  Operator"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CountModel"
+                                }
+                            }
+                        },
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                },
+                "summary": "Count"
+            }
+        },
+        "/appliance/ids/": {
+            "get": {
+                "description": "Returns a mapping of row IDs to a readable representation.",
+                "operationId": "ids_appliance_ids__get",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "search",
+                        "required": false,
+                        "schema": {
+                            "title": "Search",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "limit",
+                        "required": false,
+                        "schema": {
+                            "title": "Limit",
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "additionalProperties": {
+                                        "type": "string"
+                                    },
+                                    "title": "Response Ids Appliance Ids  Get",
+                                    "type": "object"
+                                }
+                            }
+                        },
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                },
+                "summary": "Ids"
+            }
+        },
+        "/appliance/new/": {
+            "get": {
+                "description": "Returns all of the default values for a new row,\nbut doesn't save it.",
+                "operationId": "new_appliance_new__get",
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "additionalProperties": {
+                                        "type": "string"
+                                    },
+                                    "title": "Response New Appliance New  Get",
+                                    "type": "object"
+                                }
+                            }
+                        },
+                        "description": "Successful Response"
+                    }
+                },
+                "summary": "New"
+            }
+        },
+        "/appliance/references/": {
+            "get": {
+                "description": "Returns a list of objects showing relationships with other tables.",
+                "operationId": "references_appliance_references__get",
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ReferencesModel"
+                                }
+                            }
+                        },
+                        "description": "Successful Response"
+                    }
+                },
+                "summary": "References"
+            }
+        },
+        "/appliance/schema/": {
+            "get": {
+                "description": "Returns the JSON schema for the given table.",
+                "operationId": "schema_appliance_schema__get",
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "title": "Response Schema Appliance Schema  Get",
+                                    "type": "object"
+                                }
+                            }
+                        },
+                        "description": "Successful Response"
+                    }
+                },
+                "summary": "Schema"
+            }
+        },
+        "/appliance/{row_id}/": {
+            "get": {
+                "description": "Retrieve a single row from the table.",
+                "operationId": "get_single_appliance__row_id___get",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "row_id",
+                        "required": true,
+                        "schema": {
+                            "title": "Row Id",
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApplianceOutput"
+                                }
+                            }
+                        },
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                },
+                "summary": "Get Single"
+            }
+        },
+        "/group/": {
+            "get": {
+                "description": "Returns all rows matching the given query.",
+                "operationId": "get_group__get",
+                "parameters": [
+                    {
+                        "description": "Filter by the `id` column.",
+                        "in": "query",
+                        "name": "id",
+                        "required": false,
+                        "schema": {
+                            "description": "Filter by the `id` column.",
+                            "title": "Id",
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "description": "Which operator to use for `id`. The options are `e` (equals - default) `lt`, `lte`, `gt`, and `gte`.",
+                        "in": "query",
+                        "name": "id__operator",
+                        "required": false,
+                        "schema": {
+                            "description": "Which operator to use for `id`. The options are `e` (equals - default) `lt`, `lte`, `gt`, and `gte`.",
+                            "title": "Id  Operator"
+                        }
+                    },
+                    {
+                        "description": "Filter by the `name` column.",
+                        "in": "query",
+                        "name": "name",
+                        "required": false,
+                        "schema": {
+                            "description": "Filter by the `name` column.",
+                            "maxLength": 255,
+                            "title": "Name",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Filter by the `resident` column.",
+                        "in": "query",
+                        "name": "resident",
+                        "required": false,
+                        "schema": {
+                            "description": "Filter by the `resident` column.",
+                            "title": "Resident",
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "description": "Which operator to use for `resident`. The options are `e` (equals - default) `lt`, `lte`, `gt`, and `gte`.",
+                        "in": "query",
+                        "name": "resident__operator",
+                        "required": false,
+                        "schema": {
+                            "description": "Which operator to use for `resident`. The options are `e` (equals - default) `lt`, `lte`, `gt`, and `gte`.",
+                            "title": "Resident  Operator"
+                        }
+                    },
+                    {
+                        "description": "Filter by the `apartment` column.",
+                        "in": "query",
+                        "name": "apartment",
+                        "required": false,
+                        "schema": {
+                            "description": "Filter by the `apartment` column.",
+                            "title": "Apartment",
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "description": "Which operator to use for `apartment`. The options are `e` (equals - default) `lt`, `lte`, `gt`, and `gte`.",
+                        "in": "query",
+                        "name": "apartment__operator",
+                        "required": false,
+                        "schema": {
+                            "description": "Which operator to use for `apartment`. The options are `e` (equals - default) `lt`, `lte`, `gt`, and `gte`.",
+                            "title": "Apartment  Operator"
+                        }
+                    },
+                    {
+                        "description": "Specifies which field to sort the results by. For example `id` to sort by id, and `-id` for descending.",
+                        "in": "query",
+                        "name": "__order",
+                        "required": false,
+                        "schema": {
+                            "description": "Specifies which field to sort the results by. For example `id` to sort by id, and `-id` for descending.",
+                            "title": "  Order",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "The number of results to return.",
+                        "in": "query",
+                        "name": "__page_size",
+                        "required": false,
+                        "schema": {
+                            "description": "The number of results to return.",
+                            "title": "  Page Size",
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "description": "Which page of results to return (default 1).",
+                        "in": "query",
+                        "name": "__page",
+                        "required": false,
+                        "schema": {
+                            "description": "Which page of results to return (default 1).",
+                            "title": "  Page",
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "description": "The fields to return. It's a comma separated list - for example 'name,address'. By default all fields are returned.",
+                        "in": "query",
+                        "name": "__visible_fields",
+                        "required": false,
+                        "schema": {
+                            "description": "The fields to return. It's a comma separated list - for example 'name,address'. By default all fields are returned.",
+                            "title": "  Visible Fields",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GroupPlural"
+                                }
+                            }
+                        },
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                },
+                "summary": "Get"
+            }
+        },
+        "/group/count/": {
+            "get": {
+                "description": "Returns the number of rows matching the given query.",
+                "operationId": "count_group_count__get",
+                "parameters": [
+                    {
+                        "description": "Filter by the `id` column.",
+                        "in": "query",
+                        "name": "id",
+                        "required": false,
+                        "schema": {
+                            "description": "Filter by the `id` column.",
+                            "title": "Id",
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "description": "Which operator to use for `id`. The options are `e` (equals - default) `lt`, `lte`, `gt`, and `gte`.",
+                        "in": "query",
+                        "name": "id__operator",
+                        "required": false,
+                        "schema": {
+                            "description": "Which operator to use for `id`. The options are `e` (equals - default) `lt`, `lte`, `gt`, and `gte`.",
+                            "title": "Id  Operator"
+                        }
+                    },
+                    {
+                        "description": "Filter by the `name` column.",
+                        "in": "query",
+                        "name": "name",
+                        "required": false,
+                        "schema": {
+                            "description": "Filter by the `name` column.",
+                            "maxLength": 255,
+                            "title": "Name",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Filter by the `resident` column.",
+                        "in": "query",
+                        "name": "resident",
+                        "required": false,
+                        "schema": {
+                            "description": "Filter by the `resident` column.",
+                            "title": "Resident",
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "description": "Which operator to use for `resident`. The options are `e` (equals - default) `lt`, `lte`, `gt`, and `gte`.",
+                        "in": "query",
+                        "name": "resident__operator",
+                        "required": false,
+                        "schema": {
+                            "description": "Which operator to use for `resident`. The options are `e` (equals - default) `lt`, `lte`, `gt`, and `gte`.",
+                            "title": "Resident  Operator"
+                        }
+                    },
+                    {
+                        "description": "Filter by the `apartment` column.",
+                        "in": "query",
+                        "name": "apartment",
+                        "required": false,
+                        "schema": {
+                            "description": "Filter by the `apartment` column.",
+                            "title": "Apartment",
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "description": "Which operator to use for `apartment`. The options are `e` (equals - default) `lt`, `lte`, `gt`, and `gte`.",
+                        "in": "query",
+                        "name": "apartment__operator",
+                        "required": false,
+                        "schema": {
+                            "description": "Which operator to use for `apartment`. The options are `e` (equals - default) `lt`, `lte`, `gt`, and `gte`.",
+                            "title": "Apartment  Operator"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CountModel"
+                                }
+                            }
+                        },
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                },
+                "summary": "Count"
+            }
+        },
+        "/group/ids/": {
+            "get": {
+                "description": "Returns a mapping of row IDs to a readable representation.",
+                "operationId": "ids_group_ids__get",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "search",
+                        "required": false,
+                        "schema": {
+                            "title": "Search",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "limit",
+                        "required": false,
+                        "schema": {
+                            "title": "Limit",
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "additionalProperties": {
+                                        "type": "string"
+                                    },
+                                    "title": "Response Ids Group Ids  Get",
+                                    "type": "object"
+                                }
+                            }
+                        },
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                },
+                "summary": "Ids"
+            }
+        },
+        "/group/new/": {
+            "get": {
+                "description": "Returns all of the default values for a new row,\nbut doesn't save it.",
+                "operationId": "new_group_new__get",
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "additionalProperties": {
+                                        "type": "string"
+                                    },
+                                    "title": "Response New Group New  Get",
+                                    "type": "object"
+                                }
+                            }
+                        },
+                        "description": "Successful Response"
+                    }
+                },
+                "summary": "New"
+            }
+        },
+        "/group/references/": {
+            "get": {
+                "description": "Returns a list of objects showing relationships with other tables.",
+                "operationId": "references_group_references__get",
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ReferencesModel"
+                                }
+                            }
+                        },
+                        "description": "Successful Response"
+                    }
+                },
+                "summary": "References"
+            }
+        },
+        "/group/schema/": {
+            "get": {
+                "description": "Returns the JSON schema for the given table.",
+                "operationId": "schema_group_schema__get",
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "title": "Response Schema Group Schema  Get",
+                                    "type": "object"
+                                }
+                            }
+                        },
+                        "description": "Successful Response"
+                    }
+                },
+                "summary": "Schema"
+            }
+        },
+        "/group/{row_id}/": {
+            "get": {
+                "description": "Retrieve a single row from the table.",
+                "operationId": "get_single_group__row_id___get",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "row_id",
+                        "required": true,
+                        "schema": {
+                            "title": "Row Id",
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GroupOutput"
+                                }
+                            }
+                        },
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                },
+                "summary": "Get Single"
+            }
+        },
+        "/measurement/": {
+            "get": {
+                "description": "Returns all rows matching the given query.",
+                "operationId": "get_measurement__get",
+                "parameters": [
+                    {
+                        "description": "Filter by the `id` column.",
+                        "in": "query",
+                        "name": "id",
+                        "required": false,
+                        "schema": {
+                            "description": "Filter by the `id` column.",
+                            "title": "Id",
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "description": "Which operator to use for `id`. The options are `e` (equals - default) `lt`, `lte`, `gt`, and `gte`.",
+                        "in": "query",
+                        "name": "id__operator",
+                        "required": false,
+                        "schema": {
+                            "description": "Which operator to use for `id`. The options are `e` (equals - default) `lt`, `lte`, `gt`, and `gte`.",
+                            "title": "Id  Operator"
+                        }
+                    },
+                    {
+                        "description": "Filter by the `timestamp` column.",
+                        "in": "query",
+                        "name": "timestamp",
+                        "required": false,
+                        "schema": {
+                            "description": "Filter by the `timestamp` column.",
+                            "format": "date-time",
+                            "title": "Timestamp",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Filter by the `water_consumption` column.",
+                        "in": "query",
+                        "name": "water_consumption",
+                        "required": false,
+                        "schema": {
+                            "description": "Filter by the `water_consumption` column.",
+                            "title": "Water Consumption",
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "description": "Filter by the `power_consumption` column.",
+                        "in": "query",
+                        "name": "power_consumption",
+                        "required": false,
+                        "schema": {
+                            "description": "Filter by the `power_consumption` column.",
+                            "title": "Power Consumption",
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "description": "Specifies which field to sort the results by. For example `id` to sort by id, and `-id` for descending.",
+                        "in": "query",
+                        "name": "__order",
+                        "required": false,
+                        "schema": {
+                            "description": "Specifies which field to sort the results by. For example `id` to sort by id, and `-id` for descending.",
+                            "title": "  Order",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "The number of results to return.",
+                        "in": "query",
+                        "name": "__page_size",
+                        "required": false,
+                        "schema": {
+                            "description": "The number of results to return.",
+                            "title": "  Page Size",
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "description": "Which page of results to return (default 1).",
+                        "in": "query",
+                        "name": "__page",
+                        "required": false,
+                        "schema": {
+                            "description": "Which page of results to return (default 1).",
+                            "title": "  Page",
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "description": "The fields to return. It's a comma separated list - for example 'name,address'. By default all fields are returned.",
+                        "in": "query",
+                        "name": "__visible_fields",
+                        "required": false,
+                        "schema": {
+                            "description": "The fields to return. It's a comma separated list - for example 'name,address'. By default all fields are returned.",
+                            "title": "  Visible Fields",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/MeasurementPlural"
+                                }
+                            }
+                        },
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                },
+                "summary": "Get"
+            }
+        },
+        "/measurement/count/": {
+            "get": {
+                "description": "Returns the number of rows matching the given query.",
+                "operationId": "count_measurement_count__get",
+                "parameters": [
+                    {
+                        "description": "Filter by the `id` column.",
+                        "in": "query",
+                        "name": "id",
+                        "required": false,
+                        "schema": {
+                            "description": "Filter by the `id` column.",
+                            "title": "Id",
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "description": "Which operator to use for `id`. The options are `e` (equals - default) `lt`, `lte`, `gt`, and `gte`.",
+                        "in": "query",
+                        "name": "id__operator",
+                        "required": false,
+                        "schema": {
+                            "description": "Which operator to use for `id`. The options are `e` (equals - default) `lt`, `lte`, `gt`, and `gte`.",
+                            "title": "Id  Operator"
+                        }
+                    },
+                    {
+                        "description": "Filter by the `timestamp` column.",
+                        "in": "query",
+                        "name": "timestamp",
+                        "required": false,
+                        "schema": {
+                            "description": "Filter by the `timestamp` column.",
+                            "format": "date-time",
+                            "title": "Timestamp",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Filter by the `water_consumption` column.",
+                        "in": "query",
+                        "name": "water_consumption",
+                        "required": false,
+                        "schema": {
+                            "description": "Filter by the `water_consumption` column.",
+                            "title": "Water Consumption",
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "description": "Filter by the `power_consumption` column.",
+                        "in": "query",
+                        "name": "power_consumption",
+                        "required": false,
+                        "schema": {
+                            "description": "Filter by the `power_consumption` column.",
+                            "title": "Power Consumption",
+                            "type": "number"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CountModel"
+                                }
+                            }
+                        },
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                },
+                "summary": "Count"
+            }
+        },
+        "/measurement/ids/": {
+            "get": {
+                "description": "Returns a mapping of row IDs to a readable representation.",
+                "operationId": "ids_measurement_ids__get",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "search",
+                        "required": false,
+                        "schema": {
+                            "title": "Search",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "limit",
+                        "required": false,
+                        "schema": {
+                            "title": "Limit",
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "additionalProperties": {
+                                        "type": "string"
+                                    },
+                                    "title": "Response Ids Measurement Ids  Get",
+                                    "type": "object"
+                                }
+                            }
+                        },
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                },
+                "summary": "Ids"
+            }
+        },
+        "/measurement/new/": {
+            "get": {
+                "description": "Returns all of the default values for a new row,\nbut doesn't save it.",
+                "operationId": "new_measurement_new__get",
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "additionalProperties": {
+                                        "type": "string"
+                                    },
+                                    "title": "Response New Measurement New  Get",
+                                    "type": "object"
+                                }
+                            }
+                        },
+                        "description": "Successful Response"
+                    }
+                },
+                "summary": "New"
+            }
+        },
+        "/measurement/references/": {
+            "get": {
+                "description": "Returns a list of objects showing relationships with other tables.",
+                "operationId": "references_measurement_references__get",
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ReferencesModel"
+                                }
+                            }
+                        },
+                        "description": "Successful Response"
+                    }
+                },
+                "summary": "References"
+            }
+        },
+        "/measurement/schema/": {
+            "get": {
+                "description": "Returns the JSON schema for the given table.",
+                "operationId": "schema_measurement_schema__get",
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "title": "Response Schema Measurement Schema  Get",
+                                    "type": "object"
+                                }
+                            }
+                        },
+                        "description": "Successful Response"
+                    }
+                },
+                "summary": "Schema"
+            }
+        },
+        "/measurement/{row_id}/": {
+            "get": {
+                "description": "Retrieve a single row from the table.",
+                "operationId": "get_single_measurement__row_id___get",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "row_id",
+                        "required": true,
+                        "schema": {
+                            "title": "Row Id",
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/MeasurementOutput"
+                                }
+                            }
+                        },
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                },
+                "summary": "Get Single"
+            }
+        },
+        "/resident/": {
+            "get": {
+                "description": "Returns all rows matching the given query.",
+                "operationId": "get_resident__get",
+                "parameters": [
+                    {
+                        "description": "Filter by the `id` column.",
+                        "in": "query",
+                        "name": "id",
+                        "required": false,
+                        "schema": {
+                            "description": "Filter by the `id` column.",
+                            "title": "Id",
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "description": "Which operator to use for `id`. The options are `e` (equals - default) `lt`, `lte`, `gt`, and `gte`.",
+                        "in": "query",
+                        "name": "id__operator",
+                        "required": false,
+                        "schema": {
+                            "description": "Which operator to use for `id`. The options are `e` (equals - default) `lt`, `lte`, `gt`, and `gte`.",
+                            "title": "Id  Operator"
+                        }
+                    },
+                    {
+                        "description": "Filter by the `apartment` column.",
+                        "in": "query",
+                        "name": "apartment",
+                        "required": false,
+                        "schema": {
+                            "description": "Filter by the `apartment` column.",
+                            "title": "Apartment",
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "description": "Which operator to use for `apartment`. The options are `e` (equals - default) `lt`, `lte`, `gt`, and `gte`.",
+                        "in": "query",
+                        "name": "apartment__operator",
+                        "required": false,
+                        "schema": {
+                            "description": "Which operator to use for `apartment`. The options are `e` (equals - default) `lt`, `lte`, `gt`, and `gte`.",
+                            "title": "Apartment  Operator"
+                        }
+                    },
+                    {
+                        "description": "Specifies which field to sort the results by. For example `id` to sort by id, and `-id` for descending.",
+                        "in": "query",
+                        "name": "__order",
+                        "required": false,
+                        "schema": {
+                            "description": "Specifies which field to sort the results by. For example `id` to sort by id, and `-id` for descending.",
+                            "title": "  Order",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "The number of results to return.",
+                        "in": "query",
+                        "name": "__page_size",
+                        "required": false,
+                        "schema": {
+                            "description": "The number of results to return.",
+                            "title": "  Page Size",
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "description": "Which page of results to return (default 1).",
+                        "in": "query",
+                        "name": "__page",
+                        "required": false,
+                        "schema": {
+                            "description": "Which page of results to return (default 1).",
+                            "title": "  Page",
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "description": "The fields to return. It's a comma separated list - for example 'name,address'. By default all fields are returned.",
+                        "in": "query",
+                        "name": "__visible_fields",
+                        "required": false,
+                        "schema": {
+                            "description": "The fields to return. It's a comma separated list - for example 'name,address'. By default all fields are returned.",
+                            "title": "  Visible Fields",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResidentPlural"
+                                }
+                            }
+                        },
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                },
+                "summary": "Get"
+            }
+        },
+        "/resident/count/": {
+            "get": {
+                "description": "Returns the number of rows matching the given query.",
+                "operationId": "count_resident_count__get",
+                "parameters": [
+                    {
+                        "description": "Filter by the `id` column.",
+                        "in": "query",
+                        "name": "id",
+                        "required": false,
+                        "schema": {
+                            "description": "Filter by the `id` column.",
+                            "title": "Id",
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "description": "Which operator to use for `id`. The options are `e` (equals - default) `lt`, `lte`, `gt`, and `gte`.",
+                        "in": "query",
+                        "name": "id__operator",
+                        "required": false,
+                        "schema": {
+                            "description": "Which operator to use for `id`. The options are `e` (equals - default) `lt`, `lte`, `gt`, and `gte`.",
+                            "title": "Id  Operator"
+                        }
+                    },
+                    {
+                        "description": "Filter by the `apartment` column.",
+                        "in": "query",
+                        "name": "apartment",
+                        "required": false,
+                        "schema": {
+                            "description": "Filter by the `apartment` column.",
+                            "title": "Apartment",
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "description": "Which operator to use for `apartment`. The options are `e` (equals - default) `lt`, `lte`, `gt`, and `gte`.",
+                        "in": "query",
+                        "name": "apartment__operator",
+                        "required": false,
+                        "schema": {
+                            "description": "Which operator to use for `apartment`. The options are `e` (equals - default) `lt`, `lte`, `gt`, and `gte`.",
+                            "title": "Apartment  Operator"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CountModel"
+                                }
+                            }
+                        },
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                },
+                "summary": "Count"
+            }
+        },
+        "/resident/ids/": {
+            "get": {
+                "description": "Returns a mapping of row IDs to a readable representation.",
+                "operationId": "ids_resident_ids__get",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "search",
+                        "required": false,
+                        "schema": {
+                            "title": "Search",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "limit",
+                        "required": false,
+                        "schema": {
+                            "title": "Limit",
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "additionalProperties": {
+                                        "type": "string"
+                                    },
+                                    "title": "Response Ids Resident Ids  Get",
+                                    "type": "object"
+                                }
+                            }
+                        },
+                        "description": "Successful Response"
+                    },
+                    "422": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        },
+                        "description": "Validation Error"
+                    }
+                },
+                "summary": "Ids"
+            }
+        },
+        "/resident/new/": {
+            "get": {
+                "description": "Returns all of the default values for a new row,\nbut doesn't save it.",
+                "operationId": "new_resident_new__get",
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "additionalProperties": {
+                                        "type": "string"
+                                    },
+                                    "title": "Response New Resident New  Get",
+                                    "type": "object"
+                                }
+                            }
+                        },
+                        "description": "Successful Response"
+                    }
+                },
+                "summary": "New"
+            }
+        },
+        "/resident/references/": {
+            "get": {
+                "description": "Returns a list of objects showing relationships with other tables.",
+                "operationId": "references_resident_references__get",
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ReferencesModel"
+                                }
+                            }
+                        },
+                        "description": "Successful Response"
+                    }
+                },
+                "summary": "References"
+            }
+        },
+        "/resident/schema/": {
+            "get": {
+                "description": "Returns the JSON schema for the given table.",
+                "operationId": "schema_resident_schema__get",
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "title": "Response Schema Resident Schema  Get",
+                                    "type": "object"
+                                }
+                            }
+                        },
+                        "description": "Successful Response"
+                    }
+                },
+                "summary": "Schema"
+            }
+        },
+        "/resident/{row_id}/": {
+            "get": {
+                "description": "Retrieve a single row from the table.",
+                "operationId": "get_single_resident__row_id___get",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "row_id",
+                        "required": true,
+                        "schema": {
+                            "title": "Row Id",
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResidentOutput"
                                 }
                             }
                         },
