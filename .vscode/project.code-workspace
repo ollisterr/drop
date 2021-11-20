@@ -11,12 +11,17 @@
     {
       "name": "admin",
       "path": "../admin"
+    },
+    {
+      "name": "backend",
+      "path": "../backend"
     }
   ],
   "settings": {
     "files.exclude": {
       "mobile/": true,
-      "admin/": true
+      "admin/": true,
+      "backend/": true
     },
     "git.ignoreLimitWarning": true
   }
