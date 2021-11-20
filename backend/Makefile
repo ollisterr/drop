@@ -26,10 +26,10 @@ run: run-db run-migrations
 	$(PYTHON) main.py
 
 run-db:
-	$(COMPOSE) up -d
+	$(COMPOSE) up -d db
 
 stop-db:
-	$(COMPOSE) down
+	$(COMPOSE) down db
 
 sql:
 	$(PICCOLO) sql_shell run
@@ -39,6 +39,18 @@ create-migrations:
 
 run-migrations:
 	$(PICCOLO) migrations forward all
+
+create-admin-user:
+	$(PICCOLO) user create \
+		--username=admin \
+		--password=admin \
+		--email=admin@drop.drop \
+		--is_admin=t \
+		--is_superuser=t \
+		--is_active=t
+
+docker-exec:
+	$(COMPOSE) exec drop_api /bin/bash
 
 generate-openapi:
 	$(PYTHON) scripts/export_openapi_spec.py
