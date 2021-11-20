@@ -1,3 +1,5 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 export function hexToRgb(hex: string) {
   const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
   return result
@@ -15,5 +17,30 @@ export function fadeColor(color: string, fade: number) {
     return null;
   }
   const { r, g, b } = rgb;
-  return `rgba(${r}, ${b}, ${b}, ${fade})`;
+  return `rgba(${r}, ${g}, ${b}, ${fade})`;
 }
+
+export const persistData = async (key: string, value: string) => {
+  try {
+    await AsyncStorage.setItem(key, value);
+  } catch (e: any) {
+    throw Error(e);
+  }
+};
+
+export const getPersistedData = async (key: string) => {
+  try {
+    const value = await AsyncStorage.getItem(key);
+    return value;
+  } catch (e) {
+    return null;
+  }
+};
+
+export const resetPersistedData = async (key: string) => {
+  try {
+    await AsyncStorage.removeItem(key);
+  } catch (e: any) {
+    throw Error(e);
+  }
+};

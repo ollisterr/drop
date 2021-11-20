@@ -8,13 +8,13 @@ import { H1, Text, Detail } from '../styles/typography';
 import background from '../assets/images/rain-drops.jpg';
 import DropSVG from '../assets/images/drop-icon.svg';
 import LogoSVG from '../assets/images/drop-logo.svg';
-import Card from '../components/Card';
-import KPICard from '../components/KPICard';
-import Rank from '../components/Rank';
-import Chart from '../components/Chart';
+import { Card, Button, KPICard, Rank, Chart } from '../components';
+import useGlobalState from '../store';
 
 export default function MainScreen() {
   const insets = useSafeAreaInsets();
+
+  const { logout } = useGlobalState();
 
   return (
     <ScreenWrapper>
@@ -78,6 +78,10 @@ export default function MainScreen() {
           <Spacer axis="y" spacing="xxlarge" />
 
           <Chart />
+
+          <Spacer axis="y" spacing="xxlarge" />
+
+          <Button onPress={logout}>Log out</Button>
         </Content>
       </ScrollView>
     </ScreenWrapper>
