@@ -1,36 +1,73 @@
 import * as React from 'react';
 
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { Platform, ScrollView } from 'react-native';
 import styled from '../styles';
 import { Row, ScreenWrapper, Spacer } from '../styles/components';
 import { H1, Text, Detail } from '../styles/typography';
 import background from '../assets/images/rain-drops.jpg';
 import DropSVG from '../assets/images/drop-icon.svg';
+import LogoSVG from '../assets/images/drop-logo.svg';
+import Card from '../components/Card';
+import KPICard from '../components/KPICard';
 
 export default function MainScreen() {
+  const insets = useSafeAreaInsets();
+
   return (
     <ScreenWrapper>
       <BackgroundImage source={background} />
 
-      <DropIcon />
+      <DropIcon insets={insets} />
 
-      <HeaderStats>
-        <H1 color="primary">20,5l</H1>
+      <ScrollView style={{ flex: 1 }}>
+        <Content insets={insets}>
+          <LogoIcon width={120} />
 
-        <Detail>liters of water</Detail>
-        <Detail>consumed today</Detail>
+          <HeaderStats>
+            <H1 color="primary">20,5l</H1>
 
-        <Spacer axis="y" />
+            <Detail>liters of water</Detail>
+            <Detail>consumed today</Detail>
 
-        <Row justify="center">
-          <Text color="success" weight="bold">
-            -10%
-          </Text>
+            <Spacer axis="y" />
 
-          <Spacer spacing="xxsmall" />
+            <Row justify="center">
+              <Text color="success" weight="bold">
+                -10%
+              </Text>
 
-          <Text>from last week</Text>
-        </Row>
-      </HeaderStats>
+              <Spacer spacing="xxsmall" />
+
+              <Text>from last week</Text>
+            </Row>
+          </HeaderStats>
+
+          <Spacer axis="y" spacing="xlarge" />
+
+          <Card shadowed>
+            <Text>BOI</Text>
+          </Card>
+
+          <Spacer axis="y" />
+
+          <Row>
+            <KPICard
+              kpi="55,0 l"
+              description="water spared this week"
+              color="primaryDark"
+            />
+
+            <Spacer />
+
+            <KPICard
+              kpi="35 €"
+              description="saved from last week"
+              color="success"
+            />
+          </Row>
+        </Content>
+      </ScrollView>
     </ScreenWrapper>
   );
 }
@@ -42,19 +79,30 @@ const BackgroundImage = styled.Image`
   opacity: 0.5;
 `;
 
-const DropIcon = styled(DropSVG)`
+const DropIcon = styled(DropSVG)<{ insets: any }>`
   position: absolute;
   z-index: -1;
   align-self: center;
-  width: 80%;
-  top: 0;
+  margin-top: ${p => p.insets.top}px;
   color: ${p => p.theme.colors.primaryLight};
-  opacity: 0.15;
+  opacity: ${Platform.OS === 'ios' ? 0.4 : 0.15};
+`;
+
+const LogoIcon = styled(LogoSVG)`
+  align-self: center;
+`;
+
+const Content = styled.View<{
+  insets: { top: number; bottom: number };
+}>`
+  width: 100%;
+  padding-top: ${p => p.insets.top}px;
+  padding-bottom: ${p => p.insets.bottom + 50}px;
+  padding-horizontal: ${p => p.theme.spacing.default};
 `;
 
 const HeaderStats = styled.View`
   width: 70%;
   align-self: center;
   align-items: center;
-  margin-top: 20%;
 `;

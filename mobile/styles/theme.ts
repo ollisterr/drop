@@ -19,9 +19,9 @@ const theme = {
     whitesmoke: '#F0F0F0',
   },
   borderRadius: {
-    small: px(3),
-    default: px(5),
-    large: px(10),
+    small: px(5),
+    default: px(10),
+    large: px(30),
     pill: px(9999),
   },
   spacing: {
