@@ -1,8 +1,7 @@
 import "styled-components";
 import { css } from "styled-components";
 
-export type Theme = typeof theme;
-
+// @ts-ignore
 const theme = {
   colors: {
     // accents
@@ -74,6 +73,9 @@ const theme = {
     `,
   },
 };
+
+// @ts-ignore
+export type Theme = typeof theme;
 
 export type Color = keyof Theme["colors"];
 
