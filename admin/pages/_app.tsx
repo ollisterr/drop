@@ -18,6 +18,7 @@ const GlobalStyle = createGlobalStyle`
 *::before,
 *::after {
   box-sizing: border-box;
+  font-family: "Open Sans";
 }
 
 /*
@@ -41,6 +42,13 @@ table {
 /* Revert the 'white-space' property for textarea elements on Safari */
 textarea {
   white-space: revert;
+}
+
+@font-face {
+    font-family: 'NATS';
+    src: url('/fonts/NATS-Regular.ttf');
+    font-weight: 500;
+    font-style: normal;
 }
 `;
 

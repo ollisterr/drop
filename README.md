@@ -35,3 +35,23 @@ Sloganeja:
 
 -   kasvaa käsiä pestessä ain 20s asti, sen jälkeen plateau
 -   vastapainona sustanability score joka laskee veden valuessa
+
+## Storyline
+
+-   kaveri A pesee kätensä huolellisesti
+-   notifikaatti kännykästä
+    -   "Top hygiene score!"
+    -   haasta kaverisi
+-   kaveri B saa notifikaatin, hyväksyy
+-   katsoo että omat hygiene scoret ihan vituillaan
+-   menee aamulla suihkuun, vääntää veden hullun kylmälle
+    -   "Achievement unlocked! Nävy seal!"
+-   kaveri A saa notifikaatin, näkee oman lämpötilarankkinsa
+    -   "baby seal"
+-   opettelee käymään joka päivä kylmemmässä suihkussa
+    -   personal goalit auttaa, "mitä jos tänään laittaisit asteen kylmemmäksi"
+-   Ohittaa lopulta kaverinsa B
+-   Näkee itsensä taloyhtiön leaderboardin pohjalla
+-   joku siisti pan out missä sikana ihmisiä vähentämässä vedenkäyttöä ja ylittämässä itsensä
+-   "DROP"
+-   "By Oras"
