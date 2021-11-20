@@ -1,27 +1,18 @@
-from typing import List
-
 from fastapi import FastAPI
 from fastapi.openapi.utils import get_openapi
-from fastapi.staticfiles import StaticFiles
 from piccolo.engine import engine_finder
-from piccolo_admin.endpoints import create_admin
 from piccolo_api.crud.endpoints import PiccoloCRUD
 from piccolo_api.fastapi.endpoints import FastAPIWrapper
-from starlette.routing import BaseRoute, Mount
 
-from orm.piccolo_app import APP_CONFIG
 from orm.tables import Apartment, ApartmentGroups, Group, Measurement
+from routes import admin, auth, index, static
 
-admin = create_admin(tables=APP_CONFIG.table_classes, site_name="Drop Admin")
-routes: List[BaseRoute] = [Mount("/admin/", admin)]
+app = FastAPI(site_name="Drop API")
 
-
-app = FastAPI(
-    routes=routes,
-    site_name="Drop API",
-)
-
-app.mount("/static", StaticFiles(directory="static"), name="static")
+app.include_router(index.router)
+app.include_router(admin.router)
+app.include_router(auth.router)
+app.include_router(static.router)
 
 
 def custom_openapi():
