@@ -16,6 +16,7 @@ venv:
 	test -d $(VENV) || python3 -m $(VENV) $(VENV)
 
 env:
+	rm .env || true
 	cp .env.example .env
 
 install: venv env
