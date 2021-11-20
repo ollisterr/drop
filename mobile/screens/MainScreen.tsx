@@ -75,7 +75,7 @@ export default function MainScreen() {
             />
           </Row>
 
-          <Spacer axis="y" spacing="xxlarge" />
+          <Spacer axis="y" />
 
           <Chart />
 

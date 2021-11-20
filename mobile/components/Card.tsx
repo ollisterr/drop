@@ -1,8 +1,9 @@
 import React, { ReactNode } from 'react';
-import { ImageBackgroundProps, StyleProp, ViewStyle } from 'react-native';
+import { ImageBackgroundProps } from 'react-native';
 
 import styled from '../styles';
-import theme, { Color } from '../styles/theme';
+import { shadowStyle } from '../styles/components';
+import { Color } from '../styles/theme';
 
 export interface CardProps {
   children: ReactNode;
@@ -33,15 +34,6 @@ export default function Card({
     </Wrapper>
   );
 }
-
-const shadowStyle: StyleProp<ViewStyle> = {
-  shadowOffset: { height: 5, width: 0 },
-  shadowColor: theme.colors.black,
-  shadowOpacity: 0.15,
-  shadowRadius: 5,
-  elevation: 10,
-  backgroundColor: theme.colors.white,
-};
 
 const Wrapper = styled.View<{
   shouldFlex: boolean;

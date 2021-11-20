@@ -5,8 +5,12 @@ import * as React from 'react';
 import { Ionicons } from '@expo/vector-icons';
 
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import TabTwoScreen from '../screens/TabTwoScreen';
-import { RootStackParamList, RootTabParamList } from '../types';
+import GroupsScreen from '../screens/GroupsScreen';
+import {
+  GroupStackParamList,
+  RootStackParamList,
+  RootTabParamList,
+} from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
 import MainScreen from '../screens/MainScreen';
 import LoginScreen from '../screens/LoginScreen';
@@ -15,8 +19,10 @@ import { navigationRef } from './utils';
 import { Description } from '../styles/typography';
 import theme from '../styles/theme';
 import styled from '../styles';
+import GroupScreen from '../screens/GroupScreen';
+import AddGroupScreen from '../screens/AddGroupScreen';
 
-const Stack = createNativeStackNavigator<RootStackParamList>();
+const RootStack = createNativeStackNavigator<RootStackParamList>();
 
 export default function Navigation() {
   const { authStatus, checkAuth } = useGlobalState();
@@ -27,13 +33,13 @@ export default function Navigation() {
 
   return (
     <NavigationContainer ref={navigationRef} linking={LinkingConfiguration}>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <RootStack.Navigator screenOptions={{ headerShown: false }}>
         {authStatus !== AuthStatus.UNAUTHENTICATED ? (
-          <Stack.Screen name="Root" component={BottomTabNavigator} />
+          <RootStack.Screen name="Root" component={BottomTabNavigator} />
         ) : (
-          <Stack.Screen name="Login" component={LoginScreen} />
+          <RootStack.Screen name="Login" component={LoginScreen} />
         )}
-      </Stack.Navigator>
+      </RootStack.Navigator>
     </NavigationContainer>
   );
 }
@@ -65,7 +71,7 @@ const BottomTabNavigator = () => {
       />
       <BottomTab.Screen
         name="Shower"
-        component={TabTwoScreen}
+        component={GroupsScreen}
         options={{
           tabBarLabel: (props: any) => (
             <BottomTabLabel icon="water" title="Let's bath" {...props} />
@@ -73,8 +79,8 @@ const BottomTabNavigator = () => {
         }}
       />
       <BottomTab.Screen
-        name="Groups"
-        component={TabTwoScreen}
+        name="GroupStack"
+        component={GroupScreenStack}
         options={{
           tabBarLabel: (props: any) => (
             <BottomTabLabel icon="people" title="Groups" {...props} />
@@ -82,6 +88,23 @@ const BottomTabNavigator = () => {
         }}
       />
     </BottomTab.Navigator>
+  );
+};
+
+const GroupStack = createNativeStackNavigator<GroupStackParamList>();
+
+const GroupScreenStack = () => {
+  return (
+    <GroupStack.Navigator
+      initialRouteName="Groups"
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
+      <GroupStack.Screen name="Groups" component={GroupsScreen} />
+      <GroupStack.Screen name="Group" component={GroupScreen} />
+      <GroupStack.Screen name="AddGroup" component={AddGroupScreen} />
+    </GroupStack.Navigator>
   );
 };
 

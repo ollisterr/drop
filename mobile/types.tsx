@@ -26,12 +26,24 @@ export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
 
 export type RootTabParamList = {
   Main: undefined;
-  Groups: undefined;
   Shower: undefined;
+  GroupStack: undefined;
 };
 
 export type RootTabScreenProps<Screen extends keyof RootTabParamList> =
   CompositeScreenProps<
     BottomTabScreenProps<RootTabParamList, Screen>,
     NativeStackScreenProps<RootStackParamList>
+  >;
+
+export type GroupStackParamList = {
+  Groups: undefined;
+  Group: { groupId: string };
+  AddGroup: undefined;
+};
+
+export type GroupStackScreenProps<Screen extends keyof GroupStackParamList> =
+  CompositeScreenProps<
+    BottomTabScreenProps<GroupStackParamList, Screen>,
+    NativeStackScreenProps<GroupStackParamList>
   >;
