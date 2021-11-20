@@ -6,10 +6,10 @@ import styled from "styled-components";
 import { Layout } from "../components/Layout";
 import { Main } from "../components/Main";
 import { Sidebar } from "../components/Sidebar";
-import { useCountApartmentCountGet } from "../api/default/default";
+import { useGetApartmentGet } from "../api/default/default";
 
 const Home: NextPage = () => {
-  const { data } = useCountApartmentCountGet();
+  const { data } = useGetApartmentGet();
 
   console.debug(data);
 

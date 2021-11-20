@@ -5,7 +5,6 @@
  * The OpenAPI schema for drop.energy
  * OpenAPI spec version: 0.1.0
  */
-import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 import {
   useQuery,
   useMutation,
@@ -59,6 +58,7 @@ import type {
   SchemaMeasurementSchemaGet200,
   MeasurementOptional,
 } from ".././model";
+import { customInstance } from ".././axios";
 
 type AsyncReturnType<T extends (...args: any) => Promise<any>> = T extends (
   ...args: any
@@ -70,13 +70,11 @@ type AsyncReturnType<T extends (...args: any) => Promise<any>> = T extends (
  * Returns all rows matching the given query.
  * @summary Get
  */
-export const getApartmentGet = (
-  params?: GetApartmentGetParams,
-  options?: AxiosRequestConfig
-): Promise<AxiosResponse<ApartmentPlural>> => {
-  return axios.get(`/apartment`, {
+export const getApartmentGet = (params?: GetApartmentGetParams) => {
+  return customInstance<ApartmentPlural>({
+    url: `/apartment`,
+    method: "get",
     params,
-    ...options,
   });
 };
 
@@ -96,15 +94,14 @@ export const useGetApartmentGet = <
       TError,
       TData
     >;
-    axios?: AxiosRequestConfig;
   }
 ) => {
-  const { query: queryOptions, axios: axiosOptions } = options || {};
+  const { query: queryOptions } = options || {};
 
   const queryKey = queryOptions?.queryKey ?? getGetApartmentGetQueryKey(params);
 
   const queryFn: QueryFunction<AsyncReturnType<typeof getApartmentGet>> = () =>
-    getApartmentGet(params, axiosOptions);
+    getApartmentGet(params);
 
   const query = useQuery<
     AsyncReturnType<typeof getApartmentGet>,
@@ -122,11 +119,12 @@ export const useGetApartmentGet = <
  * Create a new row in the table.
  * @summary Post
  */
-export const postApartmentPost = (
-  apartmentIn: ApartmentIn,
-  options?: AxiosRequestConfig
-): Promise<AxiosResponse<ApartmentOutput>> => {
-  return axios.post(`/apartment`, apartmentIn, options);
+export const postApartmentPost = (apartmentIn: ApartmentIn) => {
+  return customInstance<ApartmentOutput>({
+    url: `/apartment`,
+    method: "post",
+    data: apartmentIn,
+  });
 };
 
 export const usePostApartmentPost = <
@@ -139,9 +137,8 @@ export const usePostApartmentPost = <
     { data: ApartmentIn },
     TContext
   >;
-  axios?: AxiosRequestConfig;
 }) => {
-  const { mutation: mutationOptions, axios: axiosOptions } = options || {};
+  const { mutation: mutationOptions } = options || {};
 
   const mutationFn: MutationFunction<
     AsyncReturnType<typeof postApartmentPost>,
@@ -149,7 +146,7 @@ export const usePostApartmentPost = <
   > = (props) => {
     const { data } = props || {};
 
-    return postApartmentPost(data, axiosOptions);
+    return postApartmentPost(data);
   };
 
   return useMutation<
@@ -163,13 +160,11 @@ export const usePostApartmentPost = <
  * Returns a mapping of row IDs to a readable representation.
  * @summary Ids
  */
-export const idsApartmentIdsGet = (
-  params?: IdsApartmentIdsGetParams,
-  options?: AxiosRequestConfig
-): Promise<AxiosResponse<IdsApartmentIdsGet200>> => {
-  return axios.get(`/apartment/ids`, {
+export const idsApartmentIdsGet = (params?: IdsApartmentIdsGetParams) => {
+  return customInstance<IdsApartmentIdsGet200>({
+    url: `/apartment/ids`,
+    method: "get",
     params,
-    ...options,
   });
 };
 
@@ -188,16 +183,15 @@ export const useIdsApartmentIdsGet = <
       TError,
       TData
     >;
-    axios?: AxiosRequestConfig;
   }
 ) => {
-  const { query: queryOptions, axios: axiosOptions } = options || {};
+  const { query: queryOptions } = options || {};
 
   const queryKey =
     queryOptions?.queryKey ?? getIdsApartmentIdsGetQueryKey(params);
 
   const queryFn: QueryFunction<AsyncReturnType<typeof idsApartmentIdsGet>> =
-    () => idsApartmentIdsGet(params, axiosOptions);
+    () => idsApartmentIdsGet(params);
 
   const query = useQuery<
     AsyncReturnType<typeof idsApartmentIdsGet>,
@@ -216,10 +210,11 @@ export const useIdsApartmentIdsGet = <
 but doesn't save it.
  * @summary New
  */
-export const newApartmentNewGet = (
-  options?: AxiosRequestConfig
-): Promise<AxiosResponse<NewApartmentNewGet200>> => {
-  return axios.get(`/apartment/new`, options);
+export const newApartmentNewGet = () => {
+  return customInstance<NewApartmentNewGet200>({
+    url: `/apartment/new`,
+    method: "get",
+  });
 };
 
 export const getNewApartmentNewGetQueryKey = () => [`/apartment/new`];
@@ -233,14 +228,13 @@ export const useNewApartmentNewGet = <
     TError,
     TData
   >;
-  axios?: AxiosRequestConfig;
 }) => {
-  const { query: queryOptions, axios: axiosOptions } = options || {};
+  const { query: queryOptions } = options || {};
 
   const queryKey = queryOptions?.queryKey ?? getNewApartmentNewGetQueryKey();
 
   const queryFn: QueryFunction<AsyncReturnType<typeof newApartmentNewGet>> =
-    () => newApartmentNewGet(axiosOptions);
+    () => newApartmentNewGet();
 
   const query = useQuery<
     AsyncReturnType<typeof newApartmentNewGet>,
@@ -259,12 +253,12 @@ export const useNewApartmentNewGet = <
  * @summary Count
  */
 export const countApartmentCountGet = (
-  params?: CountApartmentCountGetParams,
-  options?: AxiosRequestConfig
-): Promise<AxiosResponse<CountModel>> => {
-  return axios.get(`/apartment/count`, {
+  params?: CountApartmentCountGetParams
+) => {
+  return customInstance<CountModel>({
+    url: `/apartment/count`,
+    method: "get",
     params,
-    ...options,
   });
 };
 
@@ -283,16 +277,15 @@ export const useCountApartmentCountGet = <
       TError,
       TData
     >;
-    axios?: AxiosRequestConfig;
   }
 ) => {
-  const { query: queryOptions, axios: axiosOptions } = options || {};
+  const { query: queryOptions } = options || {};
 
   const queryKey =
     queryOptions?.queryKey ?? getCountApartmentCountGetQueryKey(params);
 
   const queryFn: QueryFunction<AsyncReturnType<typeof countApartmentCountGet>> =
-    () => countApartmentCountGet(params, axiosOptions);
+    () => countApartmentCountGet(params);
 
   const query = useQuery<
     AsyncReturnType<typeof countApartmentCountGet>,
@@ -310,10 +303,11 @@ export const useCountApartmentCountGet = <
  * Returns the JSON schema for the given table.
  * @summary Schema
  */
-export const schemaApartmentSchemaGet = (
-  options?: AxiosRequestConfig
-): Promise<AxiosResponse<SchemaApartmentSchemaGet200>> => {
-  return axios.get(`/apartment/schema`, options);
+export const schemaApartmentSchemaGet = () => {
+  return customInstance<SchemaApartmentSchemaGet200>({
+    url: `/apartment/schema`,
+    method: "get",
+  });
 };
 
 export const getSchemaApartmentSchemaGetQueryKey = () => [`/apartment/schema`];
@@ -327,16 +321,15 @@ export const useSchemaApartmentSchemaGet = <
     TError,
     TData
   >;
-  axios?: AxiosRequestConfig;
 }) => {
-  const { query: queryOptions, axios: axiosOptions } = options || {};
+  const { query: queryOptions } = options || {};
 
   const queryKey =
     queryOptions?.queryKey ?? getSchemaApartmentSchemaGetQueryKey();
 
   const queryFn: QueryFunction<
     AsyncReturnType<typeof schemaApartmentSchemaGet>
-  > = () => schemaApartmentSchemaGet(axiosOptions);
+  > = () => schemaApartmentSchemaGet();
 
   const query = useQuery<
     AsyncReturnType<typeof schemaApartmentSchemaGet>,
@@ -354,10 +347,11 @@ export const useSchemaApartmentSchemaGet = <
  * Returns a list of objects showing relationships with other tables.
  * @summary References
  */
-export const referencesApartmentReferencesGet = (
-  options?: AxiosRequestConfig
-): Promise<AxiosResponse<ReferencesModel>> => {
-  return axios.get(`/apartment/references`, options);
+export const referencesApartmentReferencesGet = () => {
+  return customInstance<ReferencesModel>({
+    url: `/apartment/references`,
+    method: "get",
+  });
 };
 
 export const getReferencesApartmentReferencesGetQueryKey = () => [
@@ -373,16 +367,15 @@ export const useReferencesApartmentReferencesGet = <
     TError,
     TData
   >;
-  axios?: AxiosRequestConfig;
 }) => {
-  const { query: queryOptions, axios: axiosOptions } = options || {};
+  const { query: queryOptions } = options || {};
 
   const queryKey =
     queryOptions?.queryKey ?? getReferencesApartmentReferencesGetQueryKey();
 
   const queryFn: QueryFunction<
     AsyncReturnType<typeof referencesApartmentReferencesGet>
-  > = () => referencesApartmentReferencesGet(axiosOptions);
+  > = () => referencesApartmentReferencesGet();
 
   const query = useQuery<
     AsyncReturnType<typeof referencesApartmentReferencesGet>,
@@ -400,11 +393,11 @@ export const useReferencesApartmentReferencesGet = <
  * Retrieve a single row from the table.
  * @summary Get Single
  */
-export const getSingleApartmentRowIdGet = (
-  rowid: number,
-  options?: AxiosRequestConfig
-): Promise<AxiosResponse<ApartmentOutput>> => {
-  return axios.get(`/apartment/${rowid}`, options);
+export const getSingleApartmentRowIdGet = (rowid: number) => {
+  return customInstance<ApartmentOutput>({
+    url: `/apartment/${rowid}`,
+    method: "get",
+  });
 };
 
 export const getGetSingleApartmentRowIdGetQueryKey = (rowid: number) => [
@@ -422,17 +415,16 @@ export const useGetSingleApartmentRowIdGet = <
       TError,
       TData
     >;
-    axios?: AxiosRequestConfig;
   }
 ) => {
-  const { query: queryOptions, axios: axiosOptions } = options || {};
+  const { query: queryOptions } = options || {};
 
   const queryKey =
     queryOptions?.queryKey ?? getGetSingleApartmentRowIdGetQueryKey(rowid);
 
   const queryFn: QueryFunction<
     AsyncReturnType<typeof getSingleApartmentRowIdGet>
-  > = () => getSingleApartmentRowIdGet(rowid, axiosOptions);
+  > = () => getSingleApartmentRowIdGet(rowid);
 
   const query = useQuery<
     AsyncReturnType<typeof getSingleApartmentRowIdGet>,
@@ -452,10 +444,13 @@ export const useGetSingleApartmentRowIdGet = <
  */
 export const putApartmentRowIdPut = (
   rowid: number,
-  apartmentIn: ApartmentIn,
-  options?: AxiosRequestConfig
-): Promise<AxiosResponse<ApartmentOutput>> => {
-  return axios.put(`/apartment/${rowid}`, apartmentIn, options);
+  apartmentIn: ApartmentIn
+) => {
+  return customInstance<ApartmentOutput>({
+    url: `/apartment/${rowid}`,
+    method: "put",
+    data: apartmentIn,
+  });
 };
 
 export const usePutApartmentRowIdPut = <
@@ -468,9 +463,8 @@ export const usePutApartmentRowIdPut = <
     { rowid: number; data: ApartmentIn },
     TContext
   >;
-  axios?: AxiosRequestConfig;
 }) => {
-  const { mutation: mutationOptions, axios: axiosOptions } = options || {};
+  const { mutation: mutationOptions } = options || {};
 
   const mutationFn: MutationFunction<
     AsyncReturnType<typeof putApartmentRowIdPut>,
@@ -478,7 +472,7 @@ export const usePutApartmentRowIdPut = <
   > = (props) => {
     const { rowid, data } = props || {};
 
-    return putApartmentRowIdPut(rowid, data, axiosOptions);
+    return putApartmentRowIdPut(rowid, data);
   };
 
   return useMutation<
@@ -492,11 +486,11 @@ export const usePutApartmentRowIdPut = <
  * Delete a single row from the table.
  * @summary Delete Single
  */
-export const deleteSingleApartmentRowIdDelete = (
-  rowid: number,
-  options?: AxiosRequestConfig
-): Promise<AxiosResponse<unknown>> => {
-  return axios.delete(`/apartment/${rowid}`, options);
+export const deleteSingleApartmentRowIdDelete = (rowid: number) => {
+  return customInstance<unknown>({
+    url: `/apartment/${rowid}`,
+    method: "delete",
+  });
 };
 
 export const useDeleteSingleApartmentRowIdDelete = <
@@ -509,9 +503,8 @@ export const useDeleteSingleApartmentRowIdDelete = <
     { rowid: number },
     TContext
   >;
-  axios?: AxiosRequestConfig;
 }) => {
-  const { mutation: mutationOptions, axios: axiosOptions } = options || {};
+  const { mutation: mutationOptions } = options || {};
 
   const mutationFn: MutationFunction<
     AsyncReturnType<typeof deleteSingleApartmentRowIdDelete>,
@@ -519,7 +512,7 @@ export const useDeleteSingleApartmentRowIdDelete = <
   > = (props) => {
     const { rowid } = props || {};
 
-    return deleteSingleApartmentRowIdDelete(rowid, axiosOptions);
+    return deleteSingleApartmentRowIdDelete(rowid);
   };
 
   return useMutation<
@@ -535,10 +528,13 @@ export const useDeleteSingleApartmentRowIdDelete = <
  */
 export const patchApartmentRowIdPatch = (
   rowid: number,
-  apartmentOptional: ApartmentOptional,
-  options?: AxiosRequestConfig
-): Promise<AxiosResponse<ApartmentOutput>> => {
-  return axios.patch(`/apartment/${rowid}`, apartmentOptional, options);
+  apartmentOptional: ApartmentOptional
+) => {
+  return customInstance<ApartmentOutput>({
+    url: `/apartment/${rowid}`,
+    method: "patch",
+    data: apartmentOptional,
+  });
 };
 
 export const usePatchApartmentRowIdPatch = <
@@ -551,9 +547,8 @@ export const usePatchApartmentRowIdPatch = <
     { rowid: number; data: ApartmentOptional },
     TContext
   >;
-  axios?: AxiosRequestConfig;
 }) => {
-  const { mutation: mutationOptions, axios: axiosOptions } = options || {};
+  const { mutation: mutationOptions } = options || {};
 
   const mutationFn: MutationFunction<
     AsyncReturnType<typeof patchApartmentRowIdPatch>,
@@ -561,7 +556,7 @@ export const usePatchApartmentRowIdPatch = <
   > = (props) => {
     const { rowid, data } = props || {};
 
-    return patchApartmentRowIdPatch(rowid, data, axiosOptions);
+    return patchApartmentRowIdPatch(rowid, data);
   };
 
   return useMutation<
@@ -575,13 +570,11 @@ export const usePatchApartmentRowIdPatch = <
  * Returns all rows matching the given query.
  * @summary Get
  */
-export const getApartmentGroupsGet = (
-  params?: GetApartmentGroupsGetParams,
-  options?: AxiosRequestConfig
-): Promise<AxiosResponse<ApartmentGroupsPlural>> => {
-  return axios.get(`/apartment-groups`, {
+export const getApartmentGroupsGet = (params?: GetApartmentGroupsGetParams) => {
+  return customInstance<ApartmentGroupsPlural>({
+    url: `/apartment-groups`,
+    method: "get",
     params,
-    ...options,
   });
 };
 
@@ -600,16 +593,15 @@ export const useGetApartmentGroupsGet = <
       TError,
       TData
     >;
-    axios?: AxiosRequestConfig;
   }
 ) => {
-  const { query: queryOptions, axios: axiosOptions } = options || {};
+  const { query: queryOptions } = options || {};
 
   const queryKey =
     queryOptions?.queryKey ?? getGetApartmentGroupsGetQueryKey(params);
 
   const queryFn: QueryFunction<AsyncReturnType<typeof getApartmentGroupsGet>> =
-    () => getApartmentGroupsGet(params, axiosOptions);
+    () => getApartmentGroupsGet(params);
 
   const query = useQuery<
     AsyncReturnType<typeof getApartmentGroupsGet>,
@@ -628,10 +620,13 @@ export const useGetApartmentGroupsGet = <
  * @summary Post
  */
 export const postApartmentGroupsPost = (
-  apartmentGroupsIn: ApartmentGroupsIn,
-  options?: AxiosRequestConfig
-): Promise<AxiosResponse<ApartmentGroupsOutput>> => {
-  return axios.post(`/apartment-groups`, apartmentGroupsIn, options);
+  apartmentGroupsIn: ApartmentGroupsIn
+) => {
+  return customInstance<ApartmentGroupsOutput>({
+    url: `/apartment-groups`,
+    method: "post",
+    data: apartmentGroupsIn,
+  });
 };
 
 export const usePostApartmentGroupsPost = <
@@ -644,9 +639,8 @@ export const usePostApartmentGroupsPost = <
     { data: ApartmentGroupsIn },
     TContext
   >;
-  axios?: AxiosRequestConfig;
 }) => {
-  const { mutation: mutationOptions, axios: axiosOptions } = options || {};
+  const { mutation: mutationOptions } = options || {};
 
   const mutationFn: MutationFunction<
     AsyncReturnType<typeof postApartmentGroupsPost>,
@@ -654,7 +648,7 @@ export const usePostApartmentGroupsPost = <
   > = (props) => {
     const { data } = props || {};
 
-    return postApartmentGroupsPost(data, axiosOptions);
+    return postApartmentGroupsPost(data);
   };
 
   return useMutation<
@@ -669,12 +663,12 @@ export const usePostApartmentGroupsPost = <
  * @summary Ids
  */
 export const idsApartmentGroupsIdsGet = (
-  params?: IdsApartmentGroupsIdsGetParams,
-  options?: AxiosRequestConfig
-): Promise<AxiosResponse<IdsApartmentGroupsIdsGet200>> => {
-  return axios.get(`/apartment-groups/ids`, {
+  params?: IdsApartmentGroupsIdsGetParams
+) => {
+  return customInstance<IdsApartmentGroupsIdsGet200>({
+    url: `/apartment-groups/ids`,
+    method: "get",
     params,
-    ...options,
   });
 };
 
@@ -693,17 +687,16 @@ export const useIdsApartmentGroupsIdsGet = <
       TError,
       TData
     >;
-    axios?: AxiosRequestConfig;
   }
 ) => {
-  const { query: queryOptions, axios: axiosOptions } = options || {};
+  const { query: queryOptions } = options || {};
 
   const queryKey =
     queryOptions?.queryKey ?? getIdsApartmentGroupsIdsGetQueryKey(params);
 
   const queryFn: QueryFunction<
     AsyncReturnType<typeof idsApartmentGroupsIdsGet>
-  > = () => idsApartmentGroupsIdsGet(params, axiosOptions);
+  > = () => idsApartmentGroupsIdsGet(params);
 
   const query = useQuery<
     AsyncReturnType<typeof idsApartmentGroupsIdsGet>,
@@ -722,10 +715,11 @@ export const useIdsApartmentGroupsIdsGet = <
 but doesn't save it.
  * @summary New
  */
-export const newApartmentGroupsNewGet = (
-  options?: AxiosRequestConfig
-): Promise<AxiosResponse<NewApartmentGroupsNewGet200>> => {
-  return axios.get(`/apartment-groups/new`, options);
+export const newApartmentGroupsNewGet = () => {
+  return customInstance<NewApartmentGroupsNewGet200>({
+    url: `/apartment-groups/new`,
+    method: "get",
+  });
 };
 
 export const getNewApartmentGroupsNewGetQueryKey = () => [
@@ -741,16 +735,15 @@ export const useNewApartmentGroupsNewGet = <
     TError,
     TData
   >;
-  axios?: AxiosRequestConfig;
 }) => {
-  const { query: queryOptions, axios: axiosOptions } = options || {};
+  const { query: queryOptions } = options || {};
 
   const queryKey =
     queryOptions?.queryKey ?? getNewApartmentGroupsNewGetQueryKey();
 
   const queryFn: QueryFunction<
     AsyncReturnType<typeof newApartmentGroupsNewGet>
-  > = () => newApartmentGroupsNewGet(axiosOptions);
+  > = () => newApartmentGroupsNewGet();
 
   const query = useQuery<
     AsyncReturnType<typeof newApartmentGroupsNewGet>,
@@ -769,12 +762,12 @@ export const useNewApartmentGroupsNewGet = <
  * @summary Count
  */
 export const countApartmentGroupsCountGet = (
-  params?: CountApartmentGroupsCountGetParams,
-  options?: AxiosRequestConfig
-): Promise<AxiosResponse<CountModel>> => {
-  return axios.get(`/apartment-groups/count`, {
+  params?: CountApartmentGroupsCountGetParams
+) => {
+  return customInstance<CountModel>({
+    url: `/apartment-groups/count`,
+    method: "get",
     params,
-    ...options,
   });
 };
 
@@ -793,17 +786,16 @@ export const useCountApartmentGroupsCountGet = <
       TError,
       TData
     >;
-    axios?: AxiosRequestConfig;
   }
 ) => {
-  const { query: queryOptions, axios: axiosOptions } = options || {};
+  const { query: queryOptions } = options || {};
 
   const queryKey =
     queryOptions?.queryKey ?? getCountApartmentGroupsCountGetQueryKey(params);
 
   const queryFn: QueryFunction<
     AsyncReturnType<typeof countApartmentGroupsCountGet>
-  > = () => countApartmentGroupsCountGet(params, axiosOptions);
+  > = () => countApartmentGroupsCountGet(params);
 
   const query = useQuery<
     AsyncReturnType<typeof countApartmentGroupsCountGet>,
@@ -821,10 +813,11 @@ export const useCountApartmentGroupsCountGet = <
  * Returns the JSON schema for the given table.
  * @summary Schema
  */
-export const schemaApartmentGroupsSchemaGet = (
-  options?: AxiosRequestConfig
-): Promise<AxiosResponse<SchemaApartmentGroupsSchemaGet200>> => {
-  return axios.get(`/apartment-groups/schema`, options);
+export const schemaApartmentGroupsSchemaGet = () => {
+  return customInstance<SchemaApartmentGroupsSchemaGet200>({
+    url: `/apartment-groups/schema`,
+    method: "get",
+  });
 };
 
 export const getSchemaApartmentGroupsSchemaGetQueryKey = () => [
@@ -840,16 +833,15 @@ export const useSchemaApartmentGroupsSchemaGet = <
     TError,
     TData
   >;
-  axios?: AxiosRequestConfig;
 }) => {
-  const { query: queryOptions, axios: axiosOptions } = options || {};
+  const { query: queryOptions } = options || {};
 
   const queryKey =
     queryOptions?.queryKey ?? getSchemaApartmentGroupsSchemaGetQueryKey();
 
   const queryFn: QueryFunction<
     AsyncReturnType<typeof schemaApartmentGroupsSchemaGet>
-  > = () => schemaApartmentGroupsSchemaGet(axiosOptions);
+  > = () => schemaApartmentGroupsSchemaGet();
 
   const query = useQuery<
     AsyncReturnType<typeof schemaApartmentGroupsSchemaGet>,
@@ -867,10 +859,11 @@ export const useSchemaApartmentGroupsSchemaGet = <
  * Returns a list of objects showing relationships with other tables.
  * @summary References
  */
-export const referencesApartmentGroupsReferencesGet = (
-  options?: AxiosRequestConfig
-): Promise<AxiosResponse<ReferencesModel>> => {
-  return axios.get(`/apartment-groups/references`, options);
+export const referencesApartmentGroupsReferencesGet = () => {
+  return customInstance<ReferencesModel>({
+    url: `/apartment-groups/references`,
+    method: "get",
+  });
 };
 
 export const getReferencesApartmentGroupsReferencesGetQueryKey = () => [
@@ -886,9 +879,8 @@ export const useReferencesApartmentGroupsReferencesGet = <
     TError,
     TData
   >;
-  axios?: AxiosRequestConfig;
 }) => {
-  const { query: queryOptions, axios: axiosOptions } = options || {};
+  const { query: queryOptions } = options || {};
 
   const queryKey =
     queryOptions?.queryKey ??
@@ -896,7 +888,7 @@ export const useReferencesApartmentGroupsReferencesGet = <
 
   const queryFn: QueryFunction<
     AsyncReturnType<typeof referencesApartmentGroupsReferencesGet>
-  > = () => referencesApartmentGroupsReferencesGet(axiosOptions);
+  > = () => referencesApartmentGroupsReferencesGet();
 
   const query = useQuery<
     AsyncReturnType<typeof referencesApartmentGroupsReferencesGet>,
@@ -914,11 +906,11 @@ export const useReferencesApartmentGroupsReferencesGet = <
  * Retrieve a single row from the table.
  * @summary Get Single
  */
-export const getSingleApartmentGroupsRowIdGet = (
-  rowid: number,
-  options?: AxiosRequestConfig
-): Promise<AxiosResponse<ApartmentGroupsOutput>> => {
-  return axios.get(`/apartment-groups/${rowid}`, options);
+export const getSingleApartmentGroupsRowIdGet = (rowid: number) => {
+  return customInstance<ApartmentGroupsOutput>({
+    url: `/apartment-groups/${rowid}`,
+    method: "get",
+  });
 };
 
 export const getGetSingleApartmentGroupsRowIdGetQueryKey = (rowid: number) => [
@@ -936,10 +928,9 @@ export const useGetSingleApartmentGroupsRowIdGet = <
       TError,
       TData
     >;
-    axios?: AxiosRequestConfig;
   }
 ) => {
-  const { query: queryOptions, axios: axiosOptions } = options || {};
+  const { query: queryOptions } = options || {};
 
   const queryKey =
     queryOptions?.queryKey ??
@@ -947,7 +938,7 @@ export const useGetSingleApartmentGroupsRowIdGet = <
 
   const queryFn: QueryFunction<
     AsyncReturnType<typeof getSingleApartmentGroupsRowIdGet>
-  > = () => getSingleApartmentGroupsRowIdGet(rowid, axiosOptions);
+  > = () => getSingleApartmentGroupsRowIdGet(rowid);
 
   const query = useQuery<
     AsyncReturnType<typeof getSingleApartmentGroupsRowIdGet>,
@@ -967,10 +958,13 @@ export const useGetSingleApartmentGroupsRowIdGet = <
  */
 export const putApartmentGroupsRowIdPut = (
   rowid: number,
-  apartmentGroupsIn: ApartmentGroupsIn,
-  options?: AxiosRequestConfig
-): Promise<AxiosResponse<ApartmentGroupsOutput>> => {
-  return axios.put(`/apartment-groups/${rowid}`, apartmentGroupsIn, options);
+  apartmentGroupsIn: ApartmentGroupsIn
+) => {
+  return customInstance<ApartmentGroupsOutput>({
+    url: `/apartment-groups/${rowid}`,
+    method: "put",
+    data: apartmentGroupsIn,
+  });
 };
 
 export const usePutApartmentGroupsRowIdPut = <
@@ -983,9 +977,8 @@ export const usePutApartmentGroupsRowIdPut = <
     { rowid: number; data: ApartmentGroupsIn },
     TContext
   >;
-  axios?: AxiosRequestConfig;
 }) => {
-  const { mutation: mutationOptions, axios: axiosOptions } = options || {};
+  const { mutation: mutationOptions } = options || {};
 
   const mutationFn: MutationFunction<
     AsyncReturnType<typeof putApartmentGroupsRowIdPut>,
@@ -993,7 +986,7 @@ export const usePutApartmentGroupsRowIdPut = <
   > = (props) => {
     const { rowid, data } = props || {};
 
-    return putApartmentGroupsRowIdPut(rowid, data, axiosOptions);
+    return putApartmentGroupsRowIdPut(rowid, data);
   };
 
   return useMutation<
@@ -1007,11 +1000,11 @@ export const usePutApartmentGroupsRowIdPut = <
  * Delete a single row from the table.
  * @summary Delete Single
  */
-export const deleteSingleApartmentGroupsRowIdDelete = (
-  rowid: number,
-  options?: AxiosRequestConfig
-): Promise<AxiosResponse<unknown>> => {
-  return axios.delete(`/apartment-groups/${rowid}`, options);
+export const deleteSingleApartmentGroupsRowIdDelete = (rowid: number) => {
+  return customInstance<unknown>({
+    url: `/apartment-groups/${rowid}`,
+    method: "delete",
+  });
 };
 
 export const useDeleteSingleApartmentGroupsRowIdDelete = <
@@ -1024,9 +1017,8 @@ export const useDeleteSingleApartmentGroupsRowIdDelete = <
     { rowid: number },
     TContext
   >;
-  axios?: AxiosRequestConfig;
 }) => {
-  const { mutation: mutationOptions, axios: axiosOptions } = options || {};
+  const { mutation: mutationOptions } = options || {};
 
   const mutationFn: MutationFunction<
     AsyncReturnType<typeof deleteSingleApartmentGroupsRowIdDelete>,
@@ -1034,7 +1026,7 @@ export const useDeleteSingleApartmentGroupsRowIdDelete = <
   > = (props) => {
     const { rowid } = props || {};
 
-    return deleteSingleApartmentGroupsRowIdDelete(rowid, axiosOptions);
+    return deleteSingleApartmentGroupsRowIdDelete(rowid);
   };
 
   return useMutation<
@@ -1050,14 +1042,13 @@ export const useDeleteSingleApartmentGroupsRowIdDelete = <
  */
 export const patchApartmentGroupsRowIdPatch = (
   rowid: number,
-  apartmentGroupsOptional: ApartmentGroupsOptional,
-  options?: AxiosRequestConfig
-): Promise<AxiosResponse<ApartmentGroupsOutput>> => {
-  return axios.patch(
-    `/apartment-groups/${rowid}`,
-    apartmentGroupsOptional,
-    options
-  );
+  apartmentGroupsOptional: ApartmentGroupsOptional
+) => {
+  return customInstance<ApartmentGroupsOutput>({
+    url: `/apartment-groups/${rowid}`,
+    method: "patch",
+    data: apartmentGroupsOptional,
+  });
 };
 
 export const usePatchApartmentGroupsRowIdPatch = <
@@ -1070,9 +1061,8 @@ export const usePatchApartmentGroupsRowIdPatch = <
     { rowid: number; data: ApartmentGroupsOptional },
     TContext
   >;
-  axios?: AxiosRequestConfig;
 }) => {
-  const { mutation: mutationOptions, axios: axiosOptions } = options || {};
+  const { mutation: mutationOptions } = options || {};
 
   const mutationFn: MutationFunction<
     AsyncReturnType<typeof patchApartmentGroupsRowIdPatch>,
@@ -1080,7 +1070,7 @@ export const usePatchApartmentGroupsRowIdPatch = <
   > = (props) => {
     const { rowid, data } = props || {};
 
-    return patchApartmentGroupsRowIdPatch(rowid, data, axiosOptions);
+    return patchApartmentGroupsRowIdPatch(rowid, data);
   };
 
   return useMutation<
@@ -1094,14 +1084,8 @@ export const usePatchApartmentGroupsRowIdPatch = <
  * Returns all rows matching the given query.
  * @summary Get
  */
-export const getGroupGet = (
-  params?: GetGroupGetParams,
-  options?: AxiosRequestConfig
-): Promise<AxiosResponse<GroupPlural>> => {
-  return axios.get(`/group`, {
-    params,
-    ...options,
-  });
+export const getGroupGet = (params?: GetGroupGetParams) => {
+  return customInstance<GroupPlural>({ url: `/group`, method: "get", params });
 };
 
 export const getGetGroupGetQueryKey = (params?: GetGroupGetParams) => [
@@ -1116,15 +1100,14 @@ export const useGetGroupGet = <
   params?: GetGroupGetParams,
   options?: {
     query?: UseQueryOptions<AsyncReturnType<typeof getGroupGet>, TError, TData>;
-    axios?: AxiosRequestConfig;
   }
 ) => {
-  const { query: queryOptions, axios: axiosOptions } = options || {};
+  const { query: queryOptions } = options || {};
 
   const queryKey = queryOptions?.queryKey ?? getGetGroupGetQueryKey(params);
 
   const queryFn: QueryFunction<AsyncReturnType<typeof getGroupGet>> = () =>
-    getGroupGet(params, axiosOptions);
+    getGroupGet(params);
 
   const query = useQuery<AsyncReturnType<typeof getGroupGet>, TError, TData>(
     queryKey,
@@ -1142,11 +1125,12 @@ export const useGetGroupGet = <
  * Create a new row in the table.
  * @summary Post
  */
-export const postGroupPost = (
-  groupIn: GroupIn,
-  options?: AxiosRequestConfig
-): Promise<AxiosResponse<GroupOutput>> => {
-  return axios.post(`/group`, groupIn, options);
+export const postGroupPost = (groupIn: GroupIn) => {
+  return customInstance<GroupOutput>({
+    url: `/group`,
+    method: "post",
+    data: groupIn,
+  });
 };
 
 export const usePostGroupPost = <
@@ -1159,9 +1143,8 @@ export const usePostGroupPost = <
     { data: GroupIn },
     TContext
   >;
-  axios?: AxiosRequestConfig;
 }) => {
-  const { mutation: mutationOptions, axios: axiosOptions } = options || {};
+  const { mutation: mutationOptions } = options || {};
 
   const mutationFn: MutationFunction<
     AsyncReturnType<typeof postGroupPost>,
@@ -1169,7 +1152,7 @@ export const usePostGroupPost = <
   > = (props) => {
     const { data } = props || {};
 
-    return postGroupPost(data, axiosOptions);
+    return postGroupPost(data);
   };
 
   return useMutation<
@@ -1183,13 +1166,11 @@ export const usePostGroupPost = <
  * Returns a mapping of row IDs to a readable representation.
  * @summary Ids
  */
-export const idsGroupIdsGet = (
-  params?: IdsGroupIdsGetParams,
-  options?: AxiosRequestConfig
-): Promise<AxiosResponse<IdsGroupIdsGet200>> => {
-  return axios.get(`/group/ids`, {
+export const idsGroupIdsGet = (params?: IdsGroupIdsGetParams) => {
+  return customInstance<IdsGroupIdsGet200>({
+    url: `/group/ids`,
+    method: "get",
     params,
-    ...options,
   });
 };
 
@@ -1209,15 +1190,14 @@ export const useIdsGroupIdsGet = <
       TError,
       TData
     >;
-    axios?: AxiosRequestConfig;
   }
 ) => {
-  const { query: queryOptions, axios: axiosOptions } = options || {};
+  const { query: queryOptions } = options || {};
 
   const queryKey = queryOptions?.queryKey ?? getIdsGroupIdsGetQueryKey(params);
 
   const queryFn: QueryFunction<AsyncReturnType<typeof idsGroupIdsGet>> = () =>
-    idsGroupIdsGet(params, axiosOptions);
+    idsGroupIdsGet(params);
 
   const query = useQuery<AsyncReturnType<typeof idsGroupIdsGet>, TError, TData>(
     queryKey,
@@ -1236,10 +1216,11 @@ export const useIdsGroupIdsGet = <
 but doesn't save it.
  * @summary New
  */
-export const newGroupNewGet = (
-  options?: AxiosRequestConfig
-): Promise<AxiosResponse<NewGroupNewGet200>> => {
-  return axios.get(`/group/new`, options);
+export const newGroupNewGet = () => {
+  return customInstance<NewGroupNewGet200>({
+    url: `/group/new`,
+    method: "get",
+  });
 };
 
 export const getNewGroupNewGetQueryKey = () => [`/group/new`];
@@ -1253,14 +1234,13 @@ export const useNewGroupNewGet = <
     TError,
     TData
   >;
-  axios?: AxiosRequestConfig;
 }) => {
-  const { query: queryOptions, axios: axiosOptions } = options || {};
+  const { query: queryOptions } = options || {};
 
   const queryKey = queryOptions?.queryKey ?? getNewGroupNewGetQueryKey();
 
   const queryFn: QueryFunction<AsyncReturnType<typeof newGroupNewGet>> = () =>
-    newGroupNewGet(axiosOptions);
+    newGroupNewGet();
 
   const query = useQuery<AsyncReturnType<typeof newGroupNewGet>, TError, TData>(
     queryKey,
@@ -1278,13 +1258,11 @@ export const useNewGroupNewGet = <
  * Returns the number of rows matching the given query.
  * @summary Count
  */
-export const countGroupCountGet = (
-  params?: CountGroupCountGetParams,
-  options?: AxiosRequestConfig
-): Promise<AxiosResponse<CountModel>> => {
-  return axios.get(`/group/count`, {
+export const countGroupCountGet = (params?: CountGroupCountGetParams) => {
+  return customInstance<CountModel>({
+    url: `/group/count`,
+    method: "get",
     params,
-    ...options,
   });
 };
 
@@ -1303,16 +1281,15 @@ export const useCountGroupCountGet = <
       TError,
       TData
     >;
-    axios?: AxiosRequestConfig;
   }
 ) => {
-  const { query: queryOptions, axios: axiosOptions } = options || {};
+  const { query: queryOptions } = options || {};
 
   const queryKey =
     queryOptions?.queryKey ?? getCountGroupCountGetQueryKey(params);
 
   const queryFn: QueryFunction<AsyncReturnType<typeof countGroupCountGet>> =
-    () => countGroupCountGet(params, axiosOptions);
+    () => countGroupCountGet(params);
 
   const query = useQuery<
     AsyncReturnType<typeof countGroupCountGet>,
@@ -1330,10 +1307,11 @@ export const useCountGroupCountGet = <
  * Returns the JSON schema for the given table.
  * @summary Schema
  */
-export const schemaGroupSchemaGet = (
-  options?: AxiosRequestConfig
-): Promise<AxiosResponse<SchemaGroupSchemaGet200>> => {
-  return axios.get(`/group/schema`, options);
+export const schemaGroupSchemaGet = () => {
+  return customInstance<SchemaGroupSchemaGet200>({
+    url: `/group/schema`,
+    method: "get",
+  });
 };
 
 export const getSchemaGroupSchemaGetQueryKey = () => [`/group/schema`];
@@ -1347,14 +1325,13 @@ export const useSchemaGroupSchemaGet = <
     TError,
     TData
   >;
-  axios?: AxiosRequestConfig;
 }) => {
-  const { query: queryOptions, axios: axiosOptions } = options || {};
+  const { query: queryOptions } = options || {};
 
   const queryKey = queryOptions?.queryKey ?? getSchemaGroupSchemaGetQueryKey();
 
   const queryFn: QueryFunction<AsyncReturnType<typeof schemaGroupSchemaGet>> =
-    () => schemaGroupSchemaGet(axiosOptions);
+    () => schemaGroupSchemaGet();
 
   const query = useQuery<
     AsyncReturnType<typeof schemaGroupSchemaGet>,
@@ -1372,10 +1349,11 @@ export const useSchemaGroupSchemaGet = <
  * Returns a list of objects showing relationships with other tables.
  * @summary References
  */
-export const referencesGroupReferencesGet = (
-  options?: AxiosRequestConfig
-): Promise<AxiosResponse<ReferencesModel>> => {
-  return axios.get(`/group/references`, options);
+export const referencesGroupReferencesGet = () => {
+  return customInstance<ReferencesModel>({
+    url: `/group/references`,
+    method: "get",
+  });
 };
 
 export const getReferencesGroupReferencesGetQueryKey = () => [
@@ -1391,16 +1369,15 @@ export const useReferencesGroupReferencesGet = <
     TError,
     TData
   >;
-  axios?: AxiosRequestConfig;
 }) => {
-  const { query: queryOptions, axios: axiosOptions } = options || {};
+  const { query: queryOptions } = options || {};
 
   const queryKey =
     queryOptions?.queryKey ?? getReferencesGroupReferencesGetQueryKey();
 
   const queryFn: QueryFunction<
     AsyncReturnType<typeof referencesGroupReferencesGet>
-  > = () => referencesGroupReferencesGet(axiosOptions);
+  > = () => referencesGroupReferencesGet();
 
   const query = useQuery<
     AsyncReturnType<typeof referencesGroupReferencesGet>,
@@ -1418,11 +1395,8 @@ export const useReferencesGroupReferencesGet = <
  * Retrieve a single row from the table.
  * @summary Get Single
  */
-export const getSingleGroupRowIdGet = (
-  rowid: number,
-  options?: AxiosRequestConfig
-): Promise<AxiosResponse<GroupOutput>> => {
-  return axios.get(`/group/${rowid}`, options);
+export const getSingleGroupRowIdGet = (rowid: number) => {
+  return customInstance<GroupOutput>({ url: `/group/${rowid}`, method: "get" });
 };
 
 export const getGetSingleGroupRowIdGetQueryKey = (rowid: number) => [
@@ -1440,16 +1414,15 @@ export const useGetSingleGroupRowIdGet = <
       TError,
       TData
     >;
-    axios?: AxiosRequestConfig;
   }
 ) => {
-  const { query: queryOptions, axios: axiosOptions } = options || {};
+  const { query: queryOptions } = options || {};
 
   const queryKey =
     queryOptions?.queryKey ?? getGetSingleGroupRowIdGetQueryKey(rowid);
 
   const queryFn: QueryFunction<AsyncReturnType<typeof getSingleGroupRowIdGet>> =
-    () => getSingleGroupRowIdGet(rowid, axiosOptions);
+    () => getSingleGroupRowIdGet(rowid);
 
   const query = useQuery<
     AsyncReturnType<typeof getSingleGroupRowIdGet>,
@@ -1467,12 +1440,12 @@ export const useGetSingleGroupRowIdGet = <
  * Insert or update a single row.
  * @summary Put
  */
-export const putGroupRowIdPut = (
-  rowid: number,
-  groupIn: GroupIn,
-  options?: AxiosRequestConfig
-): Promise<AxiosResponse<GroupOutput>> => {
-  return axios.put(`/group/${rowid}`, groupIn, options);
+export const putGroupRowIdPut = (rowid: number, groupIn: GroupIn) => {
+  return customInstance<GroupOutput>({
+    url: `/group/${rowid}`,
+    method: "put",
+    data: groupIn,
+  });
 };
 
 export const usePutGroupRowIdPut = <
@@ -1485,9 +1458,8 @@ export const usePutGroupRowIdPut = <
     { rowid: number; data: GroupIn },
     TContext
   >;
-  axios?: AxiosRequestConfig;
 }) => {
-  const { mutation: mutationOptions, axios: axiosOptions } = options || {};
+  const { mutation: mutationOptions } = options || {};
 
   const mutationFn: MutationFunction<
     AsyncReturnType<typeof putGroupRowIdPut>,
@@ -1495,7 +1467,7 @@ export const usePutGroupRowIdPut = <
   > = (props) => {
     const { rowid, data } = props || {};
 
-    return putGroupRowIdPut(rowid, data, axiosOptions);
+    return putGroupRowIdPut(rowid, data);
   };
 
   return useMutation<
@@ -1509,11 +1481,8 @@ export const usePutGroupRowIdPut = <
  * Delete a single row from the table.
  * @summary Delete Single
  */
-export const deleteSingleGroupRowIdDelete = (
-  rowid: number,
-  options?: AxiosRequestConfig
-): Promise<AxiosResponse<unknown>> => {
-  return axios.delete(`/group/${rowid}`, options);
+export const deleteSingleGroupRowIdDelete = (rowid: number) => {
+  return customInstance<unknown>({ url: `/group/${rowid}`, method: "delete" });
 };
 
 export const useDeleteSingleGroupRowIdDelete = <
@@ -1526,9 +1495,8 @@ export const useDeleteSingleGroupRowIdDelete = <
     { rowid: number },
     TContext
   >;
-  axios?: AxiosRequestConfig;
 }) => {
-  const { mutation: mutationOptions, axios: axiosOptions } = options || {};
+  const { mutation: mutationOptions } = options || {};
 
   const mutationFn: MutationFunction<
     AsyncReturnType<typeof deleteSingleGroupRowIdDelete>,
@@ -1536,7 +1504,7 @@ export const useDeleteSingleGroupRowIdDelete = <
   > = (props) => {
     const { rowid } = props || {};
 
-    return deleteSingleGroupRowIdDelete(rowid, axiosOptions);
+    return deleteSingleGroupRowIdDelete(rowid);
   };
 
   return useMutation<
@@ -1552,10 +1520,13 @@ export const useDeleteSingleGroupRowIdDelete = <
  */
 export const patchGroupRowIdPatch = (
   rowid: number,
-  groupOptional: GroupOptional,
-  options?: AxiosRequestConfig
-): Promise<AxiosResponse<GroupOutput>> => {
-  return axios.patch(`/group/${rowid}`, groupOptional, options);
+  groupOptional: GroupOptional
+) => {
+  return customInstance<GroupOutput>({
+    url: `/group/${rowid}`,
+    method: "patch",
+    data: groupOptional,
+  });
 };
 
 export const usePatchGroupRowIdPatch = <
@@ -1568,9 +1539,8 @@ export const usePatchGroupRowIdPatch = <
     { rowid: number; data: GroupOptional },
     TContext
   >;
-  axios?: AxiosRequestConfig;
 }) => {
-  const { mutation: mutationOptions, axios: axiosOptions } = options || {};
+  const { mutation: mutationOptions } = options || {};
 
   const mutationFn: MutationFunction<
     AsyncReturnType<typeof patchGroupRowIdPatch>,
@@ -1578,7 +1548,7 @@ export const usePatchGroupRowIdPatch = <
   > = (props) => {
     const { rowid, data } = props || {};
 
-    return patchGroupRowIdPatch(rowid, data, axiosOptions);
+    return patchGroupRowIdPatch(rowid, data);
   };
 
   return useMutation<
@@ -1592,13 +1562,11 @@ export const usePatchGroupRowIdPatch = <
  * Returns all rows matching the given query.
  * @summary Get
  */
-export const getMeasurementGet = (
-  params?: GetMeasurementGetParams,
-  options?: AxiosRequestConfig
-): Promise<AxiosResponse<MeasurementPlural>> => {
-  return axios.get(`/measurement`, {
+export const getMeasurementGet = (params?: GetMeasurementGetParams) => {
+  return customInstance<MeasurementPlural>({
+    url: `/measurement`,
+    method: "get",
     params,
-    ...options,
   });
 };
 
@@ -1617,16 +1585,15 @@ export const useGetMeasurementGet = <
       TError,
       TData
     >;
-    axios?: AxiosRequestConfig;
   }
 ) => {
-  const { query: queryOptions, axios: axiosOptions } = options || {};
+  const { query: queryOptions } = options || {};
 
   const queryKey =
     queryOptions?.queryKey ?? getGetMeasurementGetQueryKey(params);
 
   const queryFn: QueryFunction<AsyncReturnType<typeof getMeasurementGet>> =
-    () => getMeasurementGet(params, axiosOptions);
+    () => getMeasurementGet(params);
 
   const query = useQuery<
     AsyncReturnType<typeof getMeasurementGet>,
@@ -1644,11 +1611,12 @@ export const useGetMeasurementGet = <
  * Create a new row in the table.
  * @summary Post
  */
-export const postMeasurementPost = (
-  measurementIn: MeasurementIn,
-  options?: AxiosRequestConfig
-): Promise<AxiosResponse<MeasurementOutput>> => {
-  return axios.post(`/measurement`, measurementIn, options);
+export const postMeasurementPost = (measurementIn: MeasurementIn) => {
+  return customInstance<MeasurementOutput>({
+    url: `/measurement`,
+    method: "post",
+    data: measurementIn,
+  });
 };
 
 export const usePostMeasurementPost = <
@@ -1661,9 +1629,8 @@ export const usePostMeasurementPost = <
     { data: MeasurementIn },
     TContext
   >;
-  axios?: AxiosRequestConfig;
 }) => {
-  const { mutation: mutationOptions, axios: axiosOptions } = options || {};
+  const { mutation: mutationOptions } = options || {};
 
   const mutationFn: MutationFunction<
     AsyncReturnType<typeof postMeasurementPost>,
@@ -1671,7 +1638,7 @@ export const usePostMeasurementPost = <
   > = (props) => {
     const { data } = props || {};
 
-    return postMeasurementPost(data, axiosOptions);
+    return postMeasurementPost(data);
   };
 
   return useMutation<
@@ -1685,13 +1652,11 @@ export const usePostMeasurementPost = <
  * Returns a mapping of row IDs to a readable representation.
  * @summary Ids
  */
-export const idsMeasurementIdsGet = (
-  params?: IdsMeasurementIdsGetParams,
-  options?: AxiosRequestConfig
-): Promise<AxiosResponse<IdsMeasurementIdsGet200>> => {
-  return axios.get(`/measurement/ids`, {
+export const idsMeasurementIdsGet = (params?: IdsMeasurementIdsGetParams) => {
+  return customInstance<IdsMeasurementIdsGet200>({
+    url: `/measurement/ids`,
+    method: "get",
     params,
-    ...options,
   });
 };
 
@@ -1710,16 +1675,15 @@ export const useIdsMeasurementIdsGet = <
       TError,
       TData
     >;
-    axios?: AxiosRequestConfig;
   }
 ) => {
-  const { query: queryOptions, axios: axiosOptions } = options || {};
+  const { query: queryOptions } = options || {};
 
   const queryKey =
     queryOptions?.queryKey ?? getIdsMeasurementIdsGetQueryKey(params);
 
   const queryFn: QueryFunction<AsyncReturnType<typeof idsMeasurementIdsGet>> =
-    () => idsMeasurementIdsGet(params, axiosOptions);
+    () => idsMeasurementIdsGet(params);
 
   const query = useQuery<
     AsyncReturnType<typeof idsMeasurementIdsGet>,
@@ -1738,10 +1702,11 @@ export const useIdsMeasurementIdsGet = <
 but doesn't save it.
  * @summary New
  */
-export const newMeasurementNewGet = (
-  options?: AxiosRequestConfig
-): Promise<AxiosResponse<NewMeasurementNewGet200>> => {
-  return axios.get(`/measurement/new`, options);
+export const newMeasurementNewGet = () => {
+  return customInstance<NewMeasurementNewGet200>({
+    url: `/measurement/new`,
+    method: "get",
+  });
 };
 
 export const getNewMeasurementNewGetQueryKey = () => [`/measurement/new`];
@@ -1755,14 +1720,13 @@ export const useNewMeasurementNewGet = <
     TError,
     TData
   >;
-  axios?: AxiosRequestConfig;
 }) => {
-  const { query: queryOptions, axios: axiosOptions } = options || {};
+  const { query: queryOptions } = options || {};
 
   const queryKey = queryOptions?.queryKey ?? getNewMeasurementNewGetQueryKey();
 
   const queryFn: QueryFunction<AsyncReturnType<typeof newMeasurementNewGet>> =
-    () => newMeasurementNewGet(axiosOptions);
+    () => newMeasurementNewGet();
 
   const query = useQuery<
     AsyncReturnType<typeof newMeasurementNewGet>,
@@ -1781,12 +1745,12 @@ export const useNewMeasurementNewGet = <
  * @summary Count
  */
 export const countMeasurementCountGet = (
-  params?: CountMeasurementCountGetParams,
-  options?: AxiosRequestConfig
-): Promise<AxiosResponse<CountModel>> => {
-  return axios.get(`/measurement/count`, {
+  params?: CountMeasurementCountGetParams
+) => {
+  return customInstance<CountModel>({
+    url: `/measurement/count`,
+    method: "get",
     params,
-    ...options,
   });
 };
 
@@ -1805,17 +1769,16 @@ export const useCountMeasurementCountGet = <
       TError,
       TData
     >;
-    axios?: AxiosRequestConfig;
   }
 ) => {
-  const { query: queryOptions, axios: axiosOptions } = options || {};
+  const { query: queryOptions } = options || {};
 
   const queryKey =
     queryOptions?.queryKey ?? getCountMeasurementCountGetQueryKey(params);
 
   const queryFn: QueryFunction<
     AsyncReturnType<typeof countMeasurementCountGet>
-  > = () => countMeasurementCountGet(params, axiosOptions);
+  > = () => countMeasurementCountGet(params);
 
   const query = useQuery<
     AsyncReturnType<typeof countMeasurementCountGet>,
@@ -1833,10 +1796,11 @@ export const useCountMeasurementCountGet = <
  * Returns the JSON schema for the given table.
  * @summary Schema
  */
-export const schemaMeasurementSchemaGet = (
-  options?: AxiosRequestConfig
-): Promise<AxiosResponse<SchemaMeasurementSchemaGet200>> => {
-  return axios.get(`/measurement/schema`, options);
+export const schemaMeasurementSchemaGet = () => {
+  return customInstance<SchemaMeasurementSchemaGet200>({
+    url: `/measurement/schema`,
+    method: "get",
+  });
 };
 
 export const getSchemaMeasurementSchemaGetQueryKey = () => [
@@ -1852,16 +1816,15 @@ export const useSchemaMeasurementSchemaGet = <
     TError,
     TData
   >;
-  axios?: AxiosRequestConfig;
 }) => {
-  const { query: queryOptions, axios: axiosOptions } = options || {};
+  const { query: queryOptions } = options || {};
 
   const queryKey =
     queryOptions?.queryKey ?? getSchemaMeasurementSchemaGetQueryKey();
 
   const queryFn: QueryFunction<
     AsyncReturnType<typeof schemaMeasurementSchemaGet>
-  > = () => schemaMeasurementSchemaGet(axiosOptions);
+  > = () => schemaMeasurementSchemaGet();
 
   const query = useQuery<
     AsyncReturnType<typeof schemaMeasurementSchemaGet>,
@@ -1879,10 +1842,11 @@ export const useSchemaMeasurementSchemaGet = <
  * Returns a list of objects showing relationships with other tables.
  * @summary References
  */
-export const referencesMeasurementReferencesGet = (
-  options?: AxiosRequestConfig
-): Promise<AxiosResponse<ReferencesModel>> => {
-  return axios.get(`/measurement/references`, options);
+export const referencesMeasurementReferencesGet = () => {
+  return customInstance<ReferencesModel>({
+    url: `/measurement/references`,
+    method: "get",
+  });
 };
 
 export const getReferencesMeasurementReferencesGetQueryKey = () => [
@@ -1898,16 +1862,15 @@ export const useReferencesMeasurementReferencesGet = <
     TError,
     TData
   >;
-  axios?: AxiosRequestConfig;
 }) => {
-  const { query: queryOptions, axios: axiosOptions } = options || {};
+  const { query: queryOptions } = options || {};
 
   const queryKey =
     queryOptions?.queryKey ?? getReferencesMeasurementReferencesGetQueryKey();
 
   const queryFn: QueryFunction<
     AsyncReturnType<typeof referencesMeasurementReferencesGet>
-  > = () => referencesMeasurementReferencesGet(axiosOptions);
+  > = () => referencesMeasurementReferencesGet();
 
   const query = useQuery<
     AsyncReturnType<typeof referencesMeasurementReferencesGet>,
@@ -1925,11 +1888,11 @@ export const useReferencesMeasurementReferencesGet = <
  * Retrieve a single row from the table.
  * @summary Get Single
  */
-export const getSingleMeasurementRowIdGet = (
-  rowid: number,
-  options?: AxiosRequestConfig
-): Promise<AxiosResponse<MeasurementOutput>> => {
-  return axios.get(`/measurement/${rowid}`, options);
+export const getSingleMeasurementRowIdGet = (rowid: number) => {
+  return customInstance<MeasurementOutput>({
+    url: `/measurement/${rowid}`,
+    method: "get",
+  });
 };
 
 export const getGetSingleMeasurementRowIdGetQueryKey = (rowid: number) => [
@@ -1947,17 +1910,16 @@ export const useGetSingleMeasurementRowIdGet = <
       TError,
       TData
     >;
-    axios?: AxiosRequestConfig;
   }
 ) => {
-  const { query: queryOptions, axios: axiosOptions } = options || {};
+  const { query: queryOptions } = options || {};
 
   const queryKey =
     queryOptions?.queryKey ?? getGetSingleMeasurementRowIdGetQueryKey(rowid);
 
   const queryFn: QueryFunction<
     AsyncReturnType<typeof getSingleMeasurementRowIdGet>
-  > = () => getSingleMeasurementRowIdGet(rowid, axiosOptions);
+  > = () => getSingleMeasurementRowIdGet(rowid);
 
   const query = useQuery<
     AsyncReturnType<typeof getSingleMeasurementRowIdGet>,
@@ -1977,10 +1939,13 @@ export const useGetSingleMeasurementRowIdGet = <
  */
 export const putMeasurementRowIdPut = (
   rowid: number,
-  measurementIn: MeasurementIn,
-  options?: AxiosRequestConfig
-): Promise<AxiosResponse<MeasurementOutput>> => {
-  return axios.put(`/measurement/${rowid}`, measurementIn, options);
+  measurementIn: MeasurementIn
+) => {
+  return customInstance<MeasurementOutput>({
+    url: `/measurement/${rowid}`,
+    method: "put",
+    data: measurementIn,
+  });
 };
 
 export const usePutMeasurementRowIdPut = <
@@ -1993,9 +1958,8 @@ export const usePutMeasurementRowIdPut = <
     { rowid: number; data: MeasurementIn },
     TContext
   >;
-  axios?: AxiosRequestConfig;
 }) => {
-  const { mutation: mutationOptions, axios: axiosOptions } = options || {};
+  const { mutation: mutationOptions } = options || {};
 
   const mutationFn: MutationFunction<
     AsyncReturnType<typeof putMeasurementRowIdPut>,
@@ -2003,7 +1967,7 @@ export const usePutMeasurementRowIdPut = <
   > = (props) => {
     const { rowid, data } = props || {};
 
-    return putMeasurementRowIdPut(rowid, data, axiosOptions);
+    return putMeasurementRowIdPut(rowid, data);
   };
 
   return useMutation<
@@ -2017,11 +1981,11 @@ export const usePutMeasurementRowIdPut = <
  * Delete a single row from the table.
  * @summary Delete Single
  */
-export const deleteSingleMeasurementRowIdDelete = (
-  rowid: number,
-  options?: AxiosRequestConfig
-): Promise<AxiosResponse<unknown>> => {
-  return axios.delete(`/measurement/${rowid}`, options);
+export const deleteSingleMeasurementRowIdDelete = (rowid: number) => {
+  return customInstance<unknown>({
+    url: `/measurement/${rowid}`,
+    method: "delete",
+  });
 };
 
 export const useDeleteSingleMeasurementRowIdDelete = <
@@ -2034,9 +1998,8 @@ export const useDeleteSingleMeasurementRowIdDelete = <
     { rowid: number },
     TContext
   >;
-  axios?: AxiosRequestConfig;
 }) => {
-  const { mutation: mutationOptions, axios: axiosOptions } = options || {};
+  const { mutation: mutationOptions } = options || {};
 
   const mutationFn: MutationFunction<
     AsyncReturnType<typeof deleteSingleMeasurementRowIdDelete>,
@@ -2044,7 +2007,7 @@ export const useDeleteSingleMeasurementRowIdDelete = <
   > = (props) => {
     const { rowid } = props || {};
 
-    return deleteSingleMeasurementRowIdDelete(rowid, axiosOptions);
+    return deleteSingleMeasurementRowIdDelete(rowid);
   };
 
   return useMutation<
@@ -2060,10 +2023,13 @@ export const useDeleteSingleMeasurementRowIdDelete = <
  */
 export const patchMeasurementRowIdPatch = (
   rowid: number,
-  measurementOptional: MeasurementOptional,
-  options?: AxiosRequestConfig
-): Promise<AxiosResponse<MeasurementOutput>> => {
-  return axios.patch(`/measurement/${rowid}`, measurementOptional, options);
+  measurementOptional: MeasurementOptional
+) => {
+  return customInstance<MeasurementOutput>({
+    url: `/measurement/${rowid}`,
+    method: "patch",
+    data: measurementOptional,
+  });
 };
 
 export const usePatchMeasurementRowIdPatch = <
@@ -2076,9 +2042,8 @@ export const usePatchMeasurementRowIdPatch = <
     { rowid: number; data: MeasurementOptional },
     TContext
   >;
-  axios?: AxiosRequestConfig;
 }) => {
-  const { mutation: mutationOptions, axios: axiosOptions } = options || {};
+  const { mutation: mutationOptions } = options || {};
 
   const mutationFn: MutationFunction<
     AsyncReturnType<typeof patchMeasurementRowIdPatch>,
@@ -2086,7 +2051,7 @@ export const usePatchMeasurementRowIdPatch = <
   > = (props) => {
     const { rowid, data } = props || {};
 
-    return patchMeasurementRowIdPatch(rowid, data, axiosOptions);
+    return patchMeasurementRowIdPatch(rowid, data);
   };
 
   return useMutation<
