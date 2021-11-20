@@ -2,7 +2,6 @@ from piccolo.table import Table
 from piccolo.columns.column_types import (
     ForeignKey,
     Varchar,
-    Boolean,
     Timestamp,
     Text,
     Integer,
@@ -10,7 +9,7 @@ from piccolo.columns.column_types import (
 )
 
 
-class Group(Table):
+class Group(Table, tablename="drop_group"):
     """
     Group table
     """
@@ -29,7 +28,6 @@ class Apartment(Table):
     owner = Text()
     people = Integer()
     created_on = Timestamp()
-    group = ForeignKey(references="Group")
     appliance = ForeignKey(references="Appliance")
 
 
@@ -39,10 +37,10 @@ class Appliance(Table):
     """
 
     name = Varchar()
-    measurements = ForeignKey(references="Measurements")
+    measurement = ForeignKey(references="Measurement")
 
 
-class Measurements(Table):
+class Measurement(Table):
     """
     Group table
     """
