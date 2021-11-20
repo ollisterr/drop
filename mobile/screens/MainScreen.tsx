@@ -11,6 +11,7 @@ import LogoSVG from '../assets/images/drop-logo.svg';
 import Card from '../components/Card';
 import KPICard from '../components/KPICard';
 import Rank from '../components/Rank';
+import Chart from '../components/Chart';
 
 export default function MainScreen() {
   const insets = useSafeAreaInsets();
@@ -52,7 +53,7 @@ export default function MainScreen() {
 
               <Spacer spacing="small" />
 
-              <Rank rank={1} groupName="Taloyhtio Oy AB" />
+              <Rank rank={3} groupName="Poikamiehet" />
             </Row>
           </Card>
 
@@ -73,6 +74,10 @@ export default function MainScreen() {
               color="success"
             />
           </Row>
+
+          <Spacer axis="y" spacing="xxlarge" />
+
+          <Chart />
         </Content>
       </ScrollView>
     </ScreenWrapper>
