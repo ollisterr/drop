@@ -1,5 +1,7 @@
 import { createGlobalStyle, ThemeProvider } from "styled-components";
 import { AppProps } from "next/app";
+import { QueryClient, QueryClientProvider } from "react-query";
+
 import theme from "../components/theme";
 
 const GlobalStyle = createGlobalStyle`
@@ -42,13 +44,15 @@ textarea {
 }
 `;
 
+const queryClient = new QueryClient();
+
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <>
+    <QueryClientProvider client={queryClient}>
       <GlobalStyle />
       <ThemeProvider theme={theme}>
         <Component {...pageProps} />
       </ThemeProvider>
-    </>
+    </QueryClientProvider>
   );
 }

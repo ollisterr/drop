@@ -6,8 +6,13 @@ import styled from "styled-components";
 import { Layout } from "../components/Layout";
 import { Main } from "../components/Main";
 import { Sidebar } from "../components/Sidebar";
+import { useCountApartmentCountGet } from "../api/default/default";
 
 const Home: NextPage = () => {
+  const { data } = useCountApartmentCountGet();
+
+  console.debug(data);
+
   return (
     <Layout>
       <Head>

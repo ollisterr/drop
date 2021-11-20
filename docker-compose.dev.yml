@@ -1,7 +1,7 @@
 services:
     admin:
         volumes:
-            - ./admin:/app
+            - ./admin:/usr/src/app
 
     api:
         volumes:

@@ -2,6 +2,7 @@ from typing import List
 
 from fastapi import FastAPI
 from fastapi.openapi.utils import get_openapi
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from piccolo.engine import engine_finder
 from piccolo_admin.endpoints import create_admin
@@ -21,6 +22,7 @@ app = FastAPI(
     site_name="Drop API",
 )
 
+
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
 
@@ -39,6 +41,15 @@ def custom_openapi():
 
 
 app.openapi = custom_openapi
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 FastAPIWrapper(
     root_url="/apartment/",
