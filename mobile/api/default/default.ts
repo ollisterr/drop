@@ -14,8 +14,9 @@ import {
   MutationFunction,
 } from "react-query";
 import type {
-  ApartmentPlural,
   HTTPValidationError,
+  RegisterUser,
+  ApartmentPlural,
   GetApartmentGetParams,
   ApartmentOutput,
   ApartmentIn,
@@ -66,6 +67,46 @@ type AsyncReturnType<T extends (...args: any) => Promise<any>> = T extends (
   ? R
   : any;
 
+/**
+ * @summary Create User
+ */
+export const createUserRegisterPost = (registerUser: RegisterUser) => {
+  return customInstance<unknown>({
+    url: `/register`,
+    method: "post",
+    data: registerUser,
+  });
+};
+
+export const useCreateUserRegisterPost = <
+  TError = HTTPValidationError,
+  TContext = unknown
+>(options?: {
+  mutation?: UseMutationOptions<
+    AsyncReturnType<typeof createUserRegisterPost>,
+    TError,
+    { data: RegisterUser },
+    TContext
+  >;
+}) => {
+  const { mutation: mutationOptions } = options || {};
+
+  const mutationFn: MutationFunction<
+    AsyncReturnType<typeof createUserRegisterPost>,
+    { data: RegisterUser }
+  > = (props) => {
+    const { data } = props || {};
+
+    return createUserRegisterPost(data);
+  };
+
+  return useMutation<
+    AsyncReturnType<typeof createUserRegisterPost>,
+    TError,
+    { data: RegisterUser },
+    TContext
+  >(mutationFn, mutationOptions);
+};
 /**
  * Returns all rows matching the given query.
  * @summary Get

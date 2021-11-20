@@ -39,6 +39,7 @@ Sloganeja:
 ## Storyline
 
 -   kaveri A pesee kätensä huolellisesti
+    -   "Puhdistaaksesi bakteerit mahdollisimman tehokkaasti, käsiä tulisi pestä kaksikymmentä sekuntia"
 -   notifikaatti kännykästä
     -   "Top hygiene score!"
     -   haasta kaverisi
@@ -49,9 +50,11 @@ Sloganeja:
 -   kaveri A saa notifikaatin, näkee oman lämpötilarankkinsa
     -   "baby seal"
 -   opettelee käymään joka päivä kylmemmässä suihkussa
+    -   "suihkussa valuu vettä 12 litraa minuutissa"
     -   personal goalit auttaa, "mitä jos tänään laittaisit asteen kylmemmäksi"
 -   Ohittaa lopulta kaverinsa B
 -   Näkee itsensä taloyhtiön leaderboardin pohjalla
+    -   ihan perkeleesti vettä kulunu
 -   joku siisti pan out missä sikana ihmisiä vähentämässä vedenkäyttöä ja ylittämässä itsensä
 -   "DROP"
 -   "By Oras"

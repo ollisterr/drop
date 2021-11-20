@@ -33,6 +33,7 @@ class User(Table, tablename="drop_user"):
 
     user = ForeignKey(BaseUser)
     apartment = ForeignKey(Apartment)
+    push_token = Varchar()
 
 
 class ApartmentGroups(Table):
