@@ -24,3 +24,14 @@ Sloganeja:
     -   skabaa
     -   personoitu sustainability score
         1
+
+## hyvät kaavat
+
+### Sustainability score
+
+-   lineaarinen veden kulutuksen mukaan, kulmakerroin määräytyy veden lämpötilasta
+
+### Hygiene score
+
+-   kasvaa käsiä pestessä ain 20s asti, sen jälkeen plateau
+-   vastapainona sustanability score joka laskee veden valuessa
