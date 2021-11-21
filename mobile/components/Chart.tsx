@@ -1,14 +1,14 @@
 /* eslint-disable react/destructuring-assignment */
-import React from 'react';
-import { VictoryBar, VictoryChart, VictoryAxis } from 'victory-native';
-import { useGetConsumptionLastTwoWeekKpisConsumptionWeeklyApartmentIdNumWeeksGet } from '../api/consumption/consumption';
-import useGlobalState from '../store';
-import { Row, Spacer } from '../styles/components';
-import theme from '../styles/theme';
-import { Description, Subheading } from '../styles/typography';
-import Card from './Card';
+import React from "react";
+import { VictoryBar, VictoryChart, VictoryAxis } from "victory-native";
+import { useGetConsumptionLastTwoWeekKpisConsumptionWeeklyApartmentIdNumWeeksGet } from "../api/consumption/consumption";
+import useGlobalState from "../store";
+import { Row, Spacer } from "../styles/components";
+import theme from "../styles/theme";
+import { Description, Subheading } from "../styles/typography";
+import Card from "./Card";
 
-const weekDays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+const weekDays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
 export default function Chart() {
   const { user } = useGlobalState();
@@ -16,18 +16,23 @@ export default function Chart() {
   const { data } =
     useGetConsumptionLastTwoWeekKpisConsumptionWeeklyApartmentIdNumWeeksGet(
       Number(user!.apartmentId),
-      2,
+      2
     );
 
-  const formattedData = (data ?? []).map(x => ({ ...x, y: x.consumption }));
+  const formattedData = (data ?? []).map((x) => ({ ...x, y: x.consumption }));
 
   const week1 = formattedData.slice(0, 7);
   const week2 = formattedData.slice(7);
 
-  const changeTrend = week1.map(day => {
-    const comparisonDay = week2.find(x => x.index === day.index);
-    return Math.round(day.consumption / comparisonDay.consumption);
-  });
+  const changeTrend = week1
+    .map((day) => {
+      const comparisonDay = week2.find((x) => x.weekday === day.weekday);
+      return (
+        100 - Math.round((comparisonDay.consumption / day.consumption) * 100)
+      );
+    })
+    .reverse()
+    .slice(1, 7);
 
   return (
     <Card shadowed>
@@ -40,7 +45,7 @@ export default function Chart() {
         domainPadding={{ x: [0, 50], y: 5 }}
       >
         <VictoryBar
-          data={week2}
+          data={week2.reverse()}
           barRatio={0.75}
           cornerRadius={8}
           alignment="middle"
@@ -57,7 +62,7 @@ export default function Chart() {
           style={{
             data: {
               fill: theme.colors.primary,
-              stroke: '#fff',
+              stroke: "#fff",
               strokeWidth: 2.5,
             },
           }}
@@ -66,7 +71,7 @@ export default function Chart() {
         <VictoryAxis
           tickValues={weekDays}
           style={{
-            axis: { stroke: 'transparent' },
+            axis: { stroke: "transparent" },
             tickLabels: {
               color: theme.colors.grey,
               paddingLeft: 5,
@@ -76,14 +81,14 @@ export default function Chart() {
       </VictoryChart>
 
       <Row>
-        {changeTrend.map(x => (
+        {[...changeTrend, 0].map((x) => (
           <Description
             style={{ flex: 1 }}
             weight="bold"
             align="center"
-            color={x < 0 ? 'alert' : 'success'}
+            color={x < 0 ? "alert" : "success"}
           >
-            {x < 0 ? '-' : '+'}
+            {x < 0 ? "" : "+"}
             {x}%
           </Description>
         ))}
