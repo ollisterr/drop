@@ -19,12 +19,18 @@ Notifications.setNotificationHandler({
   }),
 });
 
+Notifications.scheduleNotificationAsync({
+  content: {
+    title: "Remember to drink water!",
+  },
+  trigger: {
+    seconds: 30 * 20,
+    repeats: false,
+  },
+});
+
 export default function App() {
   const isLoadingComplete = useCachedResources();
-
-  if (!isLoadingComplete) {
-    return null;
-  }
 
   const [expoPushToken, setExpoPushToken] = useState("");
 
@@ -33,6 +39,12 @@ export default function App() {
       setExpoPushToken(token as string)
     );
   }, []);
+
+  Notifications.cancelAllScheduledNotificationsAsync();
+
+  if (!isLoadingComplete) {
+    return null;
+  }
 
   return (
     <ThemeProvider theme={theme}>
