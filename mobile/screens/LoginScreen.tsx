@@ -1,17 +1,18 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Animated, BackHandler, Easing } from 'react-native';
-import faker from 'faker';
+import React, { useEffect, useRef, useState } from "react";
+import { Animated, BackHandler, Easing, TouchableOpacity } from "react-native";
+import faker from "faker";
+import * as Notifications from "expo-notifications";
 
-import styled from '../styles';
-import { Input, ScreenWrapper, Spacer } from '../styles/components';
-import { Text } from '../styles/typography';
-import LogoIcon from '../assets/images/drop-logo-anti-drop.svg';
-import DropIcon from '../assets/images/drop-logo-drop.svg';
-import background from '../assets/images/rain-drops.jpg';
-import { Button, TextButton } from '../components';
-import useGlobalState from '../store';
-import theme from '../styles/theme';
-import { AXIOS_INSTANCE } from '../api/axios';
+import styled from "../styles";
+import { Input, ScreenWrapper, Spacer } from "../styles/components";
+import { Text } from "../styles/typography";
+import LogoIcon from "../assets/images/drop-logo-anti-drop.svg";
+import DropIcon from "../assets/images/drop-logo-drop.svg";
+import background from "../assets/images/rain-drops.jpg";
+import { Button, TextButton } from "../components";
+import useGlobalState from "../store";
+import theme from "../styles/theme";
+import { AXIOS_INSTANCE } from "../api/axios";
 
 export default function LoginScreen() {
   const [showWelcomeScreen, toggleShowWelcomeScreen] = useState(true);
@@ -25,14 +26,14 @@ export default function LoginScreen() {
 
   useEffect(() => {
     const backhandler = BackHandler.addEventListener(
-      'hardwareBackPress',
+      "hardwareBackPress",
       () => {
         if (showWelcomeScreen) {
           return false;
         }
         toggleShowWelcomeScreen(true);
         return true;
-      },
+      }
     );
 
     setTimeout(() => {
@@ -93,7 +94,7 @@ export default function LoginScreen() {
 
           <Animated.View
             style={{
-              position: 'absolute',
+              position: "absolute",
               top: 35,
               left: 70,
               width: 10,
@@ -173,15 +174,15 @@ const WelcomeText = ({ next }: { next: () => void }) => (
 const LoginView = () => {
   const { login } = useGlobalState();
 
-  const [input, setInput] = useState('');
+  const [input, setInput] = useState("");
   const [loading, toggleLoading] = useState(false);
 
   const submit = (username: string) => {
     toggleLoading(true);
-    AXIOS_INSTANCE.post('https://api.drop.energy/register', {
+    AXIOS_INSTANCE.post("https://api.drop.energy/register", {
       user: {
         username,
-        password: 'kakka',
+        password: "kakka",
         email: faker.internet.email(),
       },
       apartment: {
@@ -192,7 +193,7 @@ const LoginView = () => {
       .then(() => {
         login(username);
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
         login(username);
       })
@@ -201,9 +202,11 @@ const LoginView = () => {
 
   return (
     <Content>
-      <Text color="grey" align="center">
-        Add a username so that you&apos;re shower buddies can find you.
-      </Text>
+      <TouchableOpacity onPress={() => schedulePushNotification()}>
+        <Text color="grey" align="center">
+          Add a username so that you&apos;re shower buddies can find you.
+        </Text>
+      </TouchableOpacity>
 
       <Spacer axis="y" spacing="large" />
 
@@ -231,6 +234,17 @@ const ContentWrapper = styled.View`
   flex: 1;
   width: 100%;
   align-items: center;
-  padding: ${p => p.theme.spacing.default};
+  padding: ${(p) => p.theme.spacing.default};
   padding-top: 50%;
 `;
+
+async function schedulePushNotification() {
+  await Notifications.scheduleNotificationAsync({
+    content: {
+      title: "💧 Top hygiene score!",
+      body: "Share your results with friends!",
+      data: { data: "goes here" },
+    },
+    trigger: { seconds: 15 },
+  });
+}

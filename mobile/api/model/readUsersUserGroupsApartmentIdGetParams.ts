@@ -6,7 +6,7 @@
  * OpenAPI spec version: 0.1.0
  */
 
-export interface BaseUserPydantic {
-  username?: string;
-  password?: string;
-}
+export type ReadUsersUserGroupsApartmentIdGetParams = {
+  limit?: number;
+  offset?: number;
+};

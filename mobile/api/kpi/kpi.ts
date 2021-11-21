@@ -16,32 +16,142 @@ type AsyncReturnType<T extends (...args: any) => Promise<any>> = T extends (
   : any;
 
 /**
- * @summary Get User Daily Consumption
+ * @summary Get User Weekly Trend
  */
-export const getUserDailyConsumptionDailyConsumptionUsernameGet = (
-  username: unknown
+export const getUserWeeklyTrendKpisWeeklyChangeApartmentIdGet = (
+  apartmentid: number
 ) => {
-  return customInstance<unknown>({
-    url: `/daily-consumption/${username}`,
+  return customInstance<number>({
+    url: `/kpis/weekly-change/${apartmentid}`,
     method: "get",
   });
 };
 
-export const getGetUserDailyConsumptionDailyConsumptionUsernameGetQueryKey = (
-  username: unknown
-) => [`/daily-consumption/${username}`];
+export const getGetUserWeeklyTrendKpisWeeklyChangeApartmentIdGetQueryKey = (
+  apartmentid: number
+) => [`/kpis/weekly-change/${apartmentid}`];
 
-export const useGetUserDailyConsumptionDailyConsumptionUsernameGet = <
+export const useGetUserWeeklyTrendKpisWeeklyChangeApartmentIdGet = <
   TData = AsyncReturnType<
-    typeof getUserDailyConsumptionDailyConsumptionUsernameGet
+    typeof getUserWeeklyTrendKpisWeeklyChangeApartmentIdGet
   >,
   TError = HTTPValidationError
 >(
-  username: unknown,
+  apartmentid: number,
+  options?: {
+    query?: UseQueryOptions<
+      AsyncReturnType<typeof getUserWeeklyTrendKpisWeeklyChangeApartmentIdGet>,
+      TError,
+      TData
+    >;
+  }
+) => {
+  const { query: queryOptions } = options || {};
+
+  const queryKey =
+    queryOptions?.queryKey ??
+    getGetUserWeeklyTrendKpisWeeklyChangeApartmentIdGetQueryKey(apartmentid);
+
+  const queryFn: QueryFunction<
+    AsyncReturnType<typeof getUserWeeklyTrendKpisWeeklyChangeApartmentIdGet>
+  > = () => getUserWeeklyTrendKpisWeeklyChangeApartmentIdGet(apartmentid);
+
+  const query = useQuery<
+    AsyncReturnType<typeof getUserWeeklyTrendKpisWeeklyChangeApartmentIdGet>,
+    TError,
+    TData
+  >(queryKey, queryFn, { enabled: !!apartmentid, ...queryOptions });
+
+  return {
+    queryKey,
+    ...query,
+  };
+};
+
+/**
+ * @summary Hygiene Scores
+ */
+export const hygieneScoresHygieneScoresGroupIdDateGet = (
+  groupid: number,
+  date: string
+) => {
+  return customInstance<unknown>({
+    url: `/hygiene-scores/${groupid}/${date}`,
+    method: "get",
+  });
+};
+
+export const getHygieneScoresHygieneScoresGroupIdDateGetQueryKey = (
+  groupid: number,
+  date: string
+) => [`/hygiene-scores/${groupid}/${date}`];
+
+export const useHygieneScoresHygieneScoresGroupIdDateGet = <
+  TData = AsyncReturnType<typeof hygieneScoresHygieneScoresGroupIdDateGet>,
+  TError = HTTPValidationError
+>(
+  groupid: number,
+  date: string,
+  options?: {
+    query?: UseQueryOptions<
+      AsyncReturnType<typeof hygieneScoresHygieneScoresGroupIdDateGet>,
+      TError,
+      TData
+    >;
+  }
+) => {
+  const { query: queryOptions } = options || {};
+
+  const queryKey =
+    queryOptions?.queryKey ??
+    getHygieneScoresHygieneScoresGroupIdDateGetQueryKey(groupid, date);
+
+  const queryFn: QueryFunction<
+    AsyncReturnType<typeof hygieneScoresHygieneScoresGroupIdDateGet>
+  > = () => hygieneScoresHygieneScoresGroupIdDateGet(groupid, date);
+
+  const query = useQuery<
+    AsyncReturnType<typeof hygieneScoresHygieneScoresGroupIdDateGet>,
+    TError,
+    TData
+  >(queryKey, queryFn, { enabled: !!(groupid && date), ...queryOptions });
+
+  return {
+    queryKey,
+    ...query,
+  };
+};
+
+/**
+ * @summary Sustainability Scores
+ */
+export const sustainabilityScoresSustainabilityScoresGroupIdDateGet = (
+  groupid: number,
+  date: string
+) => {
+  return customInstance<unknown>({
+    url: `/sustainability-scores/${groupid}/${date}`,
+    method: "get",
+  });
+};
+
+export const getSustainabilityScoresSustainabilityScoresGroupIdDateGetQueryKey =
+  (groupid: number, date: string) => [
+    `/sustainability-scores/${groupid}/${date}`,
+  ];
+
+export const useSustainabilityScoresSustainabilityScoresGroupIdDateGet = <
+  TData = AsyncReturnType<
+    typeof sustainabilityScoresSustainabilityScoresGroupIdDateGet
+  >,
+  TError = HTTPValidationError
+>(
+  groupid: number,
+  date: string,
   options?: {
     query?: UseQueryOptions<
       AsyncReturnType<
-        typeof getUserDailyConsumptionDailyConsumptionUsernameGet
+        typeof sustainabilityScoresSustainabilityScoresGroupIdDateGet
       >,
       TError,
       TData
@@ -52,17 +162,25 @@ export const useGetUserDailyConsumptionDailyConsumptionUsernameGet = <
 
   const queryKey =
     queryOptions?.queryKey ??
-    getGetUserDailyConsumptionDailyConsumptionUsernameGetQueryKey(username);
+    getSustainabilityScoresSustainabilityScoresGroupIdDateGetQueryKey(
+      groupid,
+      date
+    );
 
   const queryFn: QueryFunction<
-    AsyncReturnType<typeof getUserDailyConsumptionDailyConsumptionUsernameGet>
-  > = () => getUserDailyConsumptionDailyConsumptionUsernameGet(username);
+    AsyncReturnType<
+      typeof sustainabilityScoresSustainabilityScoresGroupIdDateGet
+    >
+  > = () =>
+    sustainabilityScoresSustainabilityScoresGroupIdDateGet(groupid, date);
 
   const query = useQuery<
-    AsyncReturnType<typeof getUserDailyConsumptionDailyConsumptionUsernameGet>,
+    AsyncReturnType<
+      typeof sustainabilityScoresSustainabilityScoresGroupIdDateGet
+    >,
     TError,
     TData
-  >(queryKey, queryFn, { enabled: !!username, ...queryOptions });
+  >(queryKey, queryFn, { enabled: !!(groupid && date), ...queryOptions });
 
   return {
     queryKey,

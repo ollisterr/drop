@@ -6,6 +6,11 @@
  * OpenAPI spec version: 0.1.0
  */
 import { useQuery, UseQueryOptions, QueryFunction } from "react-query";
+import type {
+  BaseUserPydantic,
+  HTTPValidationError,
+  GetCurrentUserUsersMeGetParams,
+} from ".././model";
 import { customInstance } from ".././axios";
 
 type AsyncReturnType<T extends (...args: any) => Promise<any>> = T extends (
@@ -15,36 +20,97 @@ type AsyncReturnType<T extends (...args: any) => Promise<any>> = T extends (
   : any;
 
 /**
- * @summary Read Users
+ * @summary Get Current User
  */
-export const readUsersUsersGet = () => {
-  return customInstance<unknown>({ url: `/users`, method: "get" });
+export const getCurrentUserUsersMeGet = (
+  params?: GetCurrentUserUsersMeGetParams
+) => {
+  return customInstance<BaseUserPydantic[]>({
+    url: `/users/me`,
+    method: "get",
+    params,
+  });
 };
 
-export const getReadUsersUsersGetQueryKey = () => [`/users`];
+export const getGetCurrentUserUsersMeGetQueryKey = (
+  params?: GetCurrentUserUsersMeGetParams
+) => [`/users/me`, ...(params ? [params] : [])];
 
-export const useReadUsersUsersGet = <
-  TData = AsyncReturnType<typeof readUsersUsersGet>,
-  TError = unknown
->(options?: {
-  query?: UseQueryOptions<
-    AsyncReturnType<typeof readUsersUsersGet>,
-    TError,
-    TData
-  >;
-}) => {
+export const useGetCurrentUserUsersMeGet = <
+  TData = AsyncReturnType<typeof getCurrentUserUsersMeGet>,
+  TError = HTTPValidationError
+>(
+  params?: GetCurrentUserUsersMeGetParams,
+  options?: {
+    query?: UseQueryOptions<
+      AsyncReturnType<typeof getCurrentUserUsersMeGet>,
+      TError,
+      TData
+    >;
+  }
+) => {
   const { query: queryOptions } = options || {};
 
-  const queryKey = queryOptions?.queryKey ?? getReadUsersUsersGetQueryKey();
+  const queryKey =
+    queryOptions?.queryKey ?? getGetCurrentUserUsersMeGetQueryKey(params);
 
-  const queryFn: QueryFunction<AsyncReturnType<typeof readUsersUsersGet>> =
-    () => readUsersUsersGet();
+  const queryFn: QueryFunction<
+    AsyncReturnType<typeof getCurrentUserUsersMeGet>
+  > = () => getCurrentUserUsersMeGet(params);
 
   const query = useQuery<
-    AsyncReturnType<typeof readUsersUsersGet>,
+    AsyncReturnType<typeof getCurrentUserUsersMeGet>,
     TError,
     TData
   >(queryKey, queryFn, queryOptions);
+
+  return {
+    queryKey,
+    ...query,
+  };
+};
+
+/**
+ * @summary Get Users
+ */
+export const getUsersUsersUsernameGet = (username: string) => {
+  return customInstance<BaseUserPydantic[]>({
+    url: `/users/${username}`,
+    method: "get",
+  });
+};
+
+export const getGetUsersUsersUsernameGetQueryKey = (username: string) => [
+  `/users/${username}`,
+];
+
+export const useGetUsersUsersUsernameGet = <
+  TData = AsyncReturnType<typeof getUsersUsersUsernameGet>,
+  TError = HTTPValidationError
+>(
+  username: string,
+  options?: {
+    query?: UseQueryOptions<
+      AsyncReturnType<typeof getUsersUsersUsernameGet>,
+      TError,
+      TData
+    >;
+  }
+) => {
+  const { query: queryOptions } = options || {};
+
+  const queryKey =
+    queryOptions?.queryKey ?? getGetUsersUsersUsernameGetQueryKey(username);
+
+  const queryFn: QueryFunction<
+    AsyncReturnType<typeof getUsersUsersUsernameGet>
+  > = () => getUsersUsersUsernameGet(username);
+
+  const query = useQuery<
+    AsyncReturnType<typeof getUsersUsersUsernameGet>,
+    TError,
+    TData
+  >(queryKey, queryFn, { enabled: !!username, ...queryOptions });
 
   return {
     queryKey,

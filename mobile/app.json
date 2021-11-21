@@ -12,6 +12,13 @@
             "resizeMode": "contain",
             "backgroundColor": "#ffffff"
         },
+        "notification": {
+            "icon": "./assets/images/icon.png",
+            "color": "#311b92",
+            "androidMode": "default",
+            "androidCollapsedTitle": "Updates from Colab.notes",
+            "iosDisplayInForeground": true
+        },
         "packagerOpts": {
             "config": "metro.config.js",
             "sourceExts": [
@@ -36,6 +43,7 @@
             "supportsTablet": true
         },
         "android": {
+            "useNextNotificationsApi": true,
             "adaptiveIcon": {
                 "foregroundImage": "./assets/images/adaptive-icon.png",
                 "backgroundColor": "#ffffff"

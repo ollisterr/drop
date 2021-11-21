@@ -6,7 +6,9 @@
  * OpenAPI spec version: 0.1.0
  */
 
-export interface BaseUserPydantic {
-  username?: string;
-  password?: string;
+export interface ConsumptionLastTwoWeeksResponse {
+  week_start: string;
+  date: string;
+  apartment_id: number;
+  consumption: number;
 }

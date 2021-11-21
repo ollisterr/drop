@@ -1,15 +1,16 @@
-import * as React from 'react';
+import * as React from "react";
 
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Platform, ScrollView } from 'react-native';
-import styled from '../styles';
-import { Row, ScreenWrapper, Spacer } from '../styles/components';
-import { H1, Text, Detail } from '../styles/typography';
-import background from '../assets/images/rain-drops.jpg';
-import DropSVG from '../assets/images/drop-icon.svg';
-import LogoSVG from '../assets/images/drop-logo.svg';
-import { Card, Button, KPICard, Rank, Chart } from '../components';
-import useGlobalState from '../store';
+import * as Notifications from "expo-notifications";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { Platform, ScrollView, TouchableOpacity } from "react-native";
+import styled from "../styles";
+import { Row, ScreenWrapper, Spacer } from "../styles/components";
+import { H1, Text, Detail } from "../styles/typography";
+import background from "../assets/images/rain-drops.jpg";
+import DropSVG from "../assets/images/drop-icon.svg";
+import LogoSVG from "../assets/images/drop-logo.svg";
+import { Card, Button, KPICard, Rank, Chart } from "../components";
+import useGlobalState from "../store";
 
 export default function MainScreen() {
   const insets = useSafeAreaInsets();
@@ -20,7 +21,9 @@ export default function MainScreen() {
     <ScreenWrapper>
       <BackgroundImage source={background} />
 
-      <DropIcon insets={insets} />
+      <TouchableOpacity onPress={() => schedulePushNotification()}>
+        <DropIcon insets={insets} />
+      </TouchableOpacity>
 
       <ScrollView style={{ flex: 1 }}>
         <Content insets={insets}>
@@ -87,6 +90,16 @@ export default function MainScreen() {
     </ScreenWrapper>
   );
 }
+async function schedulePushNotification() {
+  await Notifications.scheduleNotificationAsync({
+    content: {
+      title: "You've got mail! 📬",
+      body: "Here is the notification body",
+      data: { data: "goes here" },
+    },
+    trigger: { seconds: 2 },
+  });
+}
 
 const BackgroundImage = styled.Image`
   position: absolute;
@@ -99,9 +112,9 @@ const DropIcon = styled(DropSVG)<{ insets: any }>`
   position: absolute;
   z-index: -1;
   align-self: center;
-  margin-top: ${p => p.insets.top}px;
-  color: ${p => p.theme.colors.primaryLight};
-  opacity: ${Platform.OS === 'ios' ? 0.4 : 0.15};
+  margin-top: ${(p) => p.insets.top}px;
+  color: ${(p) => p.theme.colors.primaryLight};
+  opacity: ${Platform.OS === "ios" ? 0.4 : 0.15};
 `;
 
 const LogoIcon = styled(LogoSVG)`
@@ -112,9 +125,9 @@ const Content = styled.View<{
   insets: { top: number; bottom: number };
 }>`
   width: 100%;
-  padding-top: ${p => p.insets.top}px;
-  padding-bottom: ${p => p.insets.bottom + 50}px;
-  padding-horizontal: ${p => p.theme.spacing.default};
+  padding-top: ${(p) => p.insets.top}px;
+  padding-bottom: ${(p) => p.insets.bottom + 50}px;
+  padding-horizontal: ${(p) => p.theme.spacing.default};
 `;
 
 const HeaderStats = styled.View`
