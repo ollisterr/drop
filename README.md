@@ -58,3 +58,23 @@ Sloganeja:
 -   joku siisti pan out missä sikana ihmisiä vähentämässä vedenkäyttöä ja ylittämässä itsensä
 -   "DROP"
 -   "By Oras"
+
+-   How long does it take you to wash your hands???
+-   Is it 5 second, 10 second, 10 minutes??
+
+-   9 out of 10 dentists agree, that in order to clean your hands properly, you need to wash them for almost 20 seconds!!!
+-   And while we're at it, why not beat your frens?
+
+-   Introducing DROP - by Oras.
+-   A new way to gain insights to your water consumption habits while competing with your friends!
+-   Measure how much water you actually use every day of your life
+-   Gain hold of your water consumption by tracking all appliances in your household.
+-   Compare your habits with your friends and neighbors!
+-   How does it work?
+-   Compatible with all Oras Smart Faucets, showerheads and bidets.
+
+-   Oras Smart faucets, showerheads and other appliances track the amount of water you use.
+    With DROP by Oras, you save water while having fun.
+
+-   Create a group, invite your friends, we keep track of the rest.
+-   Unlock achievements and show your friends that you are the best
