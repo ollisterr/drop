@@ -120,7 +120,7 @@ async def get_consumption(
 
 class ConsumptionLastTwoWeeks_Response(BaseModel):
     week_start: date
-    weekday: date
+    weekday: str
     apartment_id: int
     consumption: float
 
@@ -147,8 +147,12 @@ async def get_consumption_last_two_week(
             join apartment a
                 on m.apartment = a.id
             where a.id = {}
-            group by a.id, date(m.timestamp), week_start
-            order by a.id, date(m.timestamp) desc, week_start desc
+            group by
+                a.id, date(m.timestamp),
+                week_start
+            order by
+                a.id, date(m.timestamp) desc,
+                week_start desc
             limit {};
         """,
             int(apartment_id),
@@ -165,9 +169,21 @@ async def get_consumption_last_two_week(
 @router.get("/kpis/sustainability-scores/{group_id}/{date}", tags=["kpi"])
 async def sustainability_scores(group_id: int, date: str):
     measurements = Measurement.raw(
-        """SELECT SUM(tmp.sus_score) as sustainability_score, tmp.apartment FROM
-        (SELECT water_consumption * temp AS sus_score, apartment FROM measurement WHERE DATE(timestamp) = {} AND apartment IN (SELECT apartment FROM apartment_groups WHERE group_id = {})) as tmp
-        GROUP BY tmp.apartment""",
+        """
+        select sum(x.sus_score) as sustainability_score, x.apartment
+        from
+            (select
+                water_consumption * temp as sus_score,
+                apartment
+            from measurement
+            where
+                date(timestamp) = {} and
+                apartment in (
+                    select apartment
+                    from apartment_groups where group_id = {}
+                )
+            ) as x
+        group by x.apartment""",
         parser.parse(date),
         group_id,
     ).run_sync()

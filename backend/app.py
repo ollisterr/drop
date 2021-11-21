@@ -10,7 +10,6 @@ from piccolo.engine import engine_finder
 from piccolo_admin.endpoints import create_admin
 from piccolo_api.crud.endpoints import PiccoloCRUD
 from piccolo_api.fastapi.endpoints import FastAPIWrapper
-from piccolo_api.openapi.endpoints import swagger_ui
 from piccolo_api.session_auth.endpoints import session_login, session_logout
 from piccolo_api.session_auth.middleware import SessionsAuthBackend
 from starlette.middleware.authentication import AuthenticationMiddleware
@@ -77,7 +76,7 @@ private_app.openapi = custom_openapi
 
 
 FastAPIWrapper(
-    root_url="/apartment/",
+    root_url="/api/apartment/",
     fastapi_app=private_app,
     piccolo_crud=PiccoloCRUD(
         table=Apartment,
@@ -86,7 +85,7 @@ FastAPIWrapper(
 )
 
 FastAPIWrapper(
-    root_url="/apartment-groups/",
+    root_url="/api/apartment-groups/",
     fastapi_app=private_app,
     piccolo_crud=PiccoloCRUD(
         table=ApartmentGroups,
@@ -95,7 +94,7 @@ FastAPIWrapper(
 )
 
 FastAPIWrapper(
-    root_url="/group/",
+    root_url="/api/group/",
     fastapi_app=private_app,
     piccolo_crud=PiccoloCRUD(
         table=Group,
@@ -104,7 +103,7 @@ FastAPIWrapper(
 )
 
 FastAPIWrapper(
-    root_url="/measurement/",
+    root_url="/api/measurement/",
     fastapi_app=private_app,
     piccolo_crud=PiccoloCRUD(
         table=Measurement,
