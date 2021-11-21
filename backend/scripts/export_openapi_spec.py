@@ -10,11 +10,15 @@ WRITE_LOCATION = "../data/api-spec.json"
 PORT = int(os.getenv("PORT", 8000))
 HOST = os.getenv("HOST", "0.0.0.0")
 
-OPENAPI_URL = f"http://{HOST}:{PORT}/openapi.json"
+OPENAPI_URL = f"http://{HOST}:{PORT}/api/openapi.json"
 
 print(f"Fetching openapi spec from {OPENAPI_URL}")
 
-r = requests.get(OPENAPI_URL)
+s = requests.Session()
+data = {"username": "admin", "password": "admin"}
+url = f"http://{HOST}:{PORT}/login"
+r = s.post(url, data=data)
+r = requests.get(OPENAPI_URL, cookies=s.cookies)
 openapi_json = json.loads(r.content)
 openapi_json_pretty = str.encode(json.dumps(openapi_json, indent=4, sort_keys=True))
 

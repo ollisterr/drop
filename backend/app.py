@@ -42,7 +42,6 @@ app.include_router(register.router)
 private_app.include_router(users.router)
 private_app.include_router(kpis.router)
 private_app.mount("/logout/", session_logout(redirect_to="/"))
-private_app.mount("/docs/", swagger_ui(schema_url="/private/openapi.json"))
 
 private_app.add_middleware(
     AuthenticationMiddleware,
@@ -74,7 +73,7 @@ def custom_openapi():
     return private_app.openapi_schema
 
 
-app.openapi = custom_openapi
+private_app.openapi = custom_openapi
 
 
 FastAPIWrapper(

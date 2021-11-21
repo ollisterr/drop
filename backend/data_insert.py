@@ -7,7 +7,6 @@ from piccolo.apps.user.tables import BaseUser
 
 from orm.tables import Apartment, ApartmentGroups, Group, Measurement, User
 
-
 with open("data/apartments.json") as af, open("data/groups.json") as gf:
     apt_data = json.load(af)
     grp_data = json.load(gf)

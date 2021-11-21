@@ -30,6 +30,21 @@ async def create_user(data: Register_User):
     try:
         # Start a transaction
         async with BaseUser._meta.db.transaction():
+            existing_user = await BaseUser.select(BaseUser.id, BaseUser.username).where(
+                BaseUser.username == data.user.__dict__["username"]
+            )
+            if existing_user:
+                session = await SessionsBase.create_session(user_id=existing_user[0]["id"])
+                response = Response(status_code=200)
+                response.set_cookie(
+                    key="id",
+                    value=session.token,
+                    httponly=True,
+                    secure=True if ENV == "production" else False,
+                    samesite="lax",
+                )
+                return response
+
             # Don't allow creating admins or superusers via the register endpoint
             # Make the users active, no email validation for now
             piccolo_user_data = {
@@ -62,7 +77,8 @@ async def create_user(data: Register_User):
                 samesite="lax",
             )
             return response
-    except UniqueViolationError:
+    except UniqueViolationError as e:
+        print(e)
         return Response(status_code=403, content="User with this username or email already exists")
     except Exception as e:
         print(e)

@@ -8,7 +8,13 @@ from orm.tables import Apartment, Group
 BaseUserPydantic: Any = create_pydantic_model(
     table=BaseUser,
     model_name="BaseUserPydantic",
-    include_columns=(BaseUser.username, BaseUser.password),
+    include_columns=(
+        BaseUser.username,
+        BaseUser.email,
+        BaseUser.first_name,
+        BaseUser.last_name,
+        BaseUser.password,
+    ),
 )
 GroupPydantic: Any = create_pydantic_model(table=Group, model_name="GroupPydantic")
 ApartmentPydantic: Any = create_pydantic_model(table=Apartment, model_name="ApartmentPydantic")

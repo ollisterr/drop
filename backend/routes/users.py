@@ -62,6 +62,19 @@ async def get_current_user(request: Request):
     return {"user": me, "groups": groups}
 
 
+@router.get("/users/", tags=["users"])
+async def get_all_users():
+    users = await User.raw(
+        """
+            select
+                *
+            from
+                piccolo_users
+            """
+    ).run()
+    return users
+
+
 @router.get("/users/{username}", response_model=List[BaseUserPydantic], tags=["users"])
 async def get_users(username: str = Path("", title="The username to search for")):
     users = (
