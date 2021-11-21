@@ -3,12 +3,13 @@ import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import React, { useCallback, useState } from 'react';
 import {
+  Modal,
   ScrollView,
   TouchableOpacity,
   TouchableOpacityProps,
   View,
 } from 'react-native';
-import { Header, OverlayButton } from '../components';
+import { Button, Card, Header, OverlayButton } from '../components';
 import {
   Input,
   Row,
@@ -18,28 +19,27 @@ import {
 } from '../styles/components';
 import styled from '../styles';
 import theme from '../styles/theme';
-import { Description, Subheading } from '../styles/typography';
+import { Description, H3, Subheading } from '../styles/typography';
 import { GroupStackParamList } from '../types';
+import { useReadUsersUsersGet } from '../api/users/users';
+import useGlobalState from '../store';
+import { AXIOS_INSTANCE } from '../api/axios';
 
 type User = {
   id: string;
-  firstName: string;
-  lastName: string;
+  username: string;
 };
-
-const userData: User[] = [
-  { firstName: 'Kakka-Poika', lastName: 'Tarkiainen', id: 'kakka' },
-  { firstName: 'Little', lastName: 'Timothy', id: 'penis' },
-  { firstName: 'Jonesus', lastName: 'Pyllynhajur', id: 'sasdaasd' },
-  { firstName: 'Olli', lastName: 'Vitunhyväkoodari', id: 'loordi' },
-  { firstName: 'Maestro', lastName: 'Loordi', id: 'askj' },
-];
 
 export default function AddGroupScreen() {
   const navigation =
     useNavigation<StackNavigationProp<GroupStackParamList, 'AddGroup'>>();
 
+  const { username } = useGlobalState();
+
+  const [isModalVisible, toggleIsModalVisible] = useState(false);
+
   const [input, setInput] = useState('');
+  const [groupName, setGroupName] = useState('');
   const [selectedUsers, setSelectedUsers] = useState<User[]>([]);
   const [isLoading, toggleIsLoading] = useState(false);
 
@@ -52,7 +52,13 @@ export default function AddGroupScreen() {
   const removeUser = (user: User) =>
     setSelectedUsers(x => x.filter(y => y.id !== user.id));
 
-  const data = userData;
+  const { data } = useReadUsersUsersGet<User[]>();
+
+  const filteredData = (data ?? []).filter(
+    x =>
+      x.username !== username && // not self
+      x.username.toLowerCase().includes(input.toLowerCase()),
+  );
 
   const isIncluded = useCallback(
     (user: User) => {
@@ -63,10 +69,9 @@ export default function AddGroupScreen() {
 
   const submit = () => {
     toggleIsLoading(true);
-    new Promise(resolve => {
-      setTimeout(() => resolve({ id: 'asdlkjasd' }), 1000);
-    })
+    AXIOS_INSTANCE.post('/group', { name: groupName })
       .then(({ id }: any) => {
+        toggleIsModalVisible(false);
         navigation.replace('Group', { groupId: id });
       })
       .finally(() => toggleIsLoading(false));
@@ -84,27 +89,22 @@ export default function AddGroupScreen() {
           <SelectedUserList style={shadowStyle}>
             {selectedUsers.map(user => (
               <UserButton onPress={() => removeUser(user)}>
-                {user.firstName}{' '}
-                {selectedUsers.filter(x => x.firstName === user.firstName)
-                  .length > 1
-                  ? user.lastName.charAt(0)
-                  : ''}
+                {user.username}
               </UserButton>
             ))}
           </SelectedUserList>
 
-          {data.map(user => (
-            <UserCard key={user.id} style={shadowStyle}>
-              <Subheading>
-                {user.firstName} {user.lastName}
-              </Subheading>
+          {filteredData.map(user => (
+            <TouchableOpacity
+              key={user.id}
+              onPress={() => addUser(user)}
+              disabled={isIncluded(user)}
+            >
+              <UserCard style={shadowStyle}>
+                <Subheading>@{user.username}</Subheading>
 
-              <Spacer />
+                <Spacer />
 
-              <TouchableOpacity
-                onPress={() => addUser(user)}
-                disabled={isIncluded(user)}
-              >
                 <Ionicons
                   name={isIncluded(user) ? 'checkmark-circle' : 'add'}
                   size={32}
@@ -112,8 +112,8 @@ export default function AddGroupScreen() {
                     theme.colors[isIncluded(user) ? 'success' : 'greyLight']
                   }
                 />
-              </TouchableOpacity>
-            </UserCard>
+              </UserCard>
+            </TouchableOpacity>
           ))}
         </ScrollView>
 
@@ -129,19 +129,65 @@ export default function AddGroupScreen() {
 
       <OverlayButton
         icon="chevron-forward"
-        onPress={submit}
+        onPress={() => toggleIsModalVisible(true)}
         isLoading={isLoading}
         disabled={!selectedUsers.length}
       />
+
+      <Modal
+        animationType="fade"
+        transparent
+        visible={isModalVisible}
+        onRequestClose={() => {
+          toggleIsModalVisible(!isModalVisible);
+        }}
+      >
+        <ModalWrapper
+          onPress={() => toggleIsModalVisible(false)}
+          activeOpacity={1}
+        >
+          <TouchableOpacity activeOpacity={1}>
+            <Card>
+              <H3 color="grey" align="center">
+                Set group name
+              </H3>
+
+              <Spacer axis="y" />
+
+              <Input
+                value={groupName}
+                onChangeText={setGroupName}
+                placeholder="Group name"
+              />
+
+              <Spacer axis="y" />
+
+              <Button onPress={submit} loading={isLoading}>
+                Create group
+              </Button>
+            </Card>
+          </TouchableOpacity>
+        </ModalWrapper>
+      </Modal>
     </ScreenWrapper>
   );
 }
+
+const ModalWrapper = styled.TouchableOpacity`
+  flex: 1;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.3);
+  padding: ${p => p.theme.spacing.default};
+`;
 
 const UserCard = styled(Row)`
   justify-content: space-between;
   align-items: center;
   border-radius: ${p => p.theme.borderRadius.large};
   padding: ${p => p.theme.spacing.default};
+  padding-left: ${p => p.theme.spacing.medium};
   background-color: ${p => p.theme.colors.white};
   margin-bottom: ${p => p.theme.spacing.default};
 `;

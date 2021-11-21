@@ -183,6 +183,7 @@ const LoginView = () => {
       user: {
         username,
         password: 'kakka',
+        email: faker.internet.email(),
       },
       apartment: {
         address: faker.address.streetAddress(),
