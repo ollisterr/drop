@@ -60,6 +60,8 @@ docstring-parser==0.12
     # via targ
 email-validator==1.1.3
     # via pydantic
+faker==9.8.2
+    # via -r requirements-dev.in
 fastapi==0.70.0
     # via
     #   -r requirements.in
@@ -191,6 +193,7 @@ python-dateutil==2.8.2
     # via
     #   -r requirements.in
     #   pandas
+    #   faker
 python-dotenv==0.19.2
     # via
     #   -r requirements.in
@@ -246,6 +249,8 @@ targ==0.3.6
     #   piccolo-admin
 threadpoolctl==3.0.0
     # via scikit-learn
+text-unidecode==1.3
+    # via faker
 toml==0.10.2
     # via
     #   datamodel-code-generator
@@ -280,8 +285,6 @@ websockets==10.1
     # via uvicorn
 wsproto==1.0.0
     # via hypercorn
-zipp==3.6.0
-    # via importlib-resources
 
 # The following packages are considered to be unsafe in a requirements file:
 # setuptools
