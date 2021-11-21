@@ -9,11 +9,14 @@ import background from '../assets/images/rain-drops.jpg';
 import OrasIcon from '../assets/images/oras-logo.svg';
 import styled from '../styles';
 import theme from '../styles/theme';
+import { AXIOS_INSTANCE } from '../api/axios';
+import useGlobalState from '../store';
 
 const START_VALUE = 0.73;
 const DURATION = 60 * 1000;
 
 export default function ShowerScreen() {
+  const { date, user } = useGlobalState();
   const [isShowering, toggleIsShowering] = useState(false);
   const [size, setSize] = useState<{ height: number; width: number }>();
 
@@ -33,6 +36,16 @@ export default function ShowerScreen() {
   const toggleShowering = () => {
     if (isShowering) {
       anim.stopAnimation();
+
+      AXIOS_INSTANCE.post('/measurement', {
+        timestamp: date.toISOString(),
+        appliance: 'string',
+        apartment: user?.apartmentId,
+        power_consumption: (1 - progress) * 1200,
+        water_consumption: (1 - progress) * 12,
+        temp: 40,
+        flow_time: 0,
+      });
     } else {
       Animated.timing(anim, {
         toValue: 0,

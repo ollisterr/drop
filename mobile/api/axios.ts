@@ -1,7 +1,7 @@
 import Axios, { AxiosRequestConfig } from 'axios';
 
 export const AXIOS_INSTANCE = Axios.create({
-  baseURL: 'https://api.drop.energy/',
+  baseURL: 'https://api.drop.energy/api/',
 });
 
 export const customInstance = <T>(config: AxiosRequestConfig): Promise<T> => {

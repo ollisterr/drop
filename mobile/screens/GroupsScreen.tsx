@@ -14,10 +14,24 @@ import { GroupStackParamList } from '../types';
 const testData: GroupType[] = [
   {
     id: 'poikamiehet',
-    name: 'Poikamiehet',
+    name: 'Junction2021',
     score: 67,
-    rank: 3,
+    rank: 2,
     participants: ['Timo', 'Taku', 'Jonesus', 'Kaabriel', 'Hesekiel'],
+  },
+  {
+    id: 'poikamiehet',
+    name: 'Reptiliaanit',
+    score: 67,
+    rank: 4,
+    participants: ['Liisa', 'Saku', 'Mamma', 'Tuhnuri', 'Faija'],
+  },
+  {
+    id: 'poikamiehet',
+    name: 'JMT6',
+    score: 67,
+    rank: 1,
+    participants: ['Jussi', 'Sasu', 'Jonesus', 'Kaisa'],
   },
 ];
 

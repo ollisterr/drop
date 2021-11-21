@@ -6,6 +6,7 @@ import React, {
   useMemo,
   useState,
 } from 'react';
+import { AXIOS_INSTANCE } from './api/axios';
 import { navigate, reset } from './navigation/utils';
 import { getPersistedData, persistData, resetPersistedData } from './utils';
 
@@ -15,30 +16,51 @@ export enum AuthStatus {
   AUTHENTICATED = 'authenticated',
 }
 
+type User = {
+  username: string;
+  apartmentId: number;
+};
+
 type GlobalContext = {
-  username: string | null;
+  user: User | null;
   authStatus: AuthStatus;
-  login: (username?: string) => void;
+  login: (user?: User) => void;
   logout: () => void;
   checkAuth: () => void;
+  updateUser: () => void;
+  date: Date;
 };
 
 const GlobalStateContext = createContext<GlobalContext | undefined>(undefined);
 
 export function GlobalStateProvider({ children }: { children: ReactNode }) {
-  const [username, setUsername] = useState<GlobalContext['username']>(null);
+  const [user, setUser] = useState<GlobalContext['user']>(null);
   const [authStatus, setAuthStatus] = useState<GlobalContext['authStatus']>(
     AuthStatus.UNAUTHENTICATED,
   );
 
+  const date = useMemo(() => {
+    const currentDate = new Date();
+    currentDate.setFullYear(2020);
+    return currentDate;
+  }, []);
+
+  const updateUser = () =>
+    AXIOS_INSTANCE.get('/me').then(({ data }) => login(data));
+
   const checkAuth = () => {
-    if (!username) {
+    if (!user) {
       getPersistedData('username')
         .then(value => {
           if (value) {
-            setUsername(value);
-            setAuthStatus(AuthStatus.AUTHENTICATED);
-            navigate('Root', { screen: 'Main' });
+            AXIOS_INSTANCE.post('/login', {
+              username: value,
+              password: 'kakka',
+            })
+              .then(updateUser)
+              .catch(() => {
+                setAuthStatus(AuthStatus.UNAUTHENTICATED);
+              });
           } else {
             setAuthStatus(AuthStatus.UNAUTHENTICATED);
             navigate('Login');
@@ -54,30 +76,30 @@ export function GlobalStateProvider({ children }: { children: ReactNode }) {
     }
   };
 
-  useEffect(checkAuth, [username]);
+  useEffect(checkAuth, [user]);
 
   const logout = () => {
     setAuthStatus(AuthStatus.UNAUTHENTICATED);
-    setUsername(null);
+    setUser(null);
     resetPersistedData('username');
     reset('Login');
   };
 
-  const login = (user?: string) => {
-    if (user) {
+  const login = (userData?: User | null) => {
+    if (userData) {
+      setUser(userData);
+      persistData('username', userData.username);
+      reset('Root');
       setAuthStatus(AuthStatus.AUTHENTICATED);
-      setUsername(user);
-      persistData('username', user);
     } else {
-      setAuthStatus(AuthStatus.ANONYMOUS);
+      logout();
     }
-    navigate('Root', { screen: 'Main' });
   };
 
   const state = useMemo(() => {
-    return { username, authStatus, login, logout, checkAuth };
+    return { user, authStatus, login, logout, checkAuth, updateUser, date };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [username, authStatus]);
+  }, [user, authStatus]);
 
   return (
     <GlobalStateContext.Provider value={state}>

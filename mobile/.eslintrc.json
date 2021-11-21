@@ -43,6 +43,8 @@
     "react/require-default-props": "off",
     "react/jsx-props-no-spreading": "off",
     "react-hooks/exhaustive-deps": "off",
-    "react/no-unstable-nested-components": "off"
+    "react/no-unstable-nested-components": "off",
+    "@typescript-eslint/no-non-null-assertion": "off",
+    "no-return-await": "off"
   }
 }

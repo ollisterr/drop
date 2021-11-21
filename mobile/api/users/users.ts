@@ -5,13 +5,13 @@
  * The OpenAPI schema for drop.energy
  * OpenAPI spec version: 0.1.0
  */
-import { useQuery, UseQueryOptions, QueryFunction } from "react-query";
+import { useQuery, UseQueryOptions, QueryFunction } from 'react-query';
 import type {
   BaseUserPydantic,
   HTTPValidationError,
   GetCurrentUserUsersMeGetParams,
-} from ".././model";
-import { customInstance } from ".././axios";
+} from '../model';
+import { customInstance } from '../axios';
 
 type AsyncReturnType<T extends (...args: any) => Promise<any>> = T extends (
   ...args: any
@@ -23,22 +23,22 @@ type AsyncReturnType<T extends (...args: any) => Promise<any>> = T extends (
  * @summary Get Current User
  */
 export const getCurrentUserUsersMeGet = (
-  params?: GetCurrentUserUsersMeGetParams
+  params?: GetCurrentUserUsersMeGetParams,
 ) => {
   return customInstance<BaseUserPydantic[]>({
     url: `/users/me`,
-    method: "get",
+    method: 'get',
     params,
   });
 };
 
 export const getGetCurrentUserUsersMeGetQueryKey = (
-  params?: GetCurrentUserUsersMeGetParams
+  params?: GetCurrentUserUsersMeGetParams,
 ) => [`/users/me`, ...(params ? [params] : [])];
 
 export const useGetCurrentUserUsersMeGet = <
   TData = AsyncReturnType<typeof getCurrentUserUsersMeGet>,
-  TError = HTTPValidationError
+  TError = HTTPValidationError,
 >(
   params?: GetCurrentUserUsersMeGetParams,
   options?: {
@@ -47,7 +47,7 @@ export const useGetCurrentUserUsersMeGet = <
       TError,
       TData
     >;
-  }
+  },
 ) => {
   const { query: queryOptions } = options || {};
 
@@ -76,7 +76,7 @@ export const useGetCurrentUserUsersMeGet = <
 export const getUsersUsersUsernameGet = (username: string) => {
   return customInstance<BaseUserPydantic[]>({
     url: `/users/${username}`,
-    method: "get",
+    method: 'get',
   });
 };
 
@@ -86,7 +86,7 @@ export const getGetUsersUsersUsernameGetQueryKey = (username: string) => [
 
 export const useGetUsersUsersUsernameGet = <
   TData = AsyncReturnType<typeof getUsersUsersUsernameGet>,
-  TError = HTTPValidationError
+  TError = HTTPValidationError,
 >(
   username: string,
   options?: {
@@ -95,7 +95,7 @@ export const useGetUsersUsersUsernameGet = <
       TError,
       TData
     >;
-  }
+  },
 ) => {
   const { query: queryOptions } = options || {};
 
