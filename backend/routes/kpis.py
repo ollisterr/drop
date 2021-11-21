@@ -42,7 +42,7 @@ async def get_user_weekly_trend(
         first_sum += two_week[i]["sum"]
     for i in range(7, 14):
         second_sum += two_week[i]["sum"]
-    return round(1 - first_sum / second_sum, 2) * 100
+    return round((1 - first_sum / second_sum) * 100, 1)
 
 
 @router.get("/hygiene-scores/{group_id}/{date}", tags=["kpi"])
