@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import Constants from 'expo-constants';
 import * as Notifications from 'expo-notifications';
-import { Platform } from 'react-native';
+import { Platform, LogBox } from 'react-native';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
 import useCachedResources from './hooks/useCachedResources';
@@ -13,6 +13,9 @@ import { ThemeProvider } from './styles';
 import theme from './styles/theme';
 
 const queryClient = new QueryClient();
+
+LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
+LogBox.ignoreAllLogs(); // Ignore all log notifications
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -75,13 +78,10 @@ async function registerForPushNotificationsAsync() {
       finalStatus = status;
     }
     if (finalStatus !== 'granted') {
-      alert('Failed to get push token for push notification!');
       return;
     }
     token = (await Notifications.getExpoPushTokenAsync()).data;
     console.log(token);
-  } else {
-    alert('Must use physical device for Push Notifications');
   }
 
   if (Platform.OS === 'android') {

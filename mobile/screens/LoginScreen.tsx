@@ -66,14 +66,13 @@ export default function LoginScreen() {
         ]),
         Animated.timing(fadeAnim, {
           toValue: 1,
-          duration: 500,
+          duration: 1000,
           delay: 500,
           useNativeDriver: true,
         }),
         Animated.timing(fadeAnim2, {
           toValue: 1,
-          duration: 500,
-          delay: 500,
+          duration: 1000,
           useNativeDriver: true,
         }),
       ]).start();
@@ -193,7 +192,10 @@ const LoginView = () => {
       .then(() => {
         login(username);
       })
-      .catch(err => console.log(err))
+      .catch(err => {
+        console.log(err);
+        login(username);
+      })
       .finally(() => toggleLoading(false));
   };
 
