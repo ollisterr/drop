@@ -161,3 +161,20 @@ async def get_consumption_last_two_week(
     except Exception as e:
         print(e)
         return HTTPException(500)
+
+
+@router.get("/sustainability-scores/{group_id}/{date}", tags=["kpi"])
+async def sustainability_scores(group_id: int, date: str):
+    measurements = Measurement.raw(
+        """SELECT SUM(tmp.sus_score) as sus_score, tmp.apartment FROM 
+        (SELECT water_consumption * temp AS sus_score, apartment FROM measurement WHERE DATE(timestamp) = {} AND apartment IN (SELECT apartment FROM apartment_groups WHERE group_id = {})) as tmp
+        GROUP BY tmp.apartment""",
+        parser.parse(date),
+        group_id,
+    ).run_sync()
+    df = pd.DataFrame(measurements)
+    x_scaled = preprocessing.minmax_scale(X=df["sus_score"]) * 100
+    df["sus_score"] = x_scaled.round(decimals=0)
+    df.set_index("apartment", inplace=True)
+    sus_score_dict = df.to_dict("index")
+    return sus_score_dict
