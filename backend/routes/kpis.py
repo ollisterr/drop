@@ -1,26 +1,20 @@
-import pandas as pd
-from dateutil import parser
-from fastapi import APIRouter
-from sklearn import preprocessing
-
-from orm.tables import Measurement
-
-router = APIRouter()
 from datetime import date
 from typing import List
 
+import pandas as pd
 from dateutil import parser
 from dateutil.parser._parser import ParserError
 from fastapi import APIRouter, HTTPException
 from fastapi.params import Path
 from pydantic import BaseModel
+from sklearn import preprocessing
 
 from orm.tables import Measurement
 
 router = APIRouter()
 
 
-@router.get("/kpis/weekly-change/{apartment_id}", response_model=float, tags=["kpi"])
+@router.get("/kpi/weekly-change/{apartment_id}", response_model=float, tags=["kpi"])
 async def get_user_weekly_trend(
     apartment_id: int = Path(..., title="The ID of the apartment to get data for", ge=0)
 ):
@@ -45,7 +39,7 @@ async def get_user_weekly_trend(
     return round((1 - first_sum / second_sum) * 100, 1)
 
 
-@router.get("/hygiene-scores/{group_id}/{date}", tags=["kpi"])
+@router.get("/kpi/hygiene-scores/{group_id}/{date}", tags=["kpi"])
 async def hygiene_scores(group_id: int, date: str):
     measurements = Measurement.raw(
         """
@@ -68,14 +62,8 @@ async def hygiene_scores(group_id: int, date: str):
     grouped_df = flow_df.groupby(["apartment"]).mean()
     x_scaled = preprocessing.minmax_scale(X=grouped_df["flow_dist"]) * 100
     grouped_df["hygiene_score"] = x_scaled.round(decimals=0)
-    # apartments = df["apartment"].unique()
     grouped_df.drop(columns=["flow_dist"], inplace=True)
     apm_dict = grouped_df.to_dict(orient="index")
-    # for apartment in apartments:
-    #     ap_df = df[df["apartment"] == apartment]
-    #     mean_val = ap_df.aggregate("mean")
-    #     mean_val = mean_val["hygiene_score"]
-    #     apm_dict[int(apartment)] = round((int(mean_val)), 0)
     return apm_dict
 
 
@@ -86,7 +74,7 @@ class DailyConsumption_Response(BaseModel):
 
 
 @router.get(
-    "/kpis/consumption-daily/{apartment_id}/{date}",
+    "/kpi/consumption-daily/{apartment_id}/{date}",
     response_model=DailyConsumption_Response,
     tags=["consumption"],
 )
@@ -123,13 +111,14 @@ async def get_consumption(
 
 class ConsumptionLastTwoWeeks_Response(BaseModel):
     week_start: date
+    weekday: str
     date: date
     apartment_id: int
     consumption: float
 
 
 @router.get(
-    "/kpis/consumption-weekly/{apartment_id}/{num_weeks}",
+    "/kpi/consumption-weekly/{apartment_id}/{num_weeks}",
     response_model=List[ConsumptionLastTwoWeeks_Response],
     tags=["consumption"],
 )
@@ -142,6 +131,7 @@ async def get_consumption_last_two_week(
             """
             select
                 date(date_trunc('week', m.timestamp)) as week_start,
+                to_char(date(m.timestamp), 'Day') as weekday,
                 date(m.timestamp),
                 a.id as apartment_id,
                 sum(water_consumption) as consumption
@@ -164,10 +154,10 @@ async def get_consumption_last_two_week(
         return HTTPException(500)
 
 
-@router.get("/sustainability-scores/{group_id}/{date}", tags=["kpi"])
+@router.get("/kpi/sustainability-scores/{group_id}/{date}", tags=["kpi"])
 async def sustainability_scores(group_id: int, date: str):
     measurements = Measurement.raw(
-        """SELECT SUM(tmp.sus_score) as sus_score, tmp.apartment FROM 
+        """SELECT SUM(tmp.sus_score) as sus_score, tmp.apartment FROM
         (SELECT water_consumption * temp AS sus_score, apartment FROM measurement WHERE DATE(timestamp) = {} AND apartment IN (SELECT apartment FROM apartment_groups WHERE group_id = {})) as tmp
         GROUP BY tmp.apartment""",
         parser.parse(date),

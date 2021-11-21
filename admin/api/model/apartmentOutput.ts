@@ -7,7 +7,7 @@
  */
 
 export interface ApartmentOutput {
-  id?: number;
   address?: string;
+  id?: number;
   people?: number;
 }

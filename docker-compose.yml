@@ -12,6 +12,8 @@ services:
         build:
             context: backend
         container_name: drop_api
+        volumes:
+            - ./data:/app/data
         ports:
             - 8000:8000
         env_file: backend/.env

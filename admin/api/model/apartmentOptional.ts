@@ -7,7 +7,7 @@
  */
 
 export interface ApartmentOptional {
-  id?: number;
   address?: string;
+  id?: number;
   people?: number;
 }

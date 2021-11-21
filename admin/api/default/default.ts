@@ -14,47 +14,47 @@ import {
   MutationFunction,
 } from "react-query";
 import type {
-  ApartmentPlural,
-  HTTPValidationError,
-  GetApartmentGetParams,
-  ApartmentOutput,
-  ApartmentIn,
-  IdsApartmentIdsGet200,
-  IdsApartmentIdsGetParams,
-  NewApartmentNewGet200,
-  CountModel,
-  CountApartmentCountGetParams,
-  SchemaApartmentSchemaGet200,
-  ReferencesModel,
-  ApartmentOptional,
   ApartmentGroupsPlural,
+  HTTPValidationError,
   GetApartmentGroupsGetParams,
   ApartmentGroupsOutput,
   ApartmentGroupsIn,
+  CountModel,
+  CountApartmentGroupsCountGetParams,
   IdsApartmentGroupsIdsGet200,
   IdsApartmentGroupsIdsGetParams,
   NewApartmentGroupsNewGet200,
-  CountApartmentGroupsCountGetParams,
+  ReferencesModel,
   SchemaApartmentGroupsSchemaGet200,
   ApartmentGroupsOptional,
+  ApartmentPlural,
+  GetApartmentGetParams,
+  ApartmentOutput,
+  ApartmentIn,
+  CountApartmentCountGetParams,
+  IdsApartmentIdsGet200,
+  IdsApartmentIdsGetParams,
+  NewApartmentNewGet200,
+  SchemaApartmentSchemaGet200,
+  ApartmentOptional,
   GroupPlural,
   GetGroupGetParams,
   GroupOutput,
   GroupIn,
+  CountGroupCountGetParams,
   IdsGroupIdsGet200,
   IdsGroupIdsGetParams,
   NewGroupNewGet200,
-  CountGroupCountGetParams,
   SchemaGroupSchemaGet200,
   GroupOptional,
   MeasurementPlural,
   GetMeasurementGetParams,
   MeasurementOutput,
   MeasurementIn,
+  CountMeasurementCountGetParams,
   IdsMeasurementIdsGet200,
   IdsMeasurementIdsGetParams,
   NewMeasurementNewGet200,
-  CountMeasurementCountGetParams,
   SchemaMeasurementSchemaGet200,
   MeasurementOptional,
 } from ".././model";
@@ -66,506 +66,6 @@ type AsyncReturnType<T extends (...args: any) => Promise<any>> = T extends (
   ? R
   : any;
 
-/**
- * Returns all rows matching the given query.
- * @summary Get
- */
-export const getApartmentGet = (params?: GetApartmentGetParams) => {
-  return customInstance<ApartmentPlural>({
-    url: `/apartment`,
-    method: "get",
-    params,
-  });
-};
-
-export const getGetApartmentGetQueryKey = (params?: GetApartmentGetParams) => [
-  `/apartment`,
-  ...(params ? [params] : []),
-];
-
-export const useGetApartmentGet = <
-  TData = AsyncReturnType<typeof getApartmentGet>,
-  TError = HTTPValidationError
->(
-  params?: GetApartmentGetParams,
-  options?: {
-    query?: UseQueryOptions<
-      AsyncReturnType<typeof getApartmentGet>,
-      TError,
-      TData
-    >;
-  }
-) => {
-  const { query: queryOptions } = options || {};
-
-  const queryKey = queryOptions?.queryKey ?? getGetApartmentGetQueryKey(params);
-
-  const queryFn: QueryFunction<AsyncReturnType<typeof getApartmentGet>> = () =>
-    getApartmentGet(params);
-
-  const query = useQuery<
-    AsyncReturnType<typeof getApartmentGet>,
-    TError,
-    TData
-  >(queryKey, queryFn, queryOptions);
-
-  return {
-    queryKey,
-    ...query,
-  };
-};
-
-/**
- * Create a new row in the table.
- * @summary Post
- */
-export const postApartmentPost = (apartmentIn: ApartmentIn) => {
-  return customInstance<ApartmentOutput>({
-    url: `/apartment`,
-    method: "post",
-    data: apartmentIn,
-  });
-};
-
-export const usePostApartmentPost = <
-  TError = HTTPValidationError,
-  TContext = unknown
->(options?: {
-  mutation?: UseMutationOptions<
-    AsyncReturnType<typeof postApartmentPost>,
-    TError,
-    { data: ApartmentIn },
-    TContext
-  >;
-}) => {
-  const { mutation: mutationOptions } = options || {};
-
-  const mutationFn: MutationFunction<
-    AsyncReturnType<typeof postApartmentPost>,
-    { data: ApartmentIn }
-  > = (props) => {
-    const { data } = props || {};
-
-    return postApartmentPost(data);
-  };
-
-  return useMutation<
-    AsyncReturnType<typeof postApartmentPost>,
-    TError,
-    { data: ApartmentIn },
-    TContext
-  >(mutationFn, mutationOptions);
-};
-/**
- * Returns a mapping of row IDs to a readable representation.
- * @summary Ids
- */
-export const idsApartmentIdsGet = (params?: IdsApartmentIdsGetParams) => {
-  return customInstance<IdsApartmentIdsGet200>({
-    url: `/apartment/ids`,
-    method: "get",
-    params,
-  });
-};
-
-export const getIdsApartmentIdsGetQueryKey = (
-  params?: IdsApartmentIdsGetParams
-) => [`/apartment/ids`, ...(params ? [params] : [])];
-
-export const useIdsApartmentIdsGet = <
-  TData = AsyncReturnType<typeof idsApartmentIdsGet>,
-  TError = HTTPValidationError
->(
-  params?: IdsApartmentIdsGetParams,
-  options?: {
-    query?: UseQueryOptions<
-      AsyncReturnType<typeof idsApartmentIdsGet>,
-      TError,
-      TData
-    >;
-  }
-) => {
-  const { query: queryOptions } = options || {};
-
-  const queryKey =
-    queryOptions?.queryKey ?? getIdsApartmentIdsGetQueryKey(params);
-
-  const queryFn: QueryFunction<AsyncReturnType<typeof idsApartmentIdsGet>> =
-    () => idsApartmentIdsGet(params);
-
-  const query = useQuery<
-    AsyncReturnType<typeof idsApartmentIdsGet>,
-    TError,
-    TData
-  >(queryKey, queryFn, queryOptions);
-
-  return {
-    queryKey,
-    ...query,
-  };
-};
-
-/**
- * Returns all of the default values for a new row,
-but doesn't save it.
- * @summary New
- */
-export const newApartmentNewGet = () => {
-  return customInstance<NewApartmentNewGet200>({
-    url: `/apartment/new`,
-    method: "get",
-  });
-};
-
-export const getNewApartmentNewGetQueryKey = () => [`/apartment/new`];
-
-export const useNewApartmentNewGet = <
-  TData = AsyncReturnType<typeof newApartmentNewGet>,
-  TError = unknown
->(options?: {
-  query?: UseQueryOptions<
-    AsyncReturnType<typeof newApartmentNewGet>,
-    TError,
-    TData
-  >;
-}) => {
-  const { query: queryOptions } = options || {};
-
-  const queryKey = queryOptions?.queryKey ?? getNewApartmentNewGetQueryKey();
-
-  const queryFn: QueryFunction<AsyncReturnType<typeof newApartmentNewGet>> =
-    () => newApartmentNewGet();
-
-  const query = useQuery<
-    AsyncReturnType<typeof newApartmentNewGet>,
-    TError,
-    TData
-  >(queryKey, queryFn, queryOptions);
-
-  return {
-    queryKey,
-    ...query,
-  };
-};
-
-/**
- * Returns the number of rows matching the given query.
- * @summary Count
- */
-export const countApartmentCountGet = (
-  params?: CountApartmentCountGetParams
-) => {
-  return customInstance<CountModel>({
-    url: `/apartment/count`,
-    method: "get",
-    params,
-  });
-};
-
-export const getCountApartmentCountGetQueryKey = (
-  params?: CountApartmentCountGetParams
-) => [`/apartment/count`, ...(params ? [params] : [])];
-
-export const useCountApartmentCountGet = <
-  TData = AsyncReturnType<typeof countApartmentCountGet>,
-  TError = HTTPValidationError
->(
-  params?: CountApartmentCountGetParams,
-  options?: {
-    query?: UseQueryOptions<
-      AsyncReturnType<typeof countApartmentCountGet>,
-      TError,
-      TData
-    >;
-  }
-) => {
-  const { query: queryOptions } = options || {};
-
-  const queryKey =
-    queryOptions?.queryKey ?? getCountApartmentCountGetQueryKey(params);
-
-  const queryFn: QueryFunction<AsyncReturnType<typeof countApartmentCountGet>> =
-    () => countApartmentCountGet(params);
-
-  const query = useQuery<
-    AsyncReturnType<typeof countApartmentCountGet>,
-    TError,
-    TData
-  >(queryKey, queryFn, queryOptions);
-
-  return {
-    queryKey,
-    ...query,
-  };
-};
-
-/**
- * Returns the JSON schema for the given table.
- * @summary Schema
- */
-export const schemaApartmentSchemaGet = () => {
-  return customInstance<SchemaApartmentSchemaGet200>({
-    url: `/apartment/schema`,
-    method: "get",
-  });
-};
-
-export const getSchemaApartmentSchemaGetQueryKey = () => [`/apartment/schema`];
-
-export const useSchemaApartmentSchemaGet = <
-  TData = AsyncReturnType<typeof schemaApartmentSchemaGet>,
-  TError = unknown
->(options?: {
-  query?: UseQueryOptions<
-    AsyncReturnType<typeof schemaApartmentSchemaGet>,
-    TError,
-    TData
-  >;
-}) => {
-  const { query: queryOptions } = options || {};
-
-  const queryKey =
-    queryOptions?.queryKey ?? getSchemaApartmentSchemaGetQueryKey();
-
-  const queryFn: QueryFunction<
-    AsyncReturnType<typeof schemaApartmentSchemaGet>
-  > = () => schemaApartmentSchemaGet();
-
-  const query = useQuery<
-    AsyncReturnType<typeof schemaApartmentSchemaGet>,
-    TError,
-    TData
-  >(queryKey, queryFn, queryOptions);
-
-  return {
-    queryKey,
-    ...query,
-  };
-};
-
-/**
- * Returns a list of objects showing relationships with other tables.
- * @summary References
- */
-export const referencesApartmentReferencesGet = () => {
-  return customInstance<ReferencesModel>({
-    url: `/apartment/references`,
-    method: "get",
-  });
-};
-
-export const getReferencesApartmentReferencesGetQueryKey = () => [
-  `/apartment/references`,
-];
-
-export const useReferencesApartmentReferencesGet = <
-  TData = AsyncReturnType<typeof referencesApartmentReferencesGet>,
-  TError = unknown
->(options?: {
-  query?: UseQueryOptions<
-    AsyncReturnType<typeof referencesApartmentReferencesGet>,
-    TError,
-    TData
-  >;
-}) => {
-  const { query: queryOptions } = options || {};
-
-  const queryKey =
-    queryOptions?.queryKey ?? getReferencesApartmentReferencesGetQueryKey();
-
-  const queryFn: QueryFunction<
-    AsyncReturnType<typeof referencesApartmentReferencesGet>
-  > = () => referencesApartmentReferencesGet();
-
-  const query = useQuery<
-    AsyncReturnType<typeof referencesApartmentReferencesGet>,
-    TError,
-    TData
-  >(queryKey, queryFn, queryOptions);
-
-  return {
-    queryKey,
-    ...query,
-  };
-};
-
-/**
- * Retrieve a single row from the table.
- * @summary Get Single
- */
-export const getSingleApartmentRowIdGet = (rowid: number) => {
-  return customInstance<ApartmentOutput>({
-    url: `/apartment/${rowid}`,
-    method: "get",
-  });
-};
-
-export const getGetSingleApartmentRowIdGetQueryKey = (rowid: number) => [
-  `/apartment/${rowid}`,
-];
-
-export const useGetSingleApartmentRowIdGet = <
-  TData = AsyncReturnType<typeof getSingleApartmentRowIdGet>,
-  TError = HTTPValidationError
->(
-  rowid: number,
-  options?: {
-    query?: UseQueryOptions<
-      AsyncReturnType<typeof getSingleApartmentRowIdGet>,
-      TError,
-      TData
-    >;
-  }
-) => {
-  const { query: queryOptions } = options || {};
-
-  const queryKey =
-    queryOptions?.queryKey ?? getGetSingleApartmentRowIdGetQueryKey(rowid);
-
-  const queryFn: QueryFunction<
-    AsyncReturnType<typeof getSingleApartmentRowIdGet>
-  > = () => getSingleApartmentRowIdGet(rowid);
-
-  const query = useQuery<
-    AsyncReturnType<typeof getSingleApartmentRowIdGet>,
-    TError,
-    TData
-  >(queryKey, queryFn, { enabled: !!rowid, ...queryOptions });
-
-  return {
-    queryKey,
-    ...query,
-  };
-};
-
-/**
- * Insert or update a single row.
- * @summary Put
- */
-export const putApartmentRowIdPut = (
-  rowid: number,
-  apartmentIn: ApartmentIn
-) => {
-  return customInstance<ApartmentOutput>({
-    url: `/apartment/${rowid}`,
-    method: "put",
-    data: apartmentIn,
-  });
-};
-
-export const usePutApartmentRowIdPut = <
-  TError = HTTPValidationError,
-  TContext = unknown
->(options?: {
-  mutation?: UseMutationOptions<
-    AsyncReturnType<typeof putApartmentRowIdPut>,
-    TError,
-    { rowid: number; data: ApartmentIn },
-    TContext
-  >;
-}) => {
-  const { mutation: mutationOptions } = options || {};
-
-  const mutationFn: MutationFunction<
-    AsyncReturnType<typeof putApartmentRowIdPut>,
-    { rowid: number; data: ApartmentIn }
-  > = (props) => {
-    const { rowid, data } = props || {};
-
-    return putApartmentRowIdPut(rowid, data);
-  };
-
-  return useMutation<
-    AsyncReturnType<typeof putApartmentRowIdPut>,
-    TError,
-    { rowid: number; data: ApartmentIn },
-    TContext
-  >(mutationFn, mutationOptions);
-};
-/**
- * Delete a single row from the table.
- * @summary Delete Single
- */
-export const deleteSingleApartmentRowIdDelete = (rowid: number) => {
-  return customInstance<unknown>({
-    url: `/apartment/${rowid}`,
-    method: "delete",
-  });
-};
-
-export const useDeleteSingleApartmentRowIdDelete = <
-  TError = HTTPValidationError,
-  TContext = unknown
->(options?: {
-  mutation?: UseMutationOptions<
-    AsyncReturnType<typeof deleteSingleApartmentRowIdDelete>,
-    TError,
-    { rowid: number },
-    TContext
-  >;
-}) => {
-  const { mutation: mutationOptions } = options || {};
-
-  const mutationFn: MutationFunction<
-    AsyncReturnType<typeof deleteSingleApartmentRowIdDelete>,
-    { rowid: number }
-  > = (props) => {
-    const { rowid } = props || {};
-
-    return deleteSingleApartmentRowIdDelete(rowid);
-  };
-
-  return useMutation<
-    AsyncReturnType<typeof deleteSingleApartmentRowIdDelete>,
-    TError,
-    { rowid: number },
-    TContext
-  >(mutationFn, mutationOptions);
-};
-/**
- * Update a single row.
- * @summary Patch
- */
-export const patchApartmentRowIdPatch = (
-  rowid: number,
-  apartmentOptional: ApartmentOptional
-) => {
-  return customInstance<ApartmentOutput>({
-    url: `/apartment/${rowid}`,
-    method: "patch",
-    data: apartmentOptional,
-  });
-};
-
-export const usePatchApartmentRowIdPatch = <
-  TError = HTTPValidationError,
-  TContext = unknown
->(options?: {
-  mutation?: UseMutationOptions<
-    AsyncReturnType<typeof patchApartmentRowIdPatch>,
-    TError,
-    { rowid: number; data: ApartmentOptional },
-    TContext
-  >;
-}) => {
-  const { mutation: mutationOptions } = options || {};
-
-  const mutationFn: MutationFunction<
-    AsyncReturnType<typeof patchApartmentRowIdPatch>,
-    { rowid: number; data: ApartmentOptional }
-  > = (props) => {
-    const { rowid, data } = props || {};
-
-    return patchApartmentRowIdPatch(rowid, data);
-  };
-
-  return useMutation<
-    AsyncReturnType<typeof patchApartmentRowIdPatch>,
-    TError,
-    { rowid: number; data: ApartmentOptional },
-    TContext
-  >(mutationFn, mutationOptions);
-};
 /**
  * Returns all rows matching the given query.
  * @summary Get
@@ -658,6 +158,58 @@ export const usePostApartmentGroupsPost = <
     TContext
   >(mutationFn, mutationOptions);
 };
+/**
+ * Returns the number of rows matching the given query.
+ * @summary Count
+ */
+export const countApartmentGroupsCountGet = (
+  params?: CountApartmentGroupsCountGetParams
+) => {
+  return customInstance<CountModel>({
+    url: `/apartment-groups/count`,
+    method: "get",
+    params,
+  });
+};
+
+export const getCountApartmentGroupsCountGetQueryKey = (
+  params?: CountApartmentGroupsCountGetParams
+) => [`/apartment-groups/count`, ...(params ? [params] : [])];
+
+export const useCountApartmentGroupsCountGet = <
+  TData = AsyncReturnType<typeof countApartmentGroupsCountGet>,
+  TError = HTTPValidationError
+>(
+  params?: CountApartmentGroupsCountGetParams,
+  options?: {
+    query?: UseQueryOptions<
+      AsyncReturnType<typeof countApartmentGroupsCountGet>,
+      TError,
+      TData
+    >;
+  }
+) => {
+  const { query: queryOptions } = options || {};
+
+  const queryKey =
+    queryOptions?.queryKey ?? getCountApartmentGroupsCountGetQueryKey(params);
+
+  const queryFn: QueryFunction<
+    AsyncReturnType<typeof countApartmentGroupsCountGet>
+  > = () => countApartmentGroupsCountGet(params);
+
+  const query = useQuery<
+    AsyncReturnType<typeof countApartmentGroupsCountGet>,
+    TError,
+    TData
+  >(queryKey, queryFn, queryOptions);
+
+  return {
+    queryKey,
+    ...query,
+  };
+};
+
 /**
  * Returns a mapping of row IDs to a readable representation.
  * @summary Ids
@@ -758,47 +310,42 @@ export const useNewApartmentGroupsNewGet = <
 };
 
 /**
- * Returns the number of rows matching the given query.
- * @summary Count
+ * Returns a list of objects showing relationships with other tables.
+ * @summary References
  */
-export const countApartmentGroupsCountGet = (
-  params?: CountApartmentGroupsCountGetParams
-) => {
-  return customInstance<CountModel>({
-    url: `/apartment-groups/count`,
+export const referencesApartmentGroupsReferencesGet = () => {
+  return customInstance<ReferencesModel>({
+    url: `/apartment-groups/references`,
     method: "get",
-    params,
   });
 };
 
-export const getCountApartmentGroupsCountGetQueryKey = (
-  params?: CountApartmentGroupsCountGetParams
-) => [`/apartment-groups/count`, ...(params ? [params] : [])];
+export const getReferencesApartmentGroupsReferencesGetQueryKey = () => [
+  `/apartment-groups/references`,
+];
 
-export const useCountApartmentGroupsCountGet = <
-  TData = AsyncReturnType<typeof countApartmentGroupsCountGet>,
-  TError = HTTPValidationError
->(
-  params?: CountApartmentGroupsCountGetParams,
-  options?: {
-    query?: UseQueryOptions<
-      AsyncReturnType<typeof countApartmentGroupsCountGet>,
-      TError,
-      TData
-    >;
-  }
-) => {
+export const useReferencesApartmentGroupsReferencesGet = <
+  TData = AsyncReturnType<typeof referencesApartmentGroupsReferencesGet>,
+  TError = unknown
+>(options?: {
+  query?: UseQueryOptions<
+    AsyncReturnType<typeof referencesApartmentGroupsReferencesGet>,
+    TError,
+    TData
+  >;
+}) => {
   const { query: queryOptions } = options || {};
 
   const queryKey =
-    queryOptions?.queryKey ?? getCountApartmentGroupsCountGetQueryKey(params);
+    queryOptions?.queryKey ??
+    getReferencesApartmentGroupsReferencesGetQueryKey();
 
   const queryFn: QueryFunction<
-    AsyncReturnType<typeof countApartmentGroupsCountGet>
-  > = () => countApartmentGroupsCountGet(params);
+    AsyncReturnType<typeof referencesApartmentGroupsReferencesGet>
+  > = () => referencesApartmentGroupsReferencesGet();
 
   const query = useQuery<
-    AsyncReturnType<typeof countApartmentGroupsCountGet>,
+    AsyncReturnType<typeof referencesApartmentGroupsReferencesGet>,
     TError,
     TData
   >(queryKey, queryFn, queryOptions);
@@ -856,52 +403,45 @@ export const useSchemaApartmentGroupsSchemaGet = <
 };
 
 /**
- * Returns a list of objects showing relationships with other tables.
- * @summary References
+ * Delete a single row from the table.
+ * @summary Delete Single
  */
-export const referencesApartmentGroupsReferencesGet = () => {
-  return customInstance<ReferencesModel>({
-    url: `/apartment-groups/references`,
-    method: "get",
+export const deleteSingleApartmentGroupsRowIdDelete = (rowid: number) => {
+  return customInstance<unknown>({
+    url: `/apartment-groups/${rowid}`,
+    method: "delete",
   });
 };
 
-export const getReferencesApartmentGroupsReferencesGetQueryKey = () => [
-  `/apartment-groups/references`,
-];
-
-export const useReferencesApartmentGroupsReferencesGet = <
-  TData = AsyncReturnType<typeof referencesApartmentGroupsReferencesGet>,
-  TError = unknown
+export const useDeleteSingleApartmentGroupsRowIdDelete = <
+  TError = HTTPValidationError,
+  TContext = unknown
 >(options?: {
-  query?: UseQueryOptions<
-    AsyncReturnType<typeof referencesApartmentGroupsReferencesGet>,
+  mutation?: UseMutationOptions<
+    AsyncReturnType<typeof deleteSingleApartmentGroupsRowIdDelete>,
     TError,
-    TData
+    { rowid: number },
+    TContext
   >;
 }) => {
-  const { query: queryOptions } = options || {};
+  const { mutation: mutationOptions } = options || {};
 
-  const queryKey =
-    queryOptions?.queryKey ??
-    getReferencesApartmentGroupsReferencesGetQueryKey();
+  const mutationFn: MutationFunction<
+    AsyncReturnType<typeof deleteSingleApartmentGroupsRowIdDelete>,
+    { rowid: number }
+  > = (props) => {
+    const { rowid } = props || {};
 
-  const queryFn: QueryFunction<
-    AsyncReturnType<typeof referencesApartmentGroupsReferencesGet>
-  > = () => referencesApartmentGroupsReferencesGet();
-
-  const query = useQuery<
-    AsyncReturnType<typeof referencesApartmentGroupsReferencesGet>,
-    TError,
-    TData
-  >(queryKey, queryFn, queryOptions);
-
-  return {
-    queryKey,
-    ...query,
+    return deleteSingleApartmentGroupsRowIdDelete(rowid);
   };
-};
 
+  return useMutation<
+    AsyncReturnType<typeof deleteSingleApartmentGroupsRowIdDelete>,
+    TError,
+    { rowid: number },
+    TContext
+  >(mutationFn, mutationOptions);
+};
 /**
  * Retrieve a single row from the table.
  * @summary Get Single
@@ -953,6 +493,50 @@ export const useGetSingleApartmentGroupsRowIdGet = <
 };
 
 /**
+ * Update a single row.
+ * @summary Patch
+ */
+export const patchApartmentGroupsRowIdPatch = (
+  rowid: number,
+  apartmentGroupsOptional: ApartmentGroupsOptional
+) => {
+  return customInstance<ApartmentGroupsOutput>({
+    url: `/apartment-groups/${rowid}`,
+    method: "patch",
+    data: apartmentGroupsOptional,
+  });
+};
+
+export const usePatchApartmentGroupsRowIdPatch = <
+  TError = HTTPValidationError,
+  TContext = unknown
+>(options?: {
+  mutation?: UseMutationOptions<
+    AsyncReturnType<typeof patchApartmentGroupsRowIdPatch>,
+    TError,
+    { rowid: number; data: ApartmentGroupsOptional },
+    TContext
+  >;
+}) => {
+  const { mutation: mutationOptions } = options || {};
+
+  const mutationFn: MutationFunction<
+    AsyncReturnType<typeof patchApartmentGroupsRowIdPatch>,
+    { rowid: number; data: ApartmentGroupsOptional }
+  > = (props) => {
+    const { rowid, data } = props || {};
+
+    return patchApartmentGroupsRowIdPatch(rowid, data);
+  };
+
+  return useMutation<
+    AsyncReturnType<typeof patchApartmentGroupsRowIdPatch>,
+    TError,
+    { rowid: number; data: ApartmentGroupsOptional },
+    TContext
+  >(mutationFn, mutationOptions);
+};
+/**
  * Insert or update a single row.
  * @summary Put
  */
@@ -997,22 +581,345 @@ export const usePutApartmentGroupsRowIdPut = <
   >(mutationFn, mutationOptions);
 };
 /**
- * Delete a single row from the table.
- * @summary Delete Single
+ * Returns all rows matching the given query.
+ * @summary Get
  */
-export const deleteSingleApartmentGroupsRowIdDelete = (rowid: number) => {
-  return customInstance<unknown>({
-    url: `/apartment-groups/${rowid}`,
-    method: "delete",
+export const getApartmentGet = (params?: GetApartmentGetParams) => {
+  return customInstance<ApartmentPlural>({
+    url: `/apartment`,
+    method: "get",
+    params,
   });
 };
 
-export const useDeleteSingleApartmentGroupsRowIdDelete = <
+export const getGetApartmentGetQueryKey = (params?: GetApartmentGetParams) => [
+  `/apartment`,
+  ...(params ? [params] : []),
+];
+
+export const useGetApartmentGet = <
+  TData = AsyncReturnType<typeof getApartmentGet>,
+  TError = HTTPValidationError
+>(
+  params?: GetApartmentGetParams,
+  options?: {
+    query?: UseQueryOptions<
+      AsyncReturnType<typeof getApartmentGet>,
+      TError,
+      TData
+    >;
+  }
+) => {
+  const { query: queryOptions } = options || {};
+
+  const queryKey = queryOptions?.queryKey ?? getGetApartmentGetQueryKey(params);
+
+  const queryFn: QueryFunction<AsyncReturnType<typeof getApartmentGet>> = () =>
+    getApartmentGet(params);
+
+  const query = useQuery<
+    AsyncReturnType<typeof getApartmentGet>,
+    TError,
+    TData
+  >(queryKey, queryFn, queryOptions);
+
+  return {
+    queryKey,
+    ...query,
+  };
+};
+
+/**
+ * Create a new row in the table.
+ * @summary Post
+ */
+export const postApartmentPost = (apartmentIn: ApartmentIn) => {
+  return customInstance<ApartmentOutput>({
+    url: `/apartment`,
+    method: "post",
+    data: apartmentIn,
+  });
+};
+
+export const usePostApartmentPost = <
   TError = HTTPValidationError,
   TContext = unknown
 >(options?: {
   mutation?: UseMutationOptions<
-    AsyncReturnType<typeof deleteSingleApartmentGroupsRowIdDelete>,
+    AsyncReturnType<typeof postApartmentPost>,
+    TError,
+    { data: ApartmentIn },
+    TContext
+  >;
+}) => {
+  const { mutation: mutationOptions } = options || {};
+
+  const mutationFn: MutationFunction<
+    AsyncReturnType<typeof postApartmentPost>,
+    { data: ApartmentIn }
+  > = (props) => {
+    const { data } = props || {};
+
+    return postApartmentPost(data);
+  };
+
+  return useMutation<
+    AsyncReturnType<typeof postApartmentPost>,
+    TError,
+    { data: ApartmentIn },
+    TContext
+  >(mutationFn, mutationOptions);
+};
+/**
+ * Returns the number of rows matching the given query.
+ * @summary Count
+ */
+export const countApartmentCountGet = (
+  params?: CountApartmentCountGetParams
+) => {
+  return customInstance<CountModel>({
+    url: `/apartment/count`,
+    method: "get",
+    params,
+  });
+};
+
+export const getCountApartmentCountGetQueryKey = (
+  params?: CountApartmentCountGetParams
+) => [`/apartment/count`, ...(params ? [params] : [])];
+
+export const useCountApartmentCountGet = <
+  TData = AsyncReturnType<typeof countApartmentCountGet>,
+  TError = HTTPValidationError
+>(
+  params?: CountApartmentCountGetParams,
+  options?: {
+    query?: UseQueryOptions<
+      AsyncReturnType<typeof countApartmentCountGet>,
+      TError,
+      TData
+    >;
+  }
+) => {
+  const { query: queryOptions } = options || {};
+
+  const queryKey =
+    queryOptions?.queryKey ?? getCountApartmentCountGetQueryKey(params);
+
+  const queryFn: QueryFunction<AsyncReturnType<typeof countApartmentCountGet>> =
+    () => countApartmentCountGet(params);
+
+  const query = useQuery<
+    AsyncReturnType<typeof countApartmentCountGet>,
+    TError,
+    TData
+  >(queryKey, queryFn, queryOptions);
+
+  return {
+    queryKey,
+    ...query,
+  };
+};
+
+/**
+ * Returns a mapping of row IDs to a readable representation.
+ * @summary Ids
+ */
+export const idsApartmentIdsGet = (params?: IdsApartmentIdsGetParams) => {
+  return customInstance<IdsApartmentIdsGet200>({
+    url: `/apartment/ids`,
+    method: "get",
+    params,
+  });
+};
+
+export const getIdsApartmentIdsGetQueryKey = (
+  params?: IdsApartmentIdsGetParams
+) => [`/apartment/ids`, ...(params ? [params] : [])];
+
+export const useIdsApartmentIdsGet = <
+  TData = AsyncReturnType<typeof idsApartmentIdsGet>,
+  TError = HTTPValidationError
+>(
+  params?: IdsApartmentIdsGetParams,
+  options?: {
+    query?: UseQueryOptions<
+      AsyncReturnType<typeof idsApartmentIdsGet>,
+      TError,
+      TData
+    >;
+  }
+) => {
+  const { query: queryOptions } = options || {};
+
+  const queryKey =
+    queryOptions?.queryKey ?? getIdsApartmentIdsGetQueryKey(params);
+
+  const queryFn: QueryFunction<AsyncReturnType<typeof idsApartmentIdsGet>> =
+    () => idsApartmentIdsGet(params);
+
+  const query = useQuery<
+    AsyncReturnType<typeof idsApartmentIdsGet>,
+    TError,
+    TData
+  >(queryKey, queryFn, queryOptions);
+
+  return {
+    queryKey,
+    ...query,
+  };
+};
+
+/**
+ * Returns all of the default values for a new row,
+but doesn't save it.
+ * @summary New
+ */
+export const newApartmentNewGet = () => {
+  return customInstance<NewApartmentNewGet200>({
+    url: `/apartment/new`,
+    method: "get",
+  });
+};
+
+export const getNewApartmentNewGetQueryKey = () => [`/apartment/new`];
+
+export const useNewApartmentNewGet = <
+  TData = AsyncReturnType<typeof newApartmentNewGet>,
+  TError = unknown
+>(options?: {
+  query?: UseQueryOptions<
+    AsyncReturnType<typeof newApartmentNewGet>,
+    TError,
+    TData
+  >;
+}) => {
+  const { query: queryOptions } = options || {};
+
+  const queryKey = queryOptions?.queryKey ?? getNewApartmentNewGetQueryKey();
+
+  const queryFn: QueryFunction<AsyncReturnType<typeof newApartmentNewGet>> =
+    () => newApartmentNewGet();
+
+  const query = useQuery<
+    AsyncReturnType<typeof newApartmentNewGet>,
+    TError,
+    TData
+  >(queryKey, queryFn, queryOptions);
+
+  return {
+    queryKey,
+    ...query,
+  };
+};
+
+/**
+ * Returns a list of objects showing relationships with other tables.
+ * @summary References
+ */
+export const referencesApartmentReferencesGet = () => {
+  return customInstance<ReferencesModel>({
+    url: `/apartment/references`,
+    method: "get",
+  });
+};
+
+export const getReferencesApartmentReferencesGetQueryKey = () => [
+  `/apartment/references`,
+];
+
+export const useReferencesApartmentReferencesGet = <
+  TData = AsyncReturnType<typeof referencesApartmentReferencesGet>,
+  TError = unknown
+>(options?: {
+  query?: UseQueryOptions<
+    AsyncReturnType<typeof referencesApartmentReferencesGet>,
+    TError,
+    TData
+  >;
+}) => {
+  const { query: queryOptions } = options || {};
+
+  const queryKey =
+    queryOptions?.queryKey ?? getReferencesApartmentReferencesGetQueryKey();
+
+  const queryFn: QueryFunction<
+    AsyncReturnType<typeof referencesApartmentReferencesGet>
+  > = () => referencesApartmentReferencesGet();
+
+  const query = useQuery<
+    AsyncReturnType<typeof referencesApartmentReferencesGet>,
+    TError,
+    TData
+  >(queryKey, queryFn, queryOptions);
+
+  return {
+    queryKey,
+    ...query,
+  };
+};
+
+/**
+ * Returns the JSON schema for the given table.
+ * @summary Schema
+ */
+export const schemaApartmentSchemaGet = () => {
+  return customInstance<SchemaApartmentSchemaGet200>({
+    url: `/apartment/schema`,
+    method: "get",
+  });
+};
+
+export const getSchemaApartmentSchemaGetQueryKey = () => [`/apartment/schema`];
+
+export const useSchemaApartmentSchemaGet = <
+  TData = AsyncReturnType<typeof schemaApartmentSchemaGet>,
+  TError = unknown
+>(options?: {
+  query?: UseQueryOptions<
+    AsyncReturnType<typeof schemaApartmentSchemaGet>,
+    TError,
+    TData
+  >;
+}) => {
+  const { query: queryOptions } = options || {};
+
+  const queryKey =
+    queryOptions?.queryKey ?? getSchemaApartmentSchemaGetQueryKey();
+
+  const queryFn: QueryFunction<
+    AsyncReturnType<typeof schemaApartmentSchemaGet>
+  > = () => schemaApartmentSchemaGet();
+
+  const query = useQuery<
+    AsyncReturnType<typeof schemaApartmentSchemaGet>,
+    TError,
+    TData
+  >(queryKey, queryFn, queryOptions);
+
+  return {
+    queryKey,
+    ...query,
+  };
+};
+
+/**
+ * Delete a single row from the table.
+ * @summary Delete Single
+ */
+export const deleteSingleApartmentRowIdDelete = (rowid: number) => {
+  return customInstance<unknown>({
+    url: `/apartment/${rowid}`,
+    method: "delete",
+  });
+};
+
+export const useDeleteSingleApartmentRowIdDelete = <
+  TError = HTTPValidationError,
+  TContext = unknown
+>(options?: {
+  mutation?: UseMutationOptions<
+    AsyncReturnType<typeof deleteSingleApartmentRowIdDelete>,
     TError,
     { rowid: number },
     TContext
@@ -1021,62 +928,155 @@ export const useDeleteSingleApartmentGroupsRowIdDelete = <
   const { mutation: mutationOptions } = options || {};
 
   const mutationFn: MutationFunction<
-    AsyncReturnType<typeof deleteSingleApartmentGroupsRowIdDelete>,
+    AsyncReturnType<typeof deleteSingleApartmentRowIdDelete>,
     { rowid: number }
   > = (props) => {
     const { rowid } = props || {};
 
-    return deleteSingleApartmentGroupsRowIdDelete(rowid);
+    return deleteSingleApartmentRowIdDelete(rowid);
   };
 
   return useMutation<
-    AsyncReturnType<typeof deleteSingleApartmentGroupsRowIdDelete>,
+    AsyncReturnType<typeof deleteSingleApartmentRowIdDelete>,
     TError,
     { rowid: number },
     TContext
   >(mutationFn, mutationOptions);
 };
 /**
- * Update a single row.
- * @summary Patch
+ * Retrieve a single row from the table.
+ * @summary Get Single
  */
-export const patchApartmentGroupsRowIdPatch = (
-  rowid: number,
-  apartmentGroupsOptional: ApartmentGroupsOptional
-) => {
-  return customInstance<ApartmentGroupsOutput>({
-    url: `/apartment-groups/${rowid}`,
-    method: "patch",
-    data: apartmentGroupsOptional,
+export const getSingleApartmentRowIdGet = (rowid: number) => {
+  return customInstance<ApartmentOutput>({
+    url: `/apartment/${rowid}`,
+    method: "get",
   });
 };
 
-export const usePatchApartmentGroupsRowIdPatch = <
+export const getGetSingleApartmentRowIdGetQueryKey = (rowid: number) => [
+  `/apartment/${rowid}`,
+];
+
+export const useGetSingleApartmentRowIdGet = <
+  TData = AsyncReturnType<typeof getSingleApartmentRowIdGet>,
+  TError = HTTPValidationError
+>(
+  rowid: number,
+  options?: {
+    query?: UseQueryOptions<
+      AsyncReturnType<typeof getSingleApartmentRowIdGet>,
+      TError,
+      TData
+    >;
+  }
+) => {
+  const { query: queryOptions } = options || {};
+
+  const queryKey =
+    queryOptions?.queryKey ?? getGetSingleApartmentRowIdGetQueryKey(rowid);
+
+  const queryFn: QueryFunction<
+    AsyncReturnType<typeof getSingleApartmentRowIdGet>
+  > = () => getSingleApartmentRowIdGet(rowid);
+
+  const query = useQuery<
+    AsyncReturnType<typeof getSingleApartmentRowIdGet>,
+    TError,
+    TData
+  >(queryKey, queryFn, { enabled: !!rowid, ...queryOptions });
+
+  return {
+    queryKey,
+    ...query,
+  };
+};
+
+/**
+ * Update a single row.
+ * @summary Patch
+ */
+export const patchApartmentRowIdPatch = (
+  rowid: number,
+  apartmentOptional: ApartmentOptional
+) => {
+  return customInstance<ApartmentOutput>({
+    url: `/apartment/${rowid}`,
+    method: "patch",
+    data: apartmentOptional,
+  });
+};
+
+export const usePatchApartmentRowIdPatch = <
   TError = HTTPValidationError,
   TContext = unknown
 >(options?: {
   mutation?: UseMutationOptions<
-    AsyncReturnType<typeof patchApartmentGroupsRowIdPatch>,
+    AsyncReturnType<typeof patchApartmentRowIdPatch>,
     TError,
-    { rowid: number; data: ApartmentGroupsOptional },
+    { rowid: number; data: ApartmentOptional },
     TContext
   >;
 }) => {
   const { mutation: mutationOptions } = options || {};
 
   const mutationFn: MutationFunction<
-    AsyncReturnType<typeof patchApartmentGroupsRowIdPatch>,
-    { rowid: number; data: ApartmentGroupsOptional }
+    AsyncReturnType<typeof patchApartmentRowIdPatch>,
+    { rowid: number; data: ApartmentOptional }
   > = (props) => {
     const { rowid, data } = props || {};
 
-    return patchApartmentGroupsRowIdPatch(rowid, data);
+    return patchApartmentRowIdPatch(rowid, data);
   };
 
   return useMutation<
-    AsyncReturnType<typeof patchApartmentGroupsRowIdPatch>,
+    AsyncReturnType<typeof patchApartmentRowIdPatch>,
     TError,
-    { rowid: number; data: ApartmentGroupsOptional },
+    { rowid: number; data: ApartmentOptional },
+    TContext
+  >(mutationFn, mutationOptions);
+};
+/**
+ * Insert or update a single row.
+ * @summary Put
+ */
+export const putApartmentRowIdPut = (
+  rowid: number,
+  apartmentIn: ApartmentIn
+) => {
+  return customInstance<ApartmentOutput>({
+    url: `/apartment/${rowid}`,
+    method: "put",
+    data: apartmentIn,
+  });
+};
+
+export const usePutApartmentRowIdPut = <
+  TError = HTTPValidationError,
+  TContext = unknown
+>(options?: {
+  mutation?: UseMutationOptions<
+    AsyncReturnType<typeof putApartmentRowIdPut>,
+    TError,
+    { rowid: number; data: ApartmentIn },
+    TContext
+  >;
+}) => {
+  const { mutation: mutationOptions } = options || {};
+
+  const mutationFn: MutationFunction<
+    AsyncReturnType<typeof putApartmentRowIdPut>,
+    { rowid: number; data: ApartmentIn }
+  > = (props) => {
+    const { rowid, data } = props || {};
+
+    return putApartmentRowIdPut(rowid, data);
+  };
+
+  return useMutation<
+    AsyncReturnType<typeof putApartmentRowIdPut>,
+    TError,
+    { rowid: number; data: ApartmentIn },
     TContext
   >(mutationFn, mutationOptions);
 };
@@ -1162,6 +1162,55 @@ export const usePostGroupPost = <
     TContext
   >(mutationFn, mutationOptions);
 };
+/**
+ * Returns the number of rows matching the given query.
+ * @summary Count
+ */
+export const countGroupCountGet = (params?: CountGroupCountGetParams) => {
+  return customInstance<CountModel>({
+    url: `/group/count`,
+    method: "get",
+    params,
+  });
+};
+
+export const getCountGroupCountGetQueryKey = (
+  params?: CountGroupCountGetParams
+) => [`/group/count`, ...(params ? [params] : [])];
+
+export const useCountGroupCountGet = <
+  TData = AsyncReturnType<typeof countGroupCountGet>,
+  TError = HTTPValidationError
+>(
+  params?: CountGroupCountGetParams,
+  options?: {
+    query?: UseQueryOptions<
+      AsyncReturnType<typeof countGroupCountGet>,
+      TError,
+      TData
+    >;
+  }
+) => {
+  const { query: queryOptions } = options || {};
+
+  const queryKey =
+    queryOptions?.queryKey ?? getCountGroupCountGetQueryKey(params);
+
+  const queryFn: QueryFunction<AsyncReturnType<typeof countGroupCountGet>> =
+    () => countGroupCountGet(params);
+
+  const query = useQuery<
+    AsyncReturnType<typeof countGroupCountGet>,
+    TError,
+    TData
+  >(queryKey, queryFn, queryOptions);
+
+  return {
+    queryKey,
+    ...query,
+  };
+};
+
 /**
  * Returns a mapping of row IDs to a readable representation.
  * @summary Ids
@@ -1255,44 +1304,41 @@ export const useNewGroupNewGet = <
 };
 
 /**
- * Returns the number of rows matching the given query.
- * @summary Count
+ * Returns a list of objects showing relationships with other tables.
+ * @summary References
  */
-export const countGroupCountGet = (params?: CountGroupCountGetParams) => {
-  return customInstance<CountModel>({
-    url: `/group/count`,
+export const referencesGroupReferencesGet = () => {
+  return customInstance<ReferencesModel>({
+    url: `/group/references`,
     method: "get",
-    params,
   });
 };
 
-export const getCountGroupCountGetQueryKey = (
-  params?: CountGroupCountGetParams
-) => [`/group/count`, ...(params ? [params] : [])];
+export const getReferencesGroupReferencesGetQueryKey = () => [
+  `/group/references`,
+];
 
-export const useCountGroupCountGet = <
-  TData = AsyncReturnType<typeof countGroupCountGet>,
-  TError = HTTPValidationError
->(
-  params?: CountGroupCountGetParams,
-  options?: {
-    query?: UseQueryOptions<
-      AsyncReturnType<typeof countGroupCountGet>,
-      TError,
-      TData
-    >;
-  }
-) => {
+export const useReferencesGroupReferencesGet = <
+  TData = AsyncReturnType<typeof referencesGroupReferencesGet>,
+  TError = unknown
+>(options?: {
+  query?: UseQueryOptions<
+    AsyncReturnType<typeof referencesGroupReferencesGet>,
+    TError,
+    TData
+  >;
+}) => {
   const { query: queryOptions } = options || {};
 
   const queryKey =
-    queryOptions?.queryKey ?? getCountGroupCountGetQueryKey(params);
+    queryOptions?.queryKey ?? getReferencesGroupReferencesGetQueryKey();
 
-  const queryFn: QueryFunction<AsyncReturnType<typeof countGroupCountGet>> =
-    () => countGroupCountGet(params);
+  const queryFn: QueryFunction<
+    AsyncReturnType<typeof referencesGroupReferencesGet>
+  > = () => referencesGroupReferencesGet();
 
   const query = useQuery<
-    AsyncReturnType<typeof countGroupCountGet>,
+    AsyncReturnType<typeof referencesGroupReferencesGet>,
     TError,
     TData
   >(queryKey, queryFn, queryOptions);
@@ -1346,51 +1392,42 @@ export const useSchemaGroupSchemaGet = <
 };
 
 /**
- * Returns a list of objects showing relationships with other tables.
- * @summary References
+ * Delete a single row from the table.
+ * @summary Delete Single
  */
-export const referencesGroupReferencesGet = () => {
-  return customInstance<ReferencesModel>({
-    url: `/group/references`,
-    method: "get",
-  });
+export const deleteSingleGroupRowIdDelete = (rowid: number) => {
+  return customInstance<unknown>({ url: `/group/${rowid}`, method: "delete" });
 };
 
-export const getReferencesGroupReferencesGetQueryKey = () => [
-  `/group/references`,
-];
-
-export const useReferencesGroupReferencesGet = <
-  TData = AsyncReturnType<typeof referencesGroupReferencesGet>,
-  TError = unknown
+export const useDeleteSingleGroupRowIdDelete = <
+  TError = HTTPValidationError,
+  TContext = unknown
 >(options?: {
-  query?: UseQueryOptions<
-    AsyncReturnType<typeof referencesGroupReferencesGet>,
+  mutation?: UseMutationOptions<
+    AsyncReturnType<typeof deleteSingleGroupRowIdDelete>,
     TError,
-    TData
+    { rowid: number },
+    TContext
   >;
 }) => {
-  const { query: queryOptions } = options || {};
+  const { mutation: mutationOptions } = options || {};
 
-  const queryKey =
-    queryOptions?.queryKey ?? getReferencesGroupReferencesGetQueryKey();
+  const mutationFn: MutationFunction<
+    AsyncReturnType<typeof deleteSingleGroupRowIdDelete>,
+    { rowid: number }
+  > = (props) => {
+    const { rowid } = props || {};
 
-  const queryFn: QueryFunction<
-    AsyncReturnType<typeof referencesGroupReferencesGet>
-  > = () => referencesGroupReferencesGet();
-
-  const query = useQuery<
-    AsyncReturnType<typeof referencesGroupReferencesGet>,
-    TError,
-    TData
-  >(queryKey, queryFn, queryOptions);
-
-  return {
-    queryKey,
-    ...query,
+    return deleteSingleGroupRowIdDelete(rowid);
   };
-};
 
+  return useMutation<
+    AsyncReturnType<typeof deleteSingleGroupRowIdDelete>,
+    TError,
+    { rowid: number },
+    TContext
+  >(mutationFn, mutationOptions);
+};
 /**
  * Retrieve a single row from the table.
  * @summary Get Single
@@ -1437,84 +1474,6 @@ export const useGetSingleGroupRowIdGet = <
 };
 
 /**
- * Insert or update a single row.
- * @summary Put
- */
-export const putGroupRowIdPut = (rowid: number, groupIn: GroupIn) => {
-  return customInstance<GroupOutput>({
-    url: `/group/${rowid}`,
-    method: "put",
-    data: groupIn,
-  });
-};
-
-export const usePutGroupRowIdPut = <
-  TError = HTTPValidationError,
-  TContext = unknown
->(options?: {
-  mutation?: UseMutationOptions<
-    AsyncReturnType<typeof putGroupRowIdPut>,
-    TError,
-    { rowid: number; data: GroupIn },
-    TContext
-  >;
-}) => {
-  const { mutation: mutationOptions } = options || {};
-
-  const mutationFn: MutationFunction<
-    AsyncReturnType<typeof putGroupRowIdPut>,
-    { rowid: number; data: GroupIn }
-  > = (props) => {
-    const { rowid, data } = props || {};
-
-    return putGroupRowIdPut(rowid, data);
-  };
-
-  return useMutation<
-    AsyncReturnType<typeof putGroupRowIdPut>,
-    TError,
-    { rowid: number; data: GroupIn },
-    TContext
-  >(mutationFn, mutationOptions);
-};
-/**
- * Delete a single row from the table.
- * @summary Delete Single
- */
-export const deleteSingleGroupRowIdDelete = (rowid: number) => {
-  return customInstance<unknown>({ url: `/group/${rowid}`, method: "delete" });
-};
-
-export const useDeleteSingleGroupRowIdDelete = <
-  TError = HTTPValidationError,
-  TContext = unknown
->(options?: {
-  mutation?: UseMutationOptions<
-    AsyncReturnType<typeof deleteSingleGroupRowIdDelete>,
-    TError,
-    { rowid: number },
-    TContext
-  >;
-}) => {
-  const { mutation: mutationOptions } = options || {};
-
-  const mutationFn: MutationFunction<
-    AsyncReturnType<typeof deleteSingleGroupRowIdDelete>,
-    { rowid: number }
-  > = (props) => {
-    const { rowid } = props || {};
-
-    return deleteSingleGroupRowIdDelete(rowid);
-  };
-
-  return useMutation<
-    AsyncReturnType<typeof deleteSingleGroupRowIdDelete>,
-    TError,
-    { rowid: number },
-    TContext
-  >(mutationFn, mutationOptions);
-};
-/**
  * Update a single row.
  * @summary Patch
  */
@@ -1555,6 +1514,47 @@ export const usePatchGroupRowIdPatch = <
     AsyncReturnType<typeof patchGroupRowIdPatch>,
     TError,
     { rowid: number; data: GroupOptional },
+    TContext
+  >(mutationFn, mutationOptions);
+};
+/**
+ * Insert or update a single row.
+ * @summary Put
+ */
+export const putGroupRowIdPut = (rowid: number, groupIn: GroupIn) => {
+  return customInstance<GroupOutput>({
+    url: `/group/${rowid}`,
+    method: "put",
+    data: groupIn,
+  });
+};
+
+export const usePutGroupRowIdPut = <
+  TError = HTTPValidationError,
+  TContext = unknown
+>(options?: {
+  mutation?: UseMutationOptions<
+    AsyncReturnType<typeof putGroupRowIdPut>,
+    TError,
+    { rowid: number; data: GroupIn },
+    TContext
+  >;
+}) => {
+  const { mutation: mutationOptions } = options || {};
+
+  const mutationFn: MutationFunction<
+    AsyncReturnType<typeof putGroupRowIdPut>,
+    { rowid: number; data: GroupIn }
+  > = (props) => {
+    const { rowid, data } = props || {};
+
+    return putGroupRowIdPut(rowid, data);
+  };
+
+  return useMutation<
+    AsyncReturnType<typeof putGroupRowIdPut>,
+    TError,
+    { rowid: number; data: GroupIn },
     TContext
   >(mutationFn, mutationOptions);
 };
@@ -1649,6 +1649,58 @@ export const usePostMeasurementPost = <
   >(mutationFn, mutationOptions);
 };
 /**
+ * Returns the number of rows matching the given query.
+ * @summary Count
+ */
+export const countMeasurementCountGet = (
+  params?: CountMeasurementCountGetParams
+) => {
+  return customInstance<CountModel>({
+    url: `/measurement/count`,
+    method: "get",
+    params,
+  });
+};
+
+export const getCountMeasurementCountGetQueryKey = (
+  params?: CountMeasurementCountGetParams
+) => [`/measurement/count`, ...(params ? [params] : [])];
+
+export const useCountMeasurementCountGet = <
+  TData = AsyncReturnType<typeof countMeasurementCountGet>,
+  TError = HTTPValidationError
+>(
+  params?: CountMeasurementCountGetParams,
+  options?: {
+    query?: UseQueryOptions<
+      AsyncReturnType<typeof countMeasurementCountGet>,
+      TError,
+      TData
+    >;
+  }
+) => {
+  const { query: queryOptions } = options || {};
+
+  const queryKey =
+    queryOptions?.queryKey ?? getCountMeasurementCountGetQueryKey(params);
+
+  const queryFn: QueryFunction<
+    AsyncReturnType<typeof countMeasurementCountGet>
+  > = () => countMeasurementCountGet(params);
+
+  const query = useQuery<
+    AsyncReturnType<typeof countMeasurementCountGet>,
+    TError,
+    TData
+  >(queryKey, queryFn, queryOptions);
+
+  return {
+    queryKey,
+    ...query,
+  };
+};
+
+/**
  * Returns a mapping of row IDs to a readable representation.
  * @summary Ids
  */
@@ -1741,47 +1793,41 @@ export const useNewMeasurementNewGet = <
 };
 
 /**
- * Returns the number of rows matching the given query.
- * @summary Count
+ * Returns a list of objects showing relationships with other tables.
+ * @summary References
  */
-export const countMeasurementCountGet = (
-  params?: CountMeasurementCountGetParams
-) => {
-  return customInstance<CountModel>({
-    url: `/measurement/count`,
+export const referencesMeasurementReferencesGet = () => {
+  return customInstance<ReferencesModel>({
+    url: `/measurement/references`,
     method: "get",
-    params,
   });
 };
 
-export const getCountMeasurementCountGetQueryKey = (
-  params?: CountMeasurementCountGetParams
-) => [`/measurement/count`, ...(params ? [params] : [])];
+export const getReferencesMeasurementReferencesGetQueryKey = () => [
+  `/measurement/references`,
+];
 
-export const useCountMeasurementCountGet = <
-  TData = AsyncReturnType<typeof countMeasurementCountGet>,
-  TError = HTTPValidationError
->(
-  params?: CountMeasurementCountGetParams,
-  options?: {
-    query?: UseQueryOptions<
-      AsyncReturnType<typeof countMeasurementCountGet>,
-      TError,
-      TData
-    >;
-  }
-) => {
+export const useReferencesMeasurementReferencesGet = <
+  TData = AsyncReturnType<typeof referencesMeasurementReferencesGet>,
+  TError = unknown
+>(options?: {
+  query?: UseQueryOptions<
+    AsyncReturnType<typeof referencesMeasurementReferencesGet>,
+    TError,
+    TData
+  >;
+}) => {
   const { query: queryOptions } = options || {};
 
   const queryKey =
-    queryOptions?.queryKey ?? getCountMeasurementCountGetQueryKey(params);
+    queryOptions?.queryKey ?? getReferencesMeasurementReferencesGetQueryKey();
 
   const queryFn: QueryFunction<
-    AsyncReturnType<typeof countMeasurementCountGet>
-  > = () => countMeasurementCountGet(params);
+    AsyncReturnType<typeof referencesMeasurementReferencesGet>
+  > = () => referencesMeasurementReferencesGet();
 
   const query = useQuery<
-    AsyncReturnType<typeof countMeasurementCountGet>,
+    AsyncReturnType<typeof referencesMeasurementReferencesGet>,
     TError,
     TData
   >(queryKey, queryFn, queryOptions);
@@ -1839,51 +1885,45 @@ export const useSchemaMeasurementSchemaGet = <
 };
 
 /**
- * Returns a list of objects showing relationships with other tables.
- * @summary References
+ * Delete a single row from the table.
+ * @summary Delete Single
  */
-export const referencesMeasurementReferencesGet = () => {
-  return customInstance<ReferencesModel>({
-    url: `/measurement/references`,
-    method: "get",
+export const deleteSingleMeasurementRowIdDelete = (rowid: number) => {
+  return customInstance<unknown>({
+    url: `/measurement/${rowid}`,
+    method: "delete",
   });
 };
 
-export const getReferencesMeasurementReferencesGetQueryKey = () => [
-  `/measurement/references`,
-];
-
-export const useReferencesMeasurementReferencesGet = <
-  TData = AsyncReturnType<typeof referencesMeasurementReferencesGet>,
-  TError = unknown
+export const useDeleteSingleMeasurementRowIdDelete = <
+  TError = HTTPValidationError,
+  TContext = unknown
 >(options?: {
-  query?: UseQueryOptions<
-    AsyncReturnType<typeof referencesMeasurementReferencesGet>,
+  mutation?: UseMutationOptions<
+    AsyncReturnType<typeof deleteSingleMeasurementRowIdDelete>,
     TError,
-    TData
+    { rowid: number },
+    TContext
   >;
 }) => {
-  const { query: queryOptions } = options || {};
+  const { mutation: mutationOptions } = options || {};
 
-  const queryKey =
-    queryOptions?.queryKey ?? getReferencesMeasurementReferencesGetQueryKey();
+  const mutationFn: MutationFunction<
+    AsyncReturnType<typeof deleteSingleMeasurementRowIdDelete>,
+    { rowid: number }
+  > = (props) => {
+    const { rowid } = props || {};
 
-  const queryFn: QueryFunction<
-    AsyncReturnType<typeof referencesMeasurementReferencesGet>
-  > = () => referencesMeasurementReferencesGet();
-
-  const query = useQuery<
-    AsyncReturnType<typeof referencesMeasurementReferencesGet>,
-    TError,
-    TData
-  >(queryKey, queryFn, queryOptions);
-
-  return {
-    queryKey,
-    ...query,
+    return deleteSingleMeasurementRowIdDelete(rowid);
   };
-};
 
+  return useMutation<
+    AsyncReturnType<typeof deleteSingleMeasurementRowIdDelete>,
+    TError,
+    { rowid: number },
+    TContext
+  >(mutationFn, mutationOptions);
+};
 /**
  * Retrieve a single row from the table.
  * @summary Get Single
@@ -1934,90 +1974,6 @@ export const useGetSingleMeasurementRowIdGet = <
 };
 
 /**
- * Insert or update a single row.
- * @summary Put
- */
-export const putMeasurementRowIdPut = (
-  rowid: number,
-  measurementIn: MeasurementIn
-) => {
-  return customInstance<MeasurementOutput>({
-    url: `/measurement/${rowid}`,
-    method: "put",
-    data: measurementIn,
-  });
-};
-
-export const usePutMeasurementRowIdPut = <
-  TError = HTTPValidationError,
-  TContext = unknown
->(options?: {
-  mutation?: UseMutationOptions<
-    AsyncReturnType<typeof putMeasurementRowIdPut>,
-    TError,
-    { rowid: number; data: MeasurementIn },
-    TContext
-  >;
-}) => {
-  const { mutation: mutationOptions } = options || {};
-
-  const mutationFn: MutationFunction<
-    AsyncReturnType<typeof putMeasurementRowIdPut>,
-    { rowid: number; data: MeasurementIn }
-  > = (props) => {
-    const { rowid, data } = props || {};
-
-    return putMeasurementRowIdPut(rowid, data);
-  };
-
-  return useMutation<
-    AsyncReturnType<typeof putMeasurementRowIdPut>,
-    TError,
-    { rowid: number; data: MeasurementIn },
-    TContext
-  >(mutationFn, mutationOptions);
-};
-/**
- * Delete a single row from the table.
- * @summary Delete Single
- */
-export const deleteSingleMeasurementRowIdDelete = (rowid: number) => {
-  return customInstance<unknown>({
-    url: `/measurement/${rowid}`,
-    method: "delete",
-  });
-};
-
-export const useDeleteSingleMeasurementRowIdDelete = <
-  TError = HTTPValidationError,
-  TContext = unknown
->(options?: {
-  mutation?: UseMutationOptions<
-    AsyncReturnType<typeof deleteSingleMeasurementRowIdDelete>,
-    TError,
-    { rowid: number },
-    TContext
-  >;
-}) => {
-  const { mutation: mutationOptions } = options || {};
-
-  const mutationFn: MutationFunction<
-    AsyncReturnType<typeof deleteSingleMeasurementRowIdDelete>,
-    { rowid: number }
-  > = (props) => {
-    const { rowid } = props || {};
-
-    return deleteSingleMeasurementRowIdDelete(rowid);
-  };
-
-  return useMutation<
-    AsyncReturnType<typeof deleteSingleMeasurementRowIdDelete>,
-    TError,
-    { rowid: number },
-    TContext
-  >(mutationFn, mutationOptions);
-};
-/**
  * Update a single row.
  * @summary Patch
  */
@@ -2058,6 +2014,50 @@ export const usePatchMeasurementRowIdPatch = <
     AsyncReturnType<typeof patchMeasurementRowIdPatch>,
     TError,
     { rowid: number; data: MeasurementOptional },
+    TContext
+  >(mutationFn, mutationOptions);
+};
+/**
+ * Insert or update a single row.
+ * @summary Put
+ */
+export const putMeasurementRowIdPut = (
+  rowid: number,
+  measurementIn: MeasurementIn
+) => {
+  return customInstance<MeasurementOutput>({
+    url: `/measurement/${rowid}`,
+    method: "put",
+    data: measurementIn,
+  });
+};
+
+export const usePutMeasurementRowIdPut = <
+  TError = HTTPValidationError,
+  TContext = unknown
+>(options?: {
+  mutation?: UseMutationOptions<
+    AsyncReturnType<typeof putMeasurementRowIdPut>,
+    TError,
+    { rowid: number; data: MeasurementIn },
+    TContext
+  >;
+}) => {
+  const { mutation: mutationOptions } = options || {};
+
+  const mutationFn: MutationFunction<
+    AsyncReturnType<typeof putMeasurementRowIdPut>,
+    { rowid: number; data: MeasurementIn }
+  > = (props) => {
+    const { rowid, data } = props || {};
+
+    return putMeasurementRowIdPut(rowid, data);
+  };
+
+  return useMutation<
+    AsyncReturnType<typeof putMeasurementRowIdPut>,
+    TError,
+    { rowid: number; data: MeasurementIn },
     TContext
   >(mutationFn, mutationOptions);
 };

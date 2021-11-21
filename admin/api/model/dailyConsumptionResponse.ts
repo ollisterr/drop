@@ -6,8 +6,8 @@
  * OpenAPI spec version: 0.1.0
  */
 
-export interface ApartmentItem {
-  address?: string;
-  id?: number;
-  people?: number;
+export interface DailyConsumptionResponse {
+  apartment_id: number;
+  consumption: number;
+  date: string;
 }

@@ -8,7 +8,7 @@ from piccolo.apps.user.tables import BaseUser
 from orm.tables import Apartment, ApartmentGroups, Group, Measurement, User
 
 
-with open("../data/apartments.json") as af, open("../data/groups.json") as gf:
+with open("data/apartments.json") as af, open("data/groups.json") as gf:
     apt_data = json.load(af)
     grp_data = json.load(gf)
 
@@ -32,7 +32,7 @@ with open("../data/apartments.json") as af, open("../data/groups.json") as gf:
         ).run_sync()
 
 
-with open("../data/measurements.json") as f, open("../data/apartments.json") as af:
+with open("data/measurements.json") as f, open("data/apartments.json") as af:
     data = json.load(f)
     apt_data = json.load(af)
 
