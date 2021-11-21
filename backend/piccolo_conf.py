@@ -23,7 +23,7 @@ DB = PostgresEngine(
         "host": DB_HOST,
         "port": DB_PORT,
     },
-    #log_queries=True if ENV == "development" else False,
+    log_queries=False if ENV == "development" else False,
 )
 
 APP_REGISTRY = AppRegistry(

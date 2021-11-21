@@ -1,6 +1,6 @@
 from fastapi import FastAPI
-from fastapi.openapi.utils import get_openapi
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.openapi.utils import get_openapi
 from fastapi.staticfiles import StaticFiles
 from piccolo.engine import engine_finder
 from piccolo_admin.endpoints import create_admin

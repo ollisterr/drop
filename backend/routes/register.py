@@ -5,20 +5,19 @@ from asyncpg.exceptions import UniqueViolationError
 from dotenv import load_dotenv
 from fastapi import APIRouter
 from piccolo.apps.user.tables import BaseUser
-from piccolo.utils.pydantic import create_pydantic_model
 from piccolo_api.session_auth.tables import SessionsBase
 from pydantic import BaseModel
 from starlette.responses import Response
 
 from orm.tables import Apartment, User
 
+from .models import ApartmentPydantic, BaseUserPydantic
+
 load_dotenv()
 
 ENV = os.getenv("ENV", "development")
 
 router = APIRouter()
-BaseUserPydantic: Any = create_pydantic_model(table=BaseUser, model_name="BaseUserPydantic")
-ApartmentPydantic: Any = create_pydantic_model(table=Apartment, model_name="ApartmentPydantic")
 
 
 class Register_User(BaseModel):
@@ -31,7 +30,6 @@ async def create_user(data: Register_User):
     try:
         # Start a transaction
         async with BaseUser._meta.db.transaction():
-            print(data.apartment)
             # Don't allow creating admins or superusers via the register endpoint
             # Make the users active, no email validation for now
             piccolo_user_data = {

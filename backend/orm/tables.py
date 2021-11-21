@@ -47,7 +47,7 @@ class ApartmentGroups(Table):
 
 class Measurement(Table):
     """
-    Group table
+    Measurement table
     """
 
     timestamp = Timestamp()
