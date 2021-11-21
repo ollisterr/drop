@@ -241,10 +241,10 @@ const ContentWrapper = styled.View`
 async function schedulePushNotification() {
   await Notifications.scheduleNotificationAsync({
     content: {
-      title: "💧 Top hygiene score!",
-      body: "Share your results with friends!",
+      title: "Jones beat your hygiene score! 😲",
+      body: "What are you gonna do about it?",
       data: { data: "goes here" },
     },
-    trigger: { seconds: 15 },
+    trigger: { seconds: 5 },
   });
 }
