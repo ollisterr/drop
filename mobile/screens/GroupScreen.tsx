@@ -1,8 +1,10 @@
 import { Ionicons } from '@expo/vector-icons';
+import * as Notifications from 'expo-notifications';
+
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import * as React from 'react';
-import { ScrollView } from 'react-native';
+import { ScrollView, TouchableOpacity } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { KPICard, Header } from '../components';
 import { Row, ScreenWrapper, Spacer } from '../styles/components';
@@ -14,24 +16,32 @@ import { GroupStackParamList } from '../types';
 
 const testData = [
   {
-    id: 'poikamiehet',
-    username: 'Poikamiehet',
-    score: 67,
+    id: 'morjens',
+    username: 'Jonesus',
+    sustainability: 89,
+    vitals: 67,
+    score: 12,
   },
   {
-    id: 'poikamiehet',
-    username: 'Kannis',
-    score: 67,
+    id: 'Taku',
+    username: 'Taku',
+    sustainability: 65,
+    vitals: 72,
+    score: 18,
   },
   {
-    id: 'poikamiehet',
-    username: 'Tuhuri',
-    score: 67,
+    id: 'kukkku',
+    username: 'Timo',
+    sustainability: 55,
+    vitals: 43,
+    score: 41,
   },
   {
-    id: 'poikamiehet',
+    id: 'lebens',
     username: 'Lebens67',
-    score: 67,
+    sustainability: 12,
+    vitals: 17,
+    score: 78,
   },
 ];
 
@@ -41,7 +51,7 @@ export default function GroupScreen() {
   const navigation =
     useNavigation<StackNavigationProp<GroupStackParamList, 'Group'>>();
 
-  const groupName = 'Poikamiehet';
+  const groupName = 'Junction2021';
 
   return (
     <ScreenWrapper>
@@ -57,11 +67,13 @@ export default function GroupScreen() {
         <Spacer axis="y" />
 
         <Row>
-          <KPICard
-            kpi="Top 3"
-            description="Three weeks in a row"
-            color="success"
-          />
+          <TouchableOpacity onPress={schedulePushNotification}>
+            <KPICard
+              kpi="Top 3"
+              description="Three weeks in a row"
+              color="success"
+            />
+          </TouchableOpacity>
 
           <Spacer />
 
@@ -76,7 +88,7 @@ export default function GroupScreen() {
 
         {testData.map((user, i) => (
           <UserCard key={user.id}>
-            <H3 color={i < 3 ? 'victory' : undefined}>#{i + 1}</H3>
+            <H3 color={i === 0 ? 'victory' : undefined}>#{i + 1}</H3>
 
             <Spacer />
 
@@ -104,7 +116,7 @@ export default function GroupScreen() {
 
             <Spacer spacing="xxsmall" />
 
-            <Text weight="bold">{user.score}</Text>
+            <Text weight="bold">{user.vitals}</Text>
 
             <Spacer />
 
@@ -112,7 +124,7 @@ export default function GroupScreen() {
 
             <Spacer spacing="xxsmall" />
 
-            <Text weight="bold">{user.score}</Text>
+            <Text weight="bold">{user.sustainability}</Text>
           </UserCard>
         ))}
       </ScrollView>
@@ -127,3 +139,14 @@ const UserCard = styled(Row)`
   border-width: 0px;
   border-bottom-width: 1px;
 `;
+
+async function schedulePushNotification() {
+  await Notifications.scheduleNotificationAsync({
+    content: {
+      title: 'Jonesus beat you at hygiene! 😱',
+      body: 'What are you gonna do about it?',
+      data: { data: 'goes here' },
+    },
+    trigger: { seconds: 15 },
+  });
+}

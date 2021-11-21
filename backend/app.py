@@ -4,7 +4,6 @@ import os
 from dotenv import load_dotenv
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.openapi.utils import get_openapi
 from fastapi.staticfiles import StaticFiles
 from piccolo.engine import engine_finder
 from piccolo_admin.endpoints import create_admin
@@ -56,24 +55,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-
-def custom_openapi():
-    if private_app.openapi_schema:
-        return private_app.openapi_schema
-    openapi_schema = get_openapi(
-        title="Drop API",
-        version="0.1.0",
-        description="The OpenAPI schema for drop.energy",
-        routes=private_app.routes,
-    )
-    openapi_schema["info"]["x-logo"] = {"url": "https://api.drop.energy/static/drop-logo.png"}
-    private_app.openapi_schema = openapi_schema
-    return private_app.openapi_schema
-
-
-private_app.openapi = custom_openapi
-
 
 FastAPIWrapper(
     root_url="/api/apartment/",

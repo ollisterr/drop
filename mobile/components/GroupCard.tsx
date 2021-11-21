@@ -72,4 +72,5 @@ const Wrapper = styled.TouchableOpacity`
   border-radius: ${p => p.theme.borderRadius.large};
   background-color: ${p => p.theme.colors.white};
   padding: ${p => p.theme.spacing.default};
+  margin-bottom: ${p => p.theme.spacing.default};
 `;

@@ -5,9 +5,9 @@
  * The OpenAPI schema for drop.energy
  * OpenAPI spec version: 0.1.0
  */
-import { useQuery, UseQueryOptions, QueryFunction } from "react-query";
-import type { HTTPValidationError } from ".././model";
-import { customInstance } from ".././axios";
+import { useQuery, UseQueryOptions, QueryFunction } from 'react-query';
+import type { HTTPValidationError } from '../model';
+import { customInstance } from '../axios';
 
 type AsyncReturnType<T extends (...args: any) => Promise<any>> = T extends (
   ...args: any
@@ -19,23 +19,23 @@ type AsyncReturnType<T extends (...args: any) => Promise<any>> = T extends (
  * @summary Get User Weekly Trend
  */
 export const getUserWeeklyTrendKpisWeeklyChangeApartmentIdGet = (
-  apartmentid: number
+  apartmentid: number,
 ) => {
   return customInstance<number>({
     url: `/kpis/weekly-change/${apartmentid}`,
-    method: "get",
+    method: 'get',
   });
 };
 
 export const getGetUserWeeklyTrendKpisWeeklyChangeApartmentIdGetQueryKey = (
-  apartmentid: number
+  apartmentid: number,
 ) => [`/kpis/weekly-change/${apartmentid}`];
 
 export const useGetUserWeeklyTrendKpisWeeklyChangeApartmentIdGet = <
   TData = AsyncReturnType<
     typeof getUserWeeklyTrendKpisWeeklyChangeApartmentIdGet
   >,
-  TError = HTTPValidationError
+  TError = HTTPValidationError,
 >(
   apartmentid: number,
   options?: {
@@ -44,7 +44,7 @@ export const useGetUserWeeklyTrendKpisWeeklyChangeApartmentIdGet = <
       TError,
       TData
     >;
-  }
+  },
 ) => {
   const { query: queryOptions } = options || {};
 
@@ -73,22 +73,22 @@ export const useGetUserWeeklyTrendKpisWeeklyChangeApartmentIdGet = <
  */
 export const hygieneScoresHygieneScoresGroupIdDateGet = (
   groupid: number,
-  date: string
+  date: string,
 ) => {
   return customInstance<unknown>({
     url: `/hygiene-scores/${groupid}/${date}`,
-    method: "get",
+    method: 'get',
   });
 };
 
 export const getHygieneScoresHygieneScoresGroupIdDateGetQueryKey = (
   groupid: number,
-  date: string
+  date: string,
 ) => [`/hygiene-scores/${groupid}/${date}`];
 
 export const useHygieneScoresHygieneScoresGroupIdDateGet = <
   TData = AsyncReturnType<typeof hygieneScoresHygieneScoresGroupIdDateGet>,
-  TError = HTTPValidationError
+  TError = HTTPValidationError,
 >(
   groupid: number,
   date: string,
@@ -98,7 +98,7 @@ export const useHygieneScoresHygieneScoresGroupIdDateGet = <
       TError,
       TData
     >;
-  }
+  },
 ) => {
   const { query: queryOptions } = options || {};
 
@@ -127,11 +127,11 @@ export const useHygieneScoresHygieneScoresGroupIdDateGet = <
  */
 export const sustainabilityScoresSustainabilityScoresGroupIdDateGet = (
   groupid: number,
-  date: string
+  date: string,
 ) => {
   return customInstance<unknown>({
     url: `/sustainability-scores/${groupid}/${date}`,
-    method: "get",
+    method: 'get',
   });
 };
 
@@ -144,7 +144,7 @@ export const useSustainabilityScoresSustainabilityScoresGroupIdDateGet = <
   TData = AsyncReturnType<
     typeof sustainabilityScoresSustainabilityScoresGroupIdDateGet
   >,
-  TError = HTTPValidationError
+  TError = HTTPValidationError,
 >(
   groupid: number,
   date: string,
@@ -156,7 +156,7 @@ export const useSustainabilityScoresSustainabilityScoresGroupIdDateGet = <
       TError,
       TData
     >;
-  }
+  },
 ) => {
   const { query: queryOptions } = options || {};
 
@@ -164,7 +164,7 @@ export const useSustainabilityScoresSustainabilityScoresGroupIdDateGet = <
     queryOptions?.queryKey ??
     getSustainabilityScoresSustainabilityScoresGroupIdDateGetQueryKey(
       groupid,
-      date
+      date,
     );
 
   const queryFn: QueryFunction<

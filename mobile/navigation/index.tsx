@@ -26,7 +26,7 @@ import ShowerScreen from '../screens/ShowerScreen';
 const RootStack = createNativeStackNavigator<RootStackParamList>();
 
 export default function Navigation() {
-  const { authStatus, checkAuth } = useGlobalState();
+  const { authStatus, user, checkAuth } = useGlobalState();
 
   React.useEffect(() => {
     checkAuth();
@@ -35,7 +35,7 @@ export default function Navigation() {
   return (
     <NavigationContainer ref={navigationRef} linking={LinkingConfiguration}>
       <RootStack.Navigator screenOptions={{ headerShown: false }}>
-        {authStatus !== AuthStatus.UNAUTHENTICATED ? (
+        {authStatus !== AuthStatus.UNAUTHENTICATED && user ? (
           <RootStack.Screen name="Root" component={BottomTabNavigator} />
         ) : (
           <RootStack.Screen name="Login" component={LoginScreen} />

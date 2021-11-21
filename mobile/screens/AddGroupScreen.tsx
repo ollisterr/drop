@@ -1,7 +1,7 @@
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import {
   Modal,
   ScrollView,
@@ -21,7 +21,6 @@ import styled from '../styles';
 import theme from '../styles/theme';
 import { Description, H3, Subheading } from '../styles/typography';
 import { GroupStackParamList } from '../types';
-import { useReadUsersUsersGet } from '../api/users/users';
 import useGlobalState from '../store';
 import { AXIOS_INSTANCE } from '../api/axios';
 
@@ -34,7 +33,7 @@ export default function AddGroupScreen() {
   const navigation =
     useNavigation<StackNavigationProp<GroupStackParamList, 'AddGroup'>>();
 
-  const { username } = useGlobalState();
+  const { user } = useGlobalState();
 
   const [isModalVisible, toggleIsModalVisible] = useState(false);
 
@@ -42,39 +41,60 @@ export default function AddGroupScreen() {
   const [groupName, setGroupName] = useState('');
   const [selectedUsers, setSelectedUsers] = useState<User[]>([]);
   const [isLoading, toggleIsLoading] = useState(false);
+  const [usersData, setUsersData] = useState<any[]>();
 
-  const addUser = (user: User) => {
-    if (!isIncluded(user)) {
-      setSelectedUsers(x => [...x, user]);
+  const addUser = (paska: User) => {
+    if (!isIncluded(paska)) {
+      setSelectedUsers(x => [...x, paska]);
     }
   };
 
-  const removeUser = (user: User) =>
-    setSelectedUsers(x => x.filter(y => y.id !== user.id));
+  const removeUser = (paska: User) =>
+    setSelectedUsers(x => x.filter(y => y.id !== paska.id));
 
-  const { data } = useReadUsersUsersGet<User[]>();
+  useEffect(() => {
+    AXIOS_INSTANCE.get('/users', {}).then(res => setUsersData(res.data));
+  }, []);
 
-  const filteredData = (data ?? []).filter(
+  const filteredData = (usersData ?? []).filter(
     x =>
-      x.username !== username && // not self
+      x.username !== user?.username && // not self
       x.username.toLowerCase().includes(input.toLowerCase()),
   );
 
   const isIncluded = useCallback(
-    (user: User) => {
-      return !!selectedUsers.find(x => x.id === user.id);
+    (paska: User) => {
+      return !!selectedUsers.find(x => x.id === paska.id);
     },
     [selectedUsers],
   );
 
-  const submit = () => {
-    toggleIsLoading(true);
-    AXIOS_INSTANCE.post('/group', { name: groupName })
-      .then(({ id }: any) => {
-        toggleIsModalVisible(false);
-        navigation.replace('Group', { groupId: id });
-      })
-      .finally(() => toggleIsLoading(false));
+  const submit = async () => {
+    try {
+      toggleIsLoading(true);
+
+      const { data } = await AXIOS_INSTANCE.post('/group', { name: groupName });
+
+      await AXIOS_INSTANCE.post('/apartment-groups', {
+        apartment: user?.apartmentId,
+        group_id: data.id,
+      });
+
+      usersData?.forEach(
+        async lol =>
+          await AXIOS_INSTANCE.post('/apartment-groups', {
+            apartment: lol?.apartmentId,
+            group_id: data.id,
+          }),
+      );
+
+      navigation.replace('Group', { groupId: data.id });
+    } catch (err) {
+      console.log(err);
+    } finally {
+      toggleIsLoading(false);
+      toggleIsModalVisible(false);
+    }
   };
 
   return (

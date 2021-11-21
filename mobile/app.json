@@ -1,66 +1,70 @@
 {
-    "expo": {
-        "name": "drop",
-        "slug": "drop",
-        "version": "1.0.0",
-        "orientation": "portrait",
-        "icon": "./assets/images/icon.png",
-        "scheme": "myapp",
-        "userInterfaceStyle": "automatic",
-        "splash": {
-            "image": "./assets/images/splash.png",
-            "resizeMode": "contain",
-            "backgroundColor": "#ffffff"
-        },
-        "notification": {
-            "icon": "./assets/images/icon.png",
-            "color": "#311b92",
-            "androidMode": "default",
-            "androidCollapsedTitle": "Updates from Colab.notes",
-            "iosDisplayInForeground": true
-        },
-        "packagerOpts": {
-            "config": "metro.config.js",
-            "sourceExts": [
-                "expo.ts",
-                "expo.tsx",
-                "expo.js",
-                "expo.jsx",
-                "ts",
-                "tsx",
-                "js",
-                "jsx",
-                "json",
-                "wasm",
-                "svg"
-            ]
-        },
-        "updates": {
-            "fallbackToCacheTimeout": 0
-        },
-        "assetBundlePatterns": ["**/*"],
-        "ios": {
-            "supportsTablet": true
-        },
-        "android": {
-            "useNextNotificationsApi": true,
-            "adaptiveIcon": {
-                "foregroundImage": "./assets/images/adaptive-icon.png",
-                "backgroundColor": "#ffffff"
-            }
-        },
-        "web": {
-            "favicon": "./assets/images/favicon.png"
-        },
-        "plugins": [
-            [
-                "expo-notifications",
-                {
-                    "icon": "./assets/images/icon.png",
-                    "color": "#ffffff",
-                    "mode": "production"
-                }
-            ]
-        ]
-    }
+  "expo": {
+    "name": "Drop",
+    "slug": "Drop",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/icon.png",
+    "scheme": "myapp",
+    "userInterfaceStyle": "automatic",
+    "splash": {
+      "image": "./assets/images/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "notification": {
+      "icon": "./assets/images/icon.png",
+      "color": "#311b92",
+      "androidMode": "default",
+      "androidCollapsedTitle": "Updates from Colab.notes",
+      "iosDisplayInForeground": true
+    },
+    "packagerOpts": {
+      "config": "metro.config.js",
+      "sourceExts": [
+        "expo.ts",
+        "expo.tsx",
+        "expo.js",
+        "expo.jsx",
+        "ts",
+        "tsx",
+        "js",
+        "jsx",
+        "json",
+        "wasm",
+        "svg"
+      ]
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "useNextNotificationsApi": true,
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      }
+    },
+    "web": {
+      "favicon": "./assets/images/favicon.png"
+    },
+    "plugins": [
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/images/icon.png",
+          "color": "#ffffff",
+          "mode": "production"
+        }
+      ]
+    ],
+    "description": "",
+    "githubUrl": "https://github.com/ollisterr/junction2021"
+  }
 }
