@@ -42,7 +42,7 @@ async def get_user_weekly_trend(
         first_sum += two_week[i]["sum"]
     for i in range(7, 14):
         second_sum += two_week[i]["sum"]
-    return round(1 - first_sum / second_sum, 2) * 100
+    return round((1 - first_sum / second_sum) * 100, 1)
 
 
 @router.get("/hygiene-scores/{group_id}/{date}", tags=["kpi"])
@@ -54,7 +54,7 @@ async def hygiene_scores(group_id: int, date: str):
             apartment
         from measurement
         where
-            appliance = 'optima_faucet' and date(timestamp) = {}
+            appliance = 'Optima_faucet' and date(timestamp) = {}
             and apartment in (
                 select apartment from apartment_groups where group_id = {}
             )
@@ -64,18 +64,19 @@ async def hygiene_scores(group_id: int, date: str):
     ).run_sync()
     df = pd.DataFrame(measurements)
     df["flow_dist"] = abs(df["flow_time"] - 20)
-    x_scaled = preprocessing.minmax_scale(X=df["flow_dist"]) * 100
-    df["hygiene_score"] = x_scaled.round(decimals=0)
-    df = df[["apartment", "hygiene_score"]]
-    apartments = df["apartment"].unique()
-    apm_dict = {}
-    for apartment in apartments:
-        ap_df = df[df["apartment"] == apartment]
-        mean_val = ap_df.aggregate("mean")
-        mean_val = mean_val["hygiene_score"]
-        apm_dict[int(apartment)] = round((int(mean_val)), 0)
-    print(apm_dict)
-    return dict(apm_dict)
+    flow_df = df[["apartment", "flow_dist"]]
+    grouped_df = flow_df.groupby(["apartment"]).mean()
+    x_scaled = preprocessing.minmax_scale(X=grouped_df["flow_dist"]) * 100
+    grouped_df["hygiene_score"] = x_scaled.round(decimals=0)
+    # apartments = df["apartment"].unique()
+    grouped_df.drop(columns=["flow_dist"], inplace=True)
+    apm_dict = grouped_df.to_dict(orient="index")
+    # for apartment in apartments:
+    #     ap_df = df[df["apartment"] == apartment]
+    #     mean_val = ap_df.aggregate("mean")
+    #     mean_val = mean_val["hygiene_score"]
+    #     apm_dict[int(apartment)] = round((int(mean_val)), 0)
+    return apm_dict
 
 
 class DailyConsumption_Response(BaseModel):
