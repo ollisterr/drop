@@ -42,7 +42,6 @@ app.include_router(register.router)
 private_app.include_router(users.router)
 private_app.include_router(kpis.router)
 private_app.mount("/logout/", session_logout(redirect_to="/"))
-private_app.mount("/docs/", swagger_ui(schema_url="/private/openapi.json"))
 
 private_app.add_middleware(
     AuthenticationMiddleware,
@@ -78,7 +77,7 @@ app.openapi = custom_openapi
 
 
 FastAPIWrapper(
-    root_url="/apartment/",
+    root_url="/api/apartment/",
     fastapi_app=private_app,
     piccolo_crud=PiccoloCRUD(
         table=Apartment,
@@ -87,7 +86,7 @@ FastAPIWrapper(
 )
 
 FastAPIWrapper(
-    root_url="/apartment-groups/",
+    root_url="/api/apartment-groups/",
     fastapi_app=private_app,
     piccolo_crud=PiccoloCRUD(
         table=ApartmentGroups,
@@ -96,7 +95,7 @@ FastAPIWrapper(
 )
 
 FastAPIWrapper(
-    root_url="/group/",
+    root_url="/api/group/",
     fastapi_app=private_app,
     piccolo_crud=PiccoloCRUD(
         table=Group,
@@ -105,7 +104,7 @@ FastAPIWrapper(
 )
 
 FastAPIWrapper(
-    root_url="/measurement/",
+    root_url="/api/measurement/",
     fastapi_app=private_app,
     piccolo_crud=PiccoloCRUD(
         table=Measurement,
