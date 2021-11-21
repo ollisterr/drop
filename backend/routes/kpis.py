@@ -31,11 +31,12 @@ async def get_user_weekly_trend(apartment: int):
     return round(1 - first_sum / second_sum, 2) * 100
 
 
-@router.get("/hygiene-scores/{group}/{date}", tags=["kpi"])
-async def hygiene_scores(group: str, date: str):
+@router.get("/hygiene-scores/{group_id}/{date}", tags=["kpi"])
+async def hygiene_scores(group_id: int, date: str):
     measurements = Measurement.raw(
-        "SELECT flow_time, apartment FROM Measurement WHERE appliance = 'Optima_faucet' AND DATE(timestamp) = {}",
+        "SELECT flow_time, apartment FROM measurement WHERE appliance = 'Optima_faucet' AND DATE(timestamp) = {} AND apartment IN (SELECT apartment FROM apartment_groups WHERE group_id = {})",
         parser.parse(date),
+        group_id,
     ).run_sync()
     df = pd.DataFrame(measurements)
     df["flow_dist"] = abs(df["flow_time"] - 20)
