@@ -15,7 +15,7 @@ from fastapi import APIRouter, HTTPException
 from fastapi.params import Path
 from pydantic import BaseModel
 
-from orm.tables import Measurement
+from orm.tables import Measurement, Apartment
 
 router = APIRouter()
 
@@ -168,8 +168,13 @@ async def sustainability_scores(group_id: int, date: str):
         group_id,
     ).run_sync()
     df = pd.DataFrame(measurements)
+    apartment_data = Apartment.raw("SELECT id as apartment, people FROM apartment").run_sync()
+    apartment_df = pd.DataFrame(apartment_data)
+    df = df.merge(apartment_df, on="apartment")
+    df["sustainability_score"] = df["sustainability_score"] / df["people"]
     x_scaled = preprocessing.minmax_scale(X=df["sustainability_score"]) * 100
     df["sustainability_score"] = x_scaled.round(decimals=0)
     df.set_index("apartment", inplace=True)
+    df.drop(columns=["people"], inplace=True)
     sus_score_dict = df.to_dict("index")
     return sus_score_dict
