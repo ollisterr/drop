@@ -1,7 +1,12 @@
 import json
+import random
+import string
 from datetime import datetime
 
-from orm.tables import Apartment, ApartmentGroups, Group, Measurement
+from piccolo.apps.user.tables import BaseUser
+
+from orm.tables import Apartment, ApartmentGroups, Group, Measurement, User
+
 
 with open("../data/apartments.json") as af, open("../data/groups.json") as gf:
     apt_data = json.load(af)
@@ -55,3 +60,22 @@ with open("../data/measurements.json") as f, open("../data/apartments.json") as 
         batch = msms[i : i + batch_size]
         print(i)
         Measurement.insert(*batch).run_sync()
+
+
+random.seed(1234)
+fake_users = ["Taku", "Jones", "Timppa", "Olperi"]
+
+users = [
+    BaseUser(
+        username=user,
+        password="1234",
+        email="".join(random.choices(string.ascii_uppercase + string.digits, k=5)),
+    )
+    for user in fake_users
+]
+
+for user in users:
+    BaseUser.insert(user).run_sync()
+    apts = Apartment.select().run_sync()
+    apt = random.choice(apts)
+    User.insert(User(user=user, apartment=apt["id"])).run_sync()
