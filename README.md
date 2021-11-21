@@ -9,13 +9,11 @@ Sloganeja:
 ## Ideapankki
 
 -   fokusta enemmän pelifikaatioon
-
     -   voitais laskea henkilökohtainen sustainability baseline (jollain heuristiikalla) jotta äppi vois asettaa personoituja goaleita miten vähentää omaa energia/vesijalanjälkeä
     -   Näytetään ensin mieluummin oma sijoitus groupeissa vs paljon tilastoja
     -
 
 -   Taloyhtiölle
-
     -   lähinnä kuvaajia
     -   jotain ekstrapolointii aiemmasta datasta
     -   tänne ehk rahainsentiivei?
@@ -42,9 +40,7 @@ Sloganeja:
     -   "Puhdistaaksesi bakteerit mahdollisimman tehokkaasti, käsiä tulisi pestä kaksikymmentä sekuntia"
 -   notifikaatti kännykästä
     -   "Top hygiene score!"
-    -   haasta kaverisi
--   kaveri B saa notifikaatin, hyväksyy
--   katsoo että omat hygiene scoret ihan vituillaan
+-   Katsoo että omat hygiene scoret ihan vituillaan
 -   menee aamulla suihkuun, vääntää veden hullun kylmälle
     -   "Achievement unlocked! Nävy seal!"
 -   kaveri A saa notifikaatin, näkee oman lämpötilarankkinsa
