@@ -67,9 +67,14 @@ async def get_all_users():
     users = await User.raw(
         """
             select
-                *
+                id,
+                username,
+                first_name,
+                last_name,
+                active,
+                last_login
             from
-                piccolo_users
+                piccolo_user
             """
     ).run()
     return users

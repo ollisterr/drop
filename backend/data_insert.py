@@ -69,6 +69,7 @@ users = [
         username=user,
         password="1234",
         email="".join(random.choices(string.ascii_uppercase + string.digits, k=5)),
+        active=True
     )
     for user in fake_users
 ]
